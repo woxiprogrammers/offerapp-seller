@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import { View } from 'react-native'
-import { Container, Header, Left, Body, Right, Button, Icon, Title } from 'native-base';
+import { Container, 
+  Header, 
+  Left, 
+  Body, 
+  Right, 
+  Button, 
+  Icon, 
+  Title } from 'native-base';
 
 export default class SellerHeader extends Component {
   render() {
