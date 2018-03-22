@@ -13,10 +13,13 @@ export default class OfferCard extends Component {
   render() {
     return (
       
-      <Container>
+      
         <Content>
                 {/* offer cards */}
         <Card>
+        <CardItem header>
+              <Text>Buy 1 get 1</Text>
+            </CardItem>
             <CardItem>
               <Body>
                 <Text>
@@ -39,7 +42,7 @@ export default class OfferCard extends Component {
             </CardItem>
          </Card>
         </Content>
-      </Container>
+      
     );
   }
 }

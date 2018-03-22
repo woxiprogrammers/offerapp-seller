@@ -21,7 +21,7 @@ export default class OfferListing extends Component {
       
       <Container>
         <Header style={{backgroundColor: '#C10F41'}}>
-          <SellerHeader />
+          <SellerHeader title='Welcome'/>
         </ Header >     
 
         {/* Sliding buttons */}
@@ -45,11 +45,16 @@ export default class OfferListing extends Component {
 
         {/* offer cards */}
         <OfferCard />
+        <OfferCard />
+        <OfferCard />
+        <OfferCard />
+
         </Content>
 
         {/* floating Button */}
-        <FabAdd />
-
+        <View style = {{paddingBottom: 8}}>
+          <FabAdd />
+        </View>
           {/* footer with tabs */}
           <Footer >
             <SellerFooter />

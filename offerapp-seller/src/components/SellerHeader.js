@@ -21,7 +21,7 @@ export default class SellerHeader extends Component {
             </Button>
           </Left>
           <Body>
-            <Title style={{color:'white'}}>Offers</Title>
+            <Title style={{color:'white'}}>{this.props.title}</Title>
           </Body>
           <Right>
             <Button transparent>
