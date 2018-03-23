@@ -16,21 +16,22 @@ export default class MyDatePicker extends Component {
                 style={{
                     flex: 1,
                     flexDirection: 'row',
-                    justifyContent: 'flex-start',
+                    justifyContent: 'space-between',
+                    alignContent: 'center'
                     
                 }}
             >
-                <Text> Start Date </ Text>
-                <Text> End Date </ Text>
+                <Text > Start Date </ Text>
+                <Text > End Date </ Text>
             </View>
             <View
                 style={{
                     flex: 1,
                     flexDirection: 'row',
-                    
+                    justifyContent: 'space-between'
                 }}
                 >
-                
+                {/* Start Date */}
                 <DatePicker
                         selected={this.state.startDate}
                         selectsStart
@@ -41,6 +42,7 @@ export default class MyDatePicker extends Component {
                         cancelBtnText="Cancel"
                     />
                 
+                {/* End Date */}
                 <DatePicker
                     selected={this.state.endDate}
                     selectsEnd

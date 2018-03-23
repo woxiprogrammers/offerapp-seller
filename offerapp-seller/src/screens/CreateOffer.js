@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, TextInput, StyleSheet } from 'react-native';
 import { Container, 
   Header,
   Content, 
@@ -14,6 +14,10 @@ import SellerFooter from '../components/SellerFooter';
 import SelectOfferType from '../components/SelectOfferType';
 import SelectOfferCategory from '../components/SelectOfferCategory';
 import DatePicker from '../components/DatePicker';
+import DescriptionBox from '../components/DescriptionBox'
+
+import { width, height, totalSize } from 'react-native-dimension';
+
 export default class OfferListing extends Component {
   render() {
     return (
@@ -28,8 +32,26 @@ export default class OfferListing extends Component {
                 <Text style={{paddingBottom: 10, paddingTop: 10}}>Offer Validity</ Text>
                   <DatePicker />
               </ View>
+              
+              {/* Offer Description */}
+              <View style={{paddingLeft:10, paddingRight: 10}}>
+                <Text style={{paddingBottom: 10, paddingTop: 10}}>Offer Description</ Text>
+                <DescriptionBox />
+              </View>
             </ Content>
         </ Container>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  descriptionBox:{
+    flex: 1,
+    justifyContent: 'center',
+    height: height(20), // 70% of height device screen
+    width: width(80), // 80% of width device screen
+    borderColor: 'black', 
+    borderWidth: 1, 
+    
+  },
+  });

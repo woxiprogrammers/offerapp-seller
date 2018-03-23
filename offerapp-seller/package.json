@@ -10,6 +10,7 @@
     "react-native-dimension": "^1.0.6",
     "react-native-material-dropdown": "^0.11.1",
     "react-native-prompt-android": "^0.3.3",
+    "react-native-responsive-dimensions": "^1.0.2",
     "react-navigation": "^1.5.8"
   }
 }
