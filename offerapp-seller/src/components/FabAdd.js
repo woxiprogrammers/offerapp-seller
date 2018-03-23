@@ -9,7 +9,7 @@ import { Container,
     } from 'react-navigation';
     
   import { Ionicons, MaterialIcons } from '@expo/vector-icons';
-
+  import { Actions } from 'react-native-router-flux';
 
 export default class OfferListing extends Component {
   constructor() {
@@ -34,8 +34,8 @@ export default class OfferListing extends Component {
                 </Button>
 
                 <Button  style={{ backgroundColor: 'blue' }} 
-                onPress = { () =>this.props.StackNavigator.navigate('CreateOffer')}>
-                <MaterialIcons name="local-offer" size={22} color='white'/>
+                  onPress = {Actions.CreateOfferScreen}>
+                  <MaterialIcons name="local-offer" size={22} color='white'/>
                 </Button>
             </Fab>
     );

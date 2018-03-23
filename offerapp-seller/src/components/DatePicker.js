@@ -33,24 +33,52 @@ export default class MyDatePicker extends Component {
                 >
                 {/* Start Date */}
                 <DatePicker
-                        selected={this.state.startDate}
-                        selectsStart
-                        startDate={this.state.startDate}
-                        endDate={this.state.endDate}
-                        onChange={this.handleChangeStart}
-                        confirmBtnText="Confirm"
-                        cancelBtnText="Cancel"
-                    />
+                    date={this.state.date}
+                    mode="date"
+                    placeholder="select date"
+                    format="YYYY-MM-DD"
+                    minDate= "2016-05-15"
+                    maxDate="201-06-01"
+                    confirmBtnText="Confirm"
+                    cancelBtnText="Cancel"
+                    customStyles={{
+                    dateIcon: {
+                        position: 'absolute',
+                        left: 0,
+                        top: 4,
+                        marginLeft: 0
+                    },
+                    dateInput: {
+                        marginLeft: 36
+                    }
+                    // ... You can check the source to find the other keys.
+                    }}
+                    onDateChange={(date) => {this.setState({date: date})}}
+                />
                 
                 {/* End Date */}
                 <DatePicker
-                    selected={this.state.endDate}
-                    selectsEnd
-                    startDate={this.state.startDate}
-                    endDate={this.state.endDate}
-                    onChange={this.handleChangeEnd}
+                    date={this.state.date}
+                    mode="date"
+                    placeholder="select date"
+                    format="YYYY-MM-DD"
+                    minDate="2016-05-01"
+                    maxDate="2016-06-01"
                     confirmBtnText="Confirm"
                     cancelBtnText="Cancel"
+                    customStyles={{
+                    dateIcon: {
+                        position: 'absolute',
+                        left: 0,
+                        top: 4,
+                        marginLeft: 0
+                    },
+                    dateInput: {
+                        marginLeft: 36
+                    }
+                    // ... You can check the source to find the other keys.
+                    }}
+                    onDateChange={(date) => {this.setState({date: date})}}
                 />
             </ View>
         </Content>

@@ -28,7 +28,9 @@ export default class OfferListing extends Component {
         <Content>
           <View style={{
             flex: 1,
-            flexDirection: 'row'}}>
+            flexDirection: 'row',
+            alignSelf: 'stretch',           
+            }}>
               <ScrollView horizontal>
                 <Button warning style={styles.filterButton}><Text> All </Text></Button>
                 <Button warning style={styles.filterButton}><Text> Pending </Text></Button>
@@ -56,7 +58,7 @@ export default class OfferListing extends Component {
           <FabAdd />
         </View>
           {/* footer with tabs */}
-          <Footer >
+          <Footer style={{backgroundColor: '#C10F41'}}>
             <SellerFooter />
           </ Footer>
       </Container>

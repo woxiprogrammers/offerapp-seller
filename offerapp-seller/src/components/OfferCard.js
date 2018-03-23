@@ -6,7 +6,9 @@ import { Container,
     Card, 
     CardItem, 
     Text, 
-    Body } from 'native-base';
+    Body,
+    Badge,
+    Button } from 'native-base';
 import { FontAwesome, EvilIcons } from '@expo/vector-icons';
 
 export default class OfferCard extends Component {
@@ -35,9 +37,29 @@ export default class OfferCard extends Component {
                 paddingLeft: 15,
                 paddingRight: 15
               }}>
+              {/* Heart Button */}
+              <Button badge transparent>
                 <FontAwesome name="heart" size={22} color='red' />
+                <Badge primary>
+                    <Text>2</Text>
+                  </Badge>
+              </ Button>
+
+              {/* Liked Button */}
+              <Button badge transparent>
                 <EvilIcons name="like" size={30}  />
+                <Badge primary>
+                    <Text>2</Text>
+                  </Badge>
+              </Button>
+
+              {/* Grabed Offers */}
+              <Button transparent badge>
                 <FontAwesome name="handshake-o" size={22} />
+                <Badge primary>
+                    <Text>2</Text>
+                  </Badge>
+              </Button>
               </View>
             </CardItem>
          </Card>

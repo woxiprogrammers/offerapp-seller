@@ -7,7 +7,10 @@ import { Container,
   Right, 
   Button, 
   Icon, 
-  Title } from 'native-base';
+  Title,
+  Badge,
+  Text
+} from 'native-base';
 
 export default class SellerHeader extends Component {
   render() {
@@ -20,12 +23,15 @@ export default class SellerHeader extends Component {
               <Icon name='menu' style={{color:'white'}}/>
             </Button>
           </Left>
-          <Body>
+          <Body >
             <Title style={{color:'white'}}>{this.props.title}</Title>
           </Body>
           <Right>
-            <Button transparent>
+            <Button transparent badge>
               <Icon name='md-notifications' style={{color:'yellow'}}/>
+              <Badge primary top>
+                <Text>2</Text>
+              </Badge>
             </Button>
           </Right>
         </ View>

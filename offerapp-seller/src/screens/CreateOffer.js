@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TextInput, StyleSheet } from 'react-native';
+import { View, TextInput, StyleSheet, ScrollView } from 'react-native';
 import { Container, 
   Header,
   Content, 
@@ -17,10 +17,12 @@ import DatePicker from '../components/DatePicker';
 import DescriptionBox from '../components/DescriptionBox'
 
 import { width, height, totalSize } from 'react-native-dimension';
+import { Actions } from 'react-native-router-flux';
 
 export default class OfferListing extends Component {
   render() {
     return (
+      <ScrollView>
         <Container>
             <Header style={{backgroundColor: '#C10F41'}}>
               <SellerHeader title='Create Offer'/>
@@ -38,20 +40,32 @@ export default class OfferListing extends Component {
                 <Text style={{paddingBottom: 10, paddingTop: 10}}>Offer Description</ Text>
                 <DescriptionBox />
               </View>
+
+              {/* Upload Photos */}
+              <Text style={{paddingLeft:10, paddingBottom: 10, paddingTop: 10}}>Upload Photos</ Text>
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: 'row',
+                  justifyContent: 'flex-end',
+                  alignSelf: 'center'
+                }}
+              >  
+                <Button info>
+                  <Text> Browse </Text> 
+                </ Button>
+                <Button info>
+                  <Text> Upload </Text>
+                </ Button>
+              </View>
+              <View>
+              <Button block style={{backgroundColor: '#C10F41'}} onPress={Actions.OfferListingScreen}>
+                <Text> Submit </Text>
+              </ Button>
+              </View>
             </ Content>
         </ Container>
+        </ScrollView>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  descriptionBox:{
-    flex: 1,
-    justifyContent: 'center',
-    height: height(20), // 70% of height device screen
-    width: width(80), // 80% of width device screen
-    borderColor: 'black', 
-    borderWidth: 1, 
-    
-  },
-  });
