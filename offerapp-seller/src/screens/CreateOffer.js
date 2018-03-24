@@ -8,7 +8,10 @@ import { Container,
   Text,
   Input,
   Item,
-  Footer,Form } from 'native-base';
+  Footer,
+  Form,
+  Spinner
+} from 'native-base';
 import SellerHeader from '../components/SellerHeader';
 import SellerFooter from '../components/SellerFooter';
 import SelectOfferType from '../components/SelectOfferType';
@@ -60,7 +63,7 @@ export default class OfferListing extends Component {
                 </ Button>
               </View>
               <View>
-              <Button block style={{backgroundColor: '#C10F41'}} onPress={Actions.OfferListingScreen}>
+              <Button block style={{backgroundColor: '#C10F41', borderRadius: 0}} onPress={Actions.OfferListingScreen}>
                 <Text> Submit </Text>
               </ Button>
               </View>

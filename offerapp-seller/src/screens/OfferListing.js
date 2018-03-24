@@ -37,16 +37,55 @@ export default class OfferListing extends Component {
            {/* Sliding buttons */}      
           <Tabs renderTabBar={()=> <ScrollableTab />}>             
             <Tab heading={ <TabHeading><Text>All</Text></TabHeading>}>
-              <OfferCard />
+              <OfferCard 
+                cardTitle='Buy 1 get 1'
+                offerID='11'
+                startDate= '23-02-2018'
+                endDate= '23-030-2018'
+                likeCount= '1'
+                grabCount="2"
+                wishlistCount='2'
+                offerStatus='Approved'
+              />
             </Tab>
             <Tab heading={ <TabHeading><Text>Pending</Text></TabHeading>}>
-              <OfferCard />
+              <OfferCard 
+                cardTitle='Flat 50% off'
+                offerID='22'
+                startDate= '23-02-2018'
+                endDate= '23-030-2018'
+                offerStatus='Pending'
+              />
             </Tab>
             <Tab heading={ <TabHeading><Text>Approved</Text></TabHeading>}>
-              <OfferCard />        
+              <OfferCard 
+                cardTitle='Cashback'
+                offerID='33'
+                startDate= '23-02-2018'
+                endDate= '23-030-2018'
+                likeCount= '23'
+                grabCount="22"
+                wishlistCount='2'
+                offerStatus='Approved'
+              />        
             </Tab>
             <Tab heading={ <TabHeading><Text>Disapproved</Text></TabHeading>}>
-              <OfferCard />
+              <OfferCard 
+                cardTitle='Flat Rs. 100 off'
+                offerID='44'
+                startDate= '23-02-2018'
+                endDate= '23-030-2018'
+                offerStatus='Dispproved'
+              />
+            </Tab>
+            <Tab heading={ <TabHeading><Text>Expired</Text></TabHeading>}>
+              <OfferCard 
+                cardTitle='Flat Rs. 100 off'
+                offerID='55'
+                startDate= '23-02-2018'
+                endDate= '23-030-2018'
+                offerStatus='Expired'
+              />
             </Tab>
           </Tabs>          
         </Content>

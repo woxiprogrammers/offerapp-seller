@@ -27,8 +27,8 @@ export default class AddtoGroup extends React.Component{
                     </Item>
                     <SelectGroup />
                     <Button block danger
-                    style={{backgroundColor: '#C10F41', borderRadius: 0}}
-                    onPress={Actions.OfferListingScreen}
+                        style={{backgroundColor: '#C10F41', borderRadius: 0}}
+                        onPress={Actions.OfferListingScreen}
                     >
                         <Text>Send Invitation</Text>
                     </Button>

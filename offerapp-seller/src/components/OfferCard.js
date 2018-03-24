@@ -8,8 +8,15 @@ import { Container,
     Text, 
     Body,
     Badge,
-    Button } from 'native-base';
+    Button, 
+    Left,
+    Right} from 'native-base';
 import { FontAwesome, EvilIcons } from '@expo/vector-icons';
+import {
+  responsiveWidth,
+  responsiveFontSize
+} from 'react-native-responsive-dimensions';
+import renderIf from '../condition/renderIf'
 
 export default class OfferCard extends Component {
   render() {
@@ -20,13 +27,29 @@ export default class OfferCard extends Component {
                 {/* offer cards */}
         <Card>
         <CardItem header>
-              <Text>Buy 1 get 1</Text>
-            </CardItem>
+          <Left>
+              <Text>{this.props.cardTitle}</Text>
+          </Left>
+          <Right>
+          <Text>Offer ID: {this.props.offerID}</Text>
+          </Right>
+          </CardItem>
             <CardItem>
               <Body>
-                <Text>
-                  //Your text here
-                </Text>
+                <View style={{
+                  flexDirection: 'row'
+                }}>
+
+                {/* Offer Start and End Date */}
+                <Left>
+                  <Text style={{fontSize: responsiveFontSize(2)  }}>Start date: {this.props.startDate} End Date: {this.props.endDate}</Text>
+                </Left>
+
+                {/* Offer Status */}
+                <Right>
+                  <Text >{this.props.offerStatus}</Text>  
+                </Right>
+                </View>
               </Body>
             </CardItem>
             <CardItem footer style={{backgroundColor: '#c3cbd8'}}>
@@ -37,29 +60,41 @@ export default class OfferCard extends Component {
                 paddingLeft: 15,
                 paddingRight: 15
               }}>
+
               {/* Heart Button */}
-              <Button badge transparent>
-                <FontAwesome name="heart" size={22} color='red' />
-                <Badge primary>
-                    <Text>2</Text>
+              {renderIf(
+                this.props.wishlistCount,
+                <Button badge transparent>
+                  {renderIf(this.wis)}
+                  <FontAwesome name="heart" size={22} color='red' />
+                  <Badge primary>
+                      <Text>{this.props.wishlistCount}</Text>
                   </Badge>
-              </ Button>
+                </ Button>
+              )}
 
               {/* Liked Button */}
-              <Button badge transparent>
+              {renderIf(
+                this.props.likeCount,
+                <Button badge transparent>
                 <EvilIcons name="like" size={30}  />
                 <Badge primary>
-                    <Text>2</Text>
+                    <Text>{this.props.likeCount}</Text>
                   </Badge>
               </Button>
-
+              )}
+            
               {/* Grabed Offers */}
-              <Button transparent badge>
+              {renderIf(
+                this.props.grabCount,
+                <Button transparent badge>
                 <FontAwesome name="handshake-o" size={22} />
                 <Badge primary>
-                    <Text>2</Text>
+                    <Text>{this.props.grabCount}</Text>
                   </Badge>
               </Button>
+              )}
+              
               </View>
             </CardItem>
          </Card>
