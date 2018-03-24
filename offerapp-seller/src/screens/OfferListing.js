@@ -8,7 +8,12 @@ import { Container,
   Text,
   Input,
   Item,
-  Footer } from 'native-base';
+  Footer,
+  Tab,
+  Tabs ,
+  TabHeading,
+  ScrollableTab
+} from 'native-base';
   import OfferCard from '../components/OfferCard';
   import SellerHeader from '../components/SellerHeader';
   import FabAdd from '../components/FabAdd';
@@ -20,37 +25,32 @@ export default class OfferListing extends Component {
     return (
       
       <Container>
-        <Header style={{backgroundColor: '#C10F41'}}>
+        <Header style={{backgroundColor: '#C10F41'}} hasTabs>
           <SellerHeader title='Welcome'/>
-        </ Header >     
-
-        {/* Sliding buttons */}
-        <Content>
-          <View style={{
-            flex: 1,
-            flexDirection: 'row',
-            alignSelf: 'stretch',           
-            }}>
-              <ScrollView horizontal>
-                <Button warning style={styles.filterButton}><Text> All </Text></Button>
-                <Button warning style={styles.filterButton}><Text> Pending </Text></Button>
-                <Button warning style={styles.filterButton}><Text> Approved </Text></Button>
-                <Button warning style={styles.filterButton}><Text> Disapproved </Text></Button>
-              </ ScrollView>
-          </View>
-
+        </ Header >                 
+        <Content>  
           {/* seacrh bar */}
           <Item regular>
            <Icon active name='ios-search' />
            <Input placeholder='Search'/>
         </Item>
-
-        {/* offer cards */}
-        <OfferCard />
-        <OfferCard />
-        <OfferCard />
-        <OfferCard />
-
+           {/* Sliding buttons */}      
+          <Tabs renderTabBar={()=> <ScrollableTab />}>
+             
+            <Tab heading={ <TabHeading><Text>All</Text></TabHeading>}>
+              <OfferCard />
+            </Tab>
+            <Tab heading={ <TabHeading><Text>Pending</Text></TabHeading>}>
+              <OfferCard />
+            </Tab>
+            <Tab heading={ <TabHeading><Text>Approved</Text></TabHeading>}>
+              <OfferCard />        
+            </Tab>
+            <Tab heading={ <TabHeading><Text>Disapproved</Text></TabHeading>}>
+              <OfferCard />
+            </Tab>
+          </Tabs>
+          
         </Content>
 
         {/* floating Button */}
