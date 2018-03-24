@@ -29,7 +29,9 @@ export default class OfferListing extends Component {
                 onPress={() => this.setState({ active: !this.state.active })}>
                 <Ionicons name="md-add" size={32}  />
                 
-                <Button style={{ backgroundColor: 'green' }}>
+                <Button style={{ backgroundColor: 'green' }}
+                onPress={Actions.AddToGroupScreen}
+                >
                 <MaterialIcons name="group-add" size={22} color='white'/>
                 </Button>
 

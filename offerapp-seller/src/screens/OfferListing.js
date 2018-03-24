@@ -31,12 +31,11 @@ export default class OfferListing extends Component {
         <Content>  
           {/* seacrh bar */}
           <Item regular>
-           <Icon active name='ios-search' />
-           <Input placeholder='Search'/>
-        </Item>
+            <Icon active name='ios-search' />
+            <Input placeholder='Search'/>
+          </Item>
            {/* Sliding buttons */}      
-          <Tabs renderTabBar={()=> <ScrollableTab />}>
-             
+          <Tabs renderTabBar={()=> <ScrollableTab />}>             
             <Tab heading={ <TabHeading><Text>All</Text></TabHeading>}>
               <OfferCard />
             </Tab>
@@ -49,8 +48,7 @@ export default class OfferListing extends Component {
             <Tab heading={ <TabHeading><Text>Disapproved</Text></TabHeading>}>
               <OfferCard />
             </Tab>
-          </Tabs>
-          
+          </Tabs>          
         </Content>
 
         {/* floating Button */}

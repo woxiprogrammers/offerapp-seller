@@ -8,7 +8,7 @@ import { Container,
   Text,
   Input,
   Item,
-  Footer } from 'native-base';
+  Footer,Form } from 'native-base';
 import SellerHeader from '../components/SellerHeader';
 import SellerFooter from '../components/SellerFooter';
 import SelectOfferType from '../components/SelectOfferType';
@@ -28,6 +28,7 @@ export default class OfferListing extends Component {
               <SellerHeader title='Create Offer'/>
             </ Header>
             <Content>
+              <Form>
               <View style={{paddingLeft:10, paddingRight: 10}}>
                 <SelectOfferType />
                 <SelectOfferCategory />
@@ -63,6 +64,7 @@ export default class OfferListing extends Component {
                 <Text> Submit </Text>
               </ Button>
               </View>
+              </Form>
             </ Content>
         </ Container>
         </ScrollView>
