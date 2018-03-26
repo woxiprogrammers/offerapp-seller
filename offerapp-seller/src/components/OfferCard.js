@@ -17,6 +17,7 @@ import {
   responsiveFontSize
 } from 'react-native-responsive-dimensions';
 import renderIf from '../condition/renderIf'
+import { Actions } from 'react-native-router-flux';
 
 export default class OfferCard extends Component {
   render() {
@@ -39,16 +40,15 @@ export default class OfferCard extends Component {
                 <View style={{
                   flexDirection: 'row'
                 }}>
+                  {/* Offer Start and End Date */}
+                  <Left>
+                    <Text style={{fontSize: responsiveFontSize(2)  }}>Start date: {this.props.startDate} End Date: {this.props.endDate}</Text>
+                  </Left>
 
-                {/* Offer Start and End Date */}
-                <Left>
-                  <Text style={{fontSize: responsiveFontSize(2)  }}>Start date: {this.props.startDate} End Date: {this.props.endDate}</Text>
-                </Left>
-
-                {/* Offer Status */}
-                <Right>
-                  <Text >{this.props.offerStatus}</Text>  
-                </Right>
+                  {/* Offer Status */}
+                  <Right>
+                    <Text >{this.props.offerStatus}</Text>  
+                  </Right>
                 </View>
               </Body>
             </CardItem>
@@ -62,10 +62,10 @@ export default class OfferCard extends Component {
               }}>
 
               {/* Heart Button */}
-              {renderIf(
+              {renderIf( 
                 this.props.wishlistCount,
                 <Button badge transparent>
-                  {renderIf(this.wis)}
+                  
                   <FontAwesome name="heart" size={22} color='red' />
                   <Badge primary>
                       <Text>{this.props.wishlistCount}</Text>
@@ -76,7 +76,7 @@ export default class OfferCard extends Component {
               {/* Liked Button */}
               {renderIf(
                 this.props.likeCount,
-                <Button badge transparent>
+                <Button badge transparent onPress={Actions.IamIntrestedScreen}>
                 <EvilIcons name="like" size={30}  />
                 <Badge primary>
                     <Text>{this.props.likeCount}</Text>

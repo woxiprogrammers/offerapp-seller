@@ -18,7 +18,7 @@ export default class SellerHeader extends Component {
         <View style={{
             flex: 1,
             flexDirection: 'row'}}>
-        <Left>
+          <Left>
             <Button transparent>
               <Icon name='menu' style={{color:'white'}}/>
             </Button>
