@@ -11,6 +11,7 @@ import { Container,
   Badge,
   Text
 } from 'native-base';
+import { Actions } from 'react-native-router-flux';
 
 export default class SellerHeader extends Component {
   render() {
@@ -19,7 +20,7 @@ export default class SellerHeader extends Component {
             flex: 1,
             flexDirection: 'row'}}>
           <Left>
-            <Button transparent>
+            <Button transparent onPress={Actions.drawerOpen}>
               <Icon name='menu' style={{color:'white'}}/>
             </Button>
           </Left>

@@ -21,9 +21,30 @@ import { Container,
 
 
 export default class OfferListing extends Component {
+  
+  constructor(props){
+    super(props)
+    this.state = {
+      data: [],
+      offerList: []
+    }
+  }
+  componentWillMount() {
+    this.fetchData();
+  }
+  
+  fetchData(){
+    fetch('http://www.mocky.io/v2/5aab5beb2e00006700138ce1', {method: "GET"})
+    .then((response) => response.json())
+    .then((responseData)=> {
+    this.setState({offerList: responseData.data.offer_list})
+    console.log(this.state.offerList);
+    })
+    .done();
+  }
+  
   render() {
     return (
-      
       <Container>
         <Header style={{backgroundColor: '#C10F41'}} hasTabs>
           <SellerHeader title='Welcome'/>
@@ -38,7 +59,7 @@ export default class OfferListing extends Component {
           <Tabs renderTabBar={()=> <ScrollableTab />}>             
             <Tab heading={ <TabHeading><Text>All</Text></TabHeading>}>
               <OfferCard 
-                cardTitle='Buy 1 get 1'
+                cardTitle='Buy 1 get 1 Free'
                 offerID='11'
                 startDate= '23-02-2018'
                 endDate= '23-030-2018'

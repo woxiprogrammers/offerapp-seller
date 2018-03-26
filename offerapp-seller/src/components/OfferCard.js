@@ -22,10 +22,8 @@ import { Actions } from 'react-native-router-flux';
 export default class OfferCard extends Component {
   render() {
     return (
-      
-      
         <Content>
-                {/* offer cards */}
+       {/* offer cards */}
         <Card>
         <CardItem header>
           <Left>
