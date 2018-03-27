@@ -6,7 +6,10 @@ import AddToGroup from './src/screens/AddToGroup'
 import DrawerComponent from './src/components/drawer/DrawerComponent';
 import IamIntrested from './src/screens/IamIntrested';
 import AccountInfo from './src/screens/AccountInfo';
-
+import GroupListing from './src/screens/GroupListing';
+import GroupMemberListing from './src/screens/GroupMemberListing';
+import PromoteOffer from './src/screens/PromoteOffer';
+import CreateGroup from './src/screens/CreateGroup';
 class RouterComponent extends React.Component {
   render() {
     console.log('Router Running !!');
@@ -26,6 +29,10 @@ class RouterComponent extends React.Component {
                   <Scene hideNavBar key="addToGroupScreen" component={AddToGroup} />
                   <Scene hideNavBar key="iAmIntrestedScreen" component={IamIntrested} />
                   <Scene hideNavBar key="accountInfoScreen" component={AccountInfo} />
+                  <Scene hideNavBar key="promoteOfferScreen" component={PromoteOffer} />
+                  <Scene hideNavBar key="groupListingScreen" component={GroupListing} />
+                  <Scene hideNavBar key="groupMemberListingScreen" component={GroupMemberListing} />
+                  <Scene hideNavBar key="createGroupScreen" component={CreateGroup} />
                 </Stack>
               </Scene>
             </Drawer>

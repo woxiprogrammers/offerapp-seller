@@ -14,8 +14,7 @@ import { Container,
 } from 'native-base';
 import SellerHeader from '../components/SellerHeader';
 import SellerFooter from '../components/SellerFooter';
-import SelectOfferType from '../components/SelectOfferType';
-import SelectOfferCategory from '../components/SelectOfferCategory';
+import DropDownSelect from '../components/DropDownSelect'
 import DatePicker from '../components/DatePicker';
 import DescriptionBox from '../components/DescriptionBox'
 
@@ -33,8 +32,11 @@ export default class OfferListing extends Component {
             <Content>
               <Form>
               <View style={{paddingLeft:10, paddingRight: 10}}>
-                <SelectOfferType />
-                <SelectOfferCategory />
+              {/* Select offer Type */}
+                <DropDownSelect selectLabel='Select Offer Type' />
+
+                {/* Select Category  */}
+                <DropDownSelect selectLabel='Select Category' />
                 <Text style={{paddingBottom: 10, paddingTop: 10}}>Offer Validity</ Text>
                   <DatePicker />
               </ View>
@@ -63,7 +65,9 @@ export default class OfferListing extends Component {
                 </ Button>
               </View>
               <View>
-              <Button block style={{backgroundColor: '#C10F41', borderRadius: 0}} onPress={Actions.OfferListingScreen}>
+              <Button block 
+                style={{backgroundColor: '#C10F41', borderRadius: 0}} 
+                onPress={Actions.offerListingScreen}>
                 <Text> Submit </Text>
               </ Button>
               </View>

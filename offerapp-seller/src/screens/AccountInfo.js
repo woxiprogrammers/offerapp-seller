@@ -2,6 +2,7 @@ import React from 'react';
 import { ScrollView, KeyboardAvoidingView } from 'react-native'
 import { Container, Header, Form, Item, Label, Input, Text, View, Left, Right, Button,  } from 'native-base';
 import SellerHeader from '../components/SellerHeader';
+import DropDownSelect from '../components/DropDownSelect'
 import { colors } from '../styles'
 import { Dropdown } from 'react-native-material-dropdown';
 import { Actions } from 'react-native-router-flux';
@@ -124,10 +125,7 @@ export default class AccountInfo extends React.Component {
                             </View>
                             {/* Types of payments */}
                             <View>
-                            <Dropdown
-                                label='Select Types of Payment'
-                                data={data}
-                            />
+                                <DropDownSelect selectLabel="Select Type of Payment"/>
                             </View>
 
                             {/* Upload shop images */}

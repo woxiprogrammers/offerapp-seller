@@ -10,7 +10,7 @@ export default class DrawerComponent extends React.Component {
   render() {
     return (
       <View style={{ flex: 1, alignSelf: 'center', paddingTop: variables.SCREEN_HEIGHT / 2 }}>
-        
+
         {/* Account Information */}
         <Button block light
           style={{ width: responsiveWidth(80) }}
@@ -20,7 +20,7 @@ export default class DrawerComponent extends React.Component {
         </Button>
 
         {/* Manage Offer */}
-        <Button block light 
+        <Button block light
           style={{ width: responsiveWidth(80) }}
           onPress={Actions.offerListingScreen}
         >
@@ -28,12 +28,18 @@ export default class DrawerComponent extends React.Component {
         </Button>
 
         {/* Promote Offer */}
-        <Button block light style={{ width: responsiveWidth(80) }}>
+        <Button block light
+          style={{ width: responsiveWidth(80) }}
+          onPress={Actions.promoteOfferScreen}
+        >
           <Text>Promote Offer</Text>
         </Button>
 
         {/* Manage Group */}
-        <Button block light style={{ width: responsiveWidth(80) }}>
+        <Button block light
+         style={{ width: responsiveWidth(80) }}
+         onPress={Actions.groupListingScreen}
+         >
           <Text>Manage Group</Text>
         </Button>
 

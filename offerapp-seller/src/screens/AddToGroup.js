@@ -11,7 +11,7 @@ import { Container,
     Text
 } from 'native-base';
 import SellerHeader from '../components/SellerHeader';
-import SelectGroup from '../components/SelectGroup';
+import DropDownSelect from '../components/DropDownSelect'
 import { Actions } from 'react-native-router-flux';
 export default class AddtoGroup extends React.Component{
     render(){
@@ -21,14 +21,16 @@ export default class AddtoGroup extends React.Component{
                     <SellerHeader title =" Add to Group "/>
                 </Header>
                 <Form>
+                    {/* Enter MObile NUmber */}
                     <Item floatingLabel>
                         <Label>Mobile Number</Label>
                         <Input />
                     </Item>
-                    <SelectGroup />
+                    {/* Select Group */}
+                    <DropDownSelect selectLabel ="Select Group"/>
                     <Button block danger
                         style={{backgroundColor: '#C10F41', borderRadius: 0}}
-                        onPress={Actions.OfferListingScreen}
+                        onPress={Actions.offerListingScreen}
                     >
                         <Text>Send Invitation</Text>
                     </Button>

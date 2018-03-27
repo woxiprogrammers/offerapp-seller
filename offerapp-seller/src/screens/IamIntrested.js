@@ -1,7 +1,7 @@
 import React , { Component } from 'react'
 import { Container, Header, Content, Item, Icon, Input } from 'native-base';
 import SellerHeader from '../components/SellerHeader'
-import CustomerCard from '../components/CustomerCard'
+import CustomerCard from '../components/CustomerCardGrabOffer'
 export default class IamIntrested extends Component {
     render(){
         return(

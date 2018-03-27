@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { Dropdown } from 'react-native-material-dropdown';
-import { View } from "native-base";
- 
-export default class SelectOfferType extends Component {
+import { View } from 'react-native';
+export default class SelectOfferCategory extends Component {
   render() {
     let data = [{
       value: 'Banana',
@@ -13,10 +12,10 @@ export default class SelectOfferType extends Component {
     }];
  
     return (
-            <Dropdown 
-                label='Select Offer Type'
-                data={data}
-            />
+        <Dropdown
+          label={this.props.selectLabel}
+          data={data}
+        />
     );
   }
 }
