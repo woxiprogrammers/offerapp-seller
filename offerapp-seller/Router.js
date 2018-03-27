@@ -5,6 +5,7 @@ import CreateOffer from './src/screens/CreateOffer';
 import AddToGroup from './src/screens/AddToGroup'
 import DrawerComponent from './src/components/drawer/DrawerComponent';
 import IamIntrested from './src/screens/IamIntrested';
+import AccountInfo from './src/screens/AccountInfo';
 
 class RouterComponent extends React.Component {
   render() {
@@ -20,10 +21,11 @@ class RouterComponent extends React.Component {
             >
               <Scene hideNavBar panHandlers={null} key="mainroot">
                 <Stack key="root">
-                  <Scene hideNavBar key="OfferListingScreen" component={OfferListing} />
-                  <Scene hideNavBar key="CreateOfferScreen" component={CreateOffer} />
-                  <Scene hideNavBar key="AddToGroupScreen" component={AddToGroup} />
-                  <Scene hideNavBar key="IamIntrestedScreen" component={IamIntrested} />
+                  <Scene hideNavBar key="offerListingScreen" component={OfferListing} />
+                  <Scene hideNavBar key="createOfferScreen" component={CreateOffer} />
+                  <Scene hideNavBar key="addToGroupScreen" component={AddToGroup} />
+                  <Scene hideNavBar key="iAmIntrestedScreen" component={IamIntrested} />
+                  <Scene hideNavBar key="accountInfoScreen" component={AccountInfo} />
                 </Stack>
               </Scene>
             </Drawer>

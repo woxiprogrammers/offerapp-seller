@@ -30,13 +30,13 @@ export default class OfferListing extends Component {
                 <Ionicons name="md-add" size={32}  />
                 
                 <Button style={{ backgroundColor: 'green' }}
-                onPress={Actions.AddToGroupScreen}
+                onPress={Actions.addToGroupScreen}
                 >
                 <MaterialIcons name="group-add" size={22} color='white'/>
                 </Button>
 
                 <Button  style={{ backgroundColor: 'blue' }} 
-                  onPress = {Actions.CreateOfferScreen}>
+                  onPress = {Actions.createOfferScreen}>
                   <MaterialIcons name="local-offer" size={22} color='white'/>
                 </Button>
             </Fab>

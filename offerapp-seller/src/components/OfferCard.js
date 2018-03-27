@@ -74,7 +74,7 @@ export default class OfferCard extends Component {
               {/* Liked Button */}
               {renderIf(
                 this.props.likeCount,
-                <Button badge transparent onPress={Actions.IamIntrestedScreen}>
+                <Button badge transparent onPress={Actions.iAmIntrestedScreen}>
                 <EvilIcons name="like" size={30}  />
                 <Badge primary>
                     <Text>{this.props.likeCount}</Text>

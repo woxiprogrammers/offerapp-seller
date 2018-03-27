@@ -3,26 +3,42 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import {
   variables,
- } from '../../styles';
+} from '../../styles';
 import { Button } from 'native-base';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
 export default class DrawerComponent extends React.Component {
   render() {
     return (
       <View style={{ flex: 1, alignSelf: 'center', paddingTop: variables.SCREEN_HEIGHT / 2 }}>
-        <Button block light style={{width: responsiveWidth(80)}}>
+        
+        {/* Account Information */}
+        <Button block light
+          style={{ width: responsiveWidth(80) }}
+          onPress={Actions.accountInfoScreen}
+        >
           <Text>Account Information</Text>
         </Button>
-        <Button block light style={{width: responsiveWidth(80)}}>
-          <Text>Manage Order</Text>
+
+        {/* Manage Offer */}
+        <Button block light 
+          style={{ width: responsiveWidth(80) }}
+          onPress={Actions.offerListingScreen}
+        >
+          <Text>Manage Offer</Text>
         </Button>
-        <Button block light style={{width: responsiveWidth(80)}}>
-          <Text>Promot Offer</Text>
+
+        {/* Promote Offer */}
+        <Button block light style={{ width: responsiveWidth(80) }}>
+          <Text>Promote Offer</Text>
         </Button>
-        <Button block light style={{width: responsiveWidth(80)}}>
+
+        {/* Manage Group */}
+        <Button block light style={{ width: responsiveWidth(80) }}>
           <Text>Manage Group</Text>
         </Button>
-        <Button block light style={{width: responsiveWidth(80)}}>
+
+        {/* Logout */}
+        <Button block light style={{ width: responsiveWidth(80) }}>
           <Text>Logout</Text>
         </Button>
       </View>

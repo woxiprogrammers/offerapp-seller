@@ -12,6 +12,7 @@ import { Container,
   Text
 } from 'native-base';
 import { Actions } from 'react-native-router-flux';
+import { responsiveFontSize } from 'react-native-responsive-dimensions';
 
 export default class SellerHeader extends Component {
   render() {
