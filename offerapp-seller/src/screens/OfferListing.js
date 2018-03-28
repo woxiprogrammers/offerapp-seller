@@ -18,7 +18,7 @@ import { Container,
   import SellerHeader from '../components/SellerHeader';
   import FabAdd from '../components/FabAdd';
   import SellerFooter from '../components/SellerFooter';
-
+import { colors } from '../styles';
 
 export default class OfferListing extends Component {
   
@@ -46,7 +46,7 @@ export default class OfferListing extends Component {
   render() {
     return (
       <Container>
-        <Header style={{backgroundColor: '#C10F41'}} hasTabs>
+        <Header style={{backgroundColor: colors.headerColor}} hasTabs>
           <SellerHeader title='Welcome'/>
         </ Header >                 
         <Content>  
@@ -112,9 +112,9 @@ export default class OfferListing extends Component {
         </Content>
 
         {/* floating Button */}
-        <View style = {{paddingBottom: 8}}>
+        
           <FabAdd />
-        </View>
+       
           {/* footer with tabs */}
           <Footer style={{backgroundColor: '#C10F41'}}>
             <SellerFooter />

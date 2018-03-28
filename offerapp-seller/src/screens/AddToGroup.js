@@ -8,7 +8,8 @@ import { Container,
     Label,
     Input,
     Button,
-    Text
+    Text,
+    View
 } from 'native-base';
 import SellerHeader from '../components/SellerHeader';
 import DropDownSelect from '../components/DropDownSelect'
@@ -21,6 +22,9 @@ export default class AddtoGroup extends React.Component{
                     <SellerHeader title =" Add to Group "/>
                 </Header>
                 <Form>
+                    <View
+                        style={{paddingLeft: '3%', paddingRight: '3%', paddingTop: '3%'}}
+                    >
                     {/* Enter MObile NUmber */}
                     <Item floatingLabel>
                         <Label>Mobile Number</Label>
@@ -34,6 +38,7 @@ export default class AddtoGroup extends React.Component{
                     >
                         <Text>Send Invitation</Text>
                     </Button>
+                    </View>
                 </ Form>
             </ Container>
         )

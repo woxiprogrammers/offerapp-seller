@@ -6,6 +6,7 @@
     "native-base": "^2.3.10",
     "react": "16.2.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz",
+    "react-native-action-button": "^2.8.4",
     "react-native-datepicker": "^1.6.0",
     "react-native-dimension": "^1.0.6",
     "react-native-material-dropdown": "^0.11.1",

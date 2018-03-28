@@ -31,9 +31,9 @@ export default class SellerHeader extends Component {
           <Right>
             <Button transparent badge>
               <Icon name='md-notifications' style={{color:'yellow'}}/>
-              <Badge primary top>
-                <Text>2</Text>
-              </Badge>
+              <Badge primary >
+                  <Text>2</Text>
+                </Badge>
             </Button>
           </Right>
         </ View>
