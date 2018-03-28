@@ -2,7 +2,7 @@ import React from 'react';
 import SellerHeader from '../components/SellerHeader'
 import { Container, Header, View, Content } from 'native-base';
 import GroupDetailCard from '../components/GroupDetailCard';
-import FabAddGroup from '../components/FabAddGroup';
+import FabAddGroup from '../components/fab/FabAddGroup';
 
 export default class GroupListing extends React.Component {
     render() {

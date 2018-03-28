@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { View, TextInput, StyleSheet, ScrollView } from 'react-native';
-import { Container, 
+import {
+  Container,
   Header,
-  Content, 
+  Content,
   Icon,
   Button,
   Text,
@@ -26,29 +27,29 @@ export default class OfferListing extends Component {
     return (
       <ScrollView>
         <Container>
-            <Header style={{backgroundColor: '#C10F41'}}>
-              <SellerHeader title='Create Offer'/>
-            </ Header>
-            <Content>
-              <Form>
-              <View style={{paddingLeft:10, paddingRight: 10}}>
-              {/* Select offer Type */}
+          <Header style={{ backgroundColor: '#C10F41' }}>
+            <SellerHeader title='Create Offer' />
+          </ Header>
+          <Content>
+            <Form>
+              <View style={{ paddingLeft: 10, paddingRight: 10 }}>
+                {/* Select offer Type */}
                 <DropDownSelect selectLabel='Select Offer Type' />
 
                 {/* Select Category  */}
                 <DropDownSelect selectLabel='Select Category' />
-                <Text style={{paddingBottom: 10, paddingTop: 10}}>Offer Validity</ Text>
-                  <DatePicker />
+                <Text style={{ paddingBottom: 10, paddingTop: 10 }}>Offer Validity</ Text>
+                <DatePicker />
               </ View>
-              
+
               {/* Offer Description */}
-              <View style={{paddingLeft:10, paddingRight: 10}}>
-                <Text style={{paddingBottom: 10, paddingTop: 10}}>Offer Description</ Text>
+              <View style={{ paddingLeft: 10, paddingRight: 10 }}>
+                <Text style={{ paddingBottom: 10, paddingTop: 10 }}>Offer Description</ Text>
                 <DescriptionBox />
               </View>
 
               {/* Upload Photos */}
-              <Text style={{paddingLeft:10, paddingBottom: 10, paddingTop: 10}}>Upload Photos</ Text>
+              <Text style={{ paddingLeft: 10, paddingBottom: 10, paddingTop: 10 }}>Upload Photos</ Text>
               <View
                 style={{
                   flex: 1,
@@ -56,25 +57,25 @@ export default class OfferListing extends Component {
                   justifyContent: 'flex-end',
                   alignSelf: 'center'
                 }}
-              >  
+              >
                 <Button info>
-                  <Text> Browse </Text> 
+                  <Text> Browse </Text>
                 </ Button>
                 <Button info>
                   <Text> Upload </Text>
                 </ Button>
               </View>
               <View>
-              <Button block 
-                style={{backgroundColor: '#C10F41', borderRadius: 0}} 
-                onPress={Actions.offerListingScreen}>
-                <Text> Submit </Text>
-              </ Button>
+                <Button block
+                  style={{ backgroundColor: '#C10F41', borderRadius: 0 }}
+                  onPress={Actions.offerListingScreen}>
+                  <Text> Submit </Text>
+                </ Button>
               </View>
-              </Form>
-            </ Content>
+            </Form>
+          </ Content>
         </ Container>
-        </ScrollView>
+      </ScrollView>
     );
   }
 }

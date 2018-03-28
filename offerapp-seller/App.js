@@ -3,6 +3,7 @@ import Expo from 'expo';
 import Roboto from 'native-base/Fonts/Roboto.ttf';
 import RobotoMedium from 'native-base/Fonts/Roboto_medium.ttf';
 import Ionicons from '@expo/vector-icons/fonts/Ionicons.ttf';
+import OfferDetail from './src/screens/OfferDetail'
 // import { Provider } from 'react-redux';
 import Router from './Router';
 // import store from './src/store';
@@ -26,7 +27,8 @@ export default class App extends React.Component {
     if (this.state.isReady) {
       return (
         // <Provider store={store}>
-          <Router />
+          // <Router />
+          <OfferDetail />
         // </Provider>
       );
   }
