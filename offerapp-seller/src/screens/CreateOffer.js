@@ -26,7 +26,7 @@ export default class OfferListing extends Component {
   render() {
     return (
       <ScrollView>
-        <Container>
+        <Container style={{ marginTop: '5.8%' }}>
           <Header style={{ backgroundColor: '#C10F41' }}>
             <SellerHeader title='Create Offer' />
           </ Header>
@@ -54,20 +54,16 @@ export default class OfferListing extends Component {
                 style={{
                   flex: 1,
                   flexDirection: 'row',
-                  justifyContent: 'flex-end',
-                  alignSelf: 'center'
+                  paddingLeft: '3%'
                 }}
               >
                 <Button info>
-                  <Text> Browse </Text>
-                </ Button>
-                <Button info>
-                  <Text> Upload </Text>
+                  <Text> Select </Text>
                 </ Button>
               </View>
-              <View>
+              <View style={{ paddingTop: '3%' }}>
                 <Button block
-                  style={{ backgroundColor: '#C10F41', borderRadius: 0 }}
+                  style={{ backgroundColor: '#C10F41', borderRadius: 0, }}
                   onPress={Actions.offerListingScreen}>
                   <Text> Submit </Text>
                 </ Button>

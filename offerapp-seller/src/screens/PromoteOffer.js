@@ -6,7 +6,7 @@ import { Actions } from 'react-native-router-flux';
 export default class PromoteOffer extends React.Component {
     render() {
         return (
-            <Container>
+            <Container style={{ marginTop: '5.8%' }}>
                 <Header style={{ backgroundColor: '#C10F41' }}>
                     <SellerHeader title='Promote Offer' />
                 </Header>

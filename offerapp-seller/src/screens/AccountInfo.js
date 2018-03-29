@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScrollView, KeyboardAvoidingView } from 'react-native'
-import { Container, Header, Form, Item, Label, Input, Text, View, Left, Right, Button,  } from 'native-base';
+import { Container, Header, Form, Item, Label, Input, Text, View, Left, Right, Button, } from 'native-base';
 import SellerHeader from '../components/SellerHeader';
 import DropDownSelect from '../components/DropDownSelect'
 import { colors } from '../styles'
@@ -17,12 +17,12 @@ export default class AccountInfo extends React.Component {
         }];
 
         return (
-                <Container>
-                    <Header style={{ backgroundColor: '#C10F41' }}>
-                        <SellerHeader title='Account Information' />
-                    </Header>
-                    
-                    <KeyboardAvoidingView
+            <Container style={{ marginTop: '5.8%' }}>
+                <Header style={{ backgroundColor: '#C10F41' }}>
+                    <SellerHeader title='Account Information' />
+                </Header>
+
+                <KeyboardAvoidingView
                     behavior="padding"
                 >
                     <ScrollView>
@@ -69,14 +69,14 @@ export default class AccountInfo extends React.Component {
                                 <Left>
                                     <Item floatingLabel>
                                         <Label>Landline Number</Label>
-                                        <Input />
+                                        <Input keyboardType={'numeric'}/>
                                     </Item>
                                 </Left>
                                 {/* Mobile Number */}
                                 <Right>
                                     <Item floatingLabel>
                                         <Label>Mobile Number</Label>
-                                        <Input />
+                                        <Input keyboardType={'numeric'}/>
                                     </Item>
                                 </Right>
                             </View>
@@ -125,7 +125,7 @@ export default class AccountInfo extends React.Component {
                             </View>
                             {/* Types of payments */}
                             <View>
-                                <DropDownSelect selectLabel="Select Type of Payment"/>
+                                <DropDownSelect selectLabel="Select Type of Payment" />
                             </View>
 
                             {/* Upload shop images */}
@@ -138,16 +138,16 @@ export default class AccountInfo extends React.Component {
                                 </Button>
                             </View>
                             <View style={{ paddingTop: '3%' }}>
-                                <Button full style={{backgroundColor: '#C10F41'}}
+                                <Button full style={{ backgroundColor: '#C10F41' }}
                                     onPress={Actions.offerListingScreen}
                                 >
-                                    <Text style={{color: 'white'}}>Submit</Text>
+                                    <Text style={{ color: 'white' }}>Submit</Text>
                                 </Button>
                             </View>
                         </Form>
                     </ScrollView>
                 </KeyboardAvoidingView>
-                </Container>
+            </Container>
         );
     }
 }

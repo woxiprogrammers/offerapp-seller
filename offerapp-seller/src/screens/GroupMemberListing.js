@@ -6,7 +6,7 @@ import FabAddMemberToGroup from '../components/fab/fabAddMemberToGroup'
 export default class GroupMemberListing extends React.Component {
     render() {
         return (
-            <Container>
+            <Container style={{ marginTop: '5.8%' }}>
                 <Content>
                     <Header style={{ backgroundColor: '#C10F41' }}>
                         <SellerHeader title='Members List' />

@@ -7,7 +7,7 @@ import FabAddGroup from '../components/fab/FabAddGroup';
 export default class GroupListing extends React.Component {
     render() {
         return (
-            <Container>
+            <Container style={{ marginTop: '5.8%' }}>
                 <Header style={{ backgroundColor: '#C10F41' }}>
                     <SellerHeader title='Group List' />
                 </Header>
@@ -24,8 +24,61 @@ export default class GroupListing extends React.Component {
                         groupName='PQR'
                         totalMembers='20'
                     />
+                    <GroupDetailCard
+                        groupNumber='2'
+                        groupName='PQR'
+                        totalMembers='20'
+                    />
+                    <GroupDetailCard
+                        groupNumber='2'
+                        groupName='PQR'
+                        totalMembers='20'
+                    />
+                    <GroupDetailCard
+                        groupNumber='2'
+                        groupName='PQR'
+                        totalMembers='20'
+                    />
+                    <GroupDetailCard
+                        groupNumber='2'
+                        groupName='PQR'
+                        totalMembers='20'
+                    />
+                    <GroupDetailCard
+                        groupNumber='2'
+                        groupName='PQR'
+                        totalMembers='20'
+                    />
+                    <GroupDetailCard
+                        groupNumber='2'
+                        groupName='PQR'
+                        totalMembers='20'
+                    />
+                    <GroupDetailCard
+                        groupNumber='2'
+                        groupName='PQR'
+                        totalMembers='20'
+                    />
+                    <GroupDetailCard
+                        groupNumber='2'
+                        groupName='PQR'
+                        totalMembers='20'
+                    />
+                    <GroupDetailCard
+                        groupNumber='2'
+                        groupName='PQR'
+                        totalMembers='20'
+                    />
+                    <GroupDetailCard
+                        groupNumber='2'
+                        groupName='PQR'
+                        totalMembers='20'
+                    />
+
                 </Content>
-                <FabAddGroup />
+                <View>
+                    <FabAddGroup />
+                </View>
             </Container>
 
         )

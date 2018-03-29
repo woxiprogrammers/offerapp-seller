@@ -27,7 +27,7 @@ export default class OfferCard extends Component {
     return (
       <Content>
         {/* offer cards */}
-        <Card>
+        <Card scrollEnabled={false}>
           <CardItem header>
             <Left>
               <Text>{this.props.cardTitle}</Text>

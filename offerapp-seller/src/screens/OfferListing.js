@@ -46,11 +46,12 @@ export default class OfferListing extends Component {
 
   render() {
     return (
-      <Container>
-        <Header style={{ backgroundColor: colors.headerColor }} hasTabs>
+      <Container style={{ marginTop: '5.8%' }}>
+        <Header style={{ backgroundColor: colors.headerColor, }} hasTabs >
           <SellerHeader title='Welcome' />
         </ Header >
-        <Content>
+
+        <Content >
           {/* seacrh bar */}
           <Item regular>
             <Icon active name='ios-search' />
@@ -59,6 +60,16 @@ export default class OfferListing extends Component {
           {/* Sliding buttons */}
           <Tabs renderTabBar={() => <ScrollableTab />}>
             <Tab heading={<TabHeading><Text>All</Text></TabHeading>}>
+              <OfferCard
+                cardTitle='Buy 1 get 1 Free'
+                offerID='11'
+                startDate='23-02-2018'
+                endDate='23-030-2018'
+                likeCount='1'
+                grabCount="2"
+                wishlistCount='2'
+                offerStatus='Approved'
+              />
               <OfferCard
                 cardTitle='Buy 1 get 1 Free'
                 offerID='11'
@@ -111,11 +122,10 @@ export default class OfferListing extends Component {
             </Tab>
           </Tabs>
         </Content>
-
         {/* floating Button */}
-
-        <FabAdd />
-
+        <View>
+          <FabAdd />
+        </View>
         {/* footer with tabs */}
         <Footer style={{ backgroundColor: '#C10F41' }}>
           <SellerFooter />

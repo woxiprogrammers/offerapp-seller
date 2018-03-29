@@ -9,7 +9,7 @@ import { Actions } from 'react-native-router-flux';
 export default class CreateGroup extends React.Component {
     render() {
         return (
-            <Container>
+            <Container style={{ marginTop: '5.8%' }}>
                 <Header style={{ backgroundColor: '#C10F41' }}>
                     <SellerHeader title='Create Group' />
                 </Header>
@@ -42,7 +42,7 @@ export default class CreateGroup extends React.Component {
                             {/* Enter Admin Contact No. */}
                             <Item floatingLabel>
                                 <Label>Contact Number</Label>
-                                <Input />
+                                <Input keyboardType={'numeric'} />
                             </Item>
                         </Right>
                     </View>
