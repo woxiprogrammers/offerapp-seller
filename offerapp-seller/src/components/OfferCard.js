@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import {
   Container,
   Header,
@@ -27,15 +27,18 @@ export default class OfferCard extends Component {
     return (
       <Content>
         {/* offer cards */}
-        <Card scrollEnabled={false}>
+        <TouchableOpacity onPress={Actions.offerDetailScreen}> 
+        <Card >
           <CardItem header>
             <Left>
-              <Text>{this.props.cardTitle}</Text>
+                <Text>{this.props.cardTitle}</Text>
             </Left>
             <Right>
               <Text>Offer ID: {this.props.offerID}</Text>
             </Right>
+
           </CardItem>
+
           <CardItem>
             <Body>
               <View style={{
@@ -99,7 +102,9 @@ export default class OfferCard extends Component {
 
             </View>
           </CardItem>
+
         </Card>
+        </TouchableOpacity> 
       </Content>
 
     );

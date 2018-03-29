@@ -3,6 +3,7 @@ import SellerHeader from '../components/SellerHeader'
 import { Container, Header, View, Content } from 'native-base';
 import GroupDetailCard from '../components/GroupDetailCard';
 import FabAddGroup from '../components/fab/FabAddGroup';
+import { Actions } from 'react-native-router-flux';
 
 export default class GroupListing extends React.Component {
     render() {
@@ -18,6 +19,7 @@ export default class GroupListing extends React.Component {
                         groupNumber='1'
                         groupName='ABC'
                         totalMembers='25'
+                        onPress={Actions.offersSentScreen}
                     />
                     <GroupDetailCard
                         groupNumber='2'

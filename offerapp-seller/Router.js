@@ -11,6 +11,8 @@ import GroupMemberListing from './src/screens/GroupMemberListing';
 import PromoteOffer from './src/screens/PromoteOffer';
 import CreateGroup from './src/screens/CreateGroup';
 import SellerRegistration from './src/screens/SellerRegistration';
+import OffersSent from './src/screens/OffersSent';
+import OfferDetail from './src/screens/OfferDetail';
 class RouterComponent extends React.Component {
   render() {
     console.log('Router Running !!');
@@ -35,6 +37,8 @@ class RouterComponent extends React.Component {
                   <Scene hideNavBar key="groupMemberListingScreen" component={GroupMemberListing} />
                   <Scene hideNavBar key="createGroupScreen" component={CreateGroup} />
                   <Scene hideNavBar initial key="sellerRegistrationScreen" component={SellerRegistration} />
+                  <Scene hideNavBar key="offersSentScreen" component={OffersSent} />
+                  <Scene hideNavBar key="offerDetailScreen" component={OfferDetail} />
                 </Stack>
               </Scene>
             </Drawer>
