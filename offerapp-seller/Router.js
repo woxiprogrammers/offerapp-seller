@@ -13,6 +13,10 @@ import CreateGroup from './src/screens/CreateGroup';
 import SellerRegistration from './src/screens/SellerRegistration';
 import OffersSent from './src/screens/OffersSent';
 import OfferDetail from './src/screens/OfferDetail';
+import MultiSelectDropDown from './src/components/MultiSelectDropDown'
+import Login from './src/screens/Login'
+import MobileVerifyScreen from './src/screens/MobileVerifyScreen';
+import OtpVerifyScreen from './src/screens/OtpVerifyScreen';
 class RouterComponent extends React.Component {
   render() {
     console.log('Router Running !!');
@@ -27,6 +31,7 @@ class RouterComponent extends React.Component {
             >
               <Scene hideNavBar panHandlers={null} key="mainroot">
                 <Stack key="root">
+                  <Scene hideNavBar initial key="LoginScreen" component={Login} />
                   <Scene hideNavBar key="offerListingScreen" component={OfferListing} />
                   <Scene hideNavBar key="createOfferScreen" component={CreateOffer} />
                   <Scene hideNavBar key="addToGroupScreen" component={AddToGroup} />
@@ -36,9 +41,12 @@ class RouterComponent extends React.Component {
                   <Scene hideNavBar key="groupListingScreen" component={GroupListing} />
                   <Scene hideNavBar key="groupMemberListingScreen" component={GroupMemberListing} />
                   <Scene hideNavBar key="createGroupScreen" component={CreateGroup} />
-                  <Scene hideNavBar initial key="sellerRegistrationScreen" component={SellerRegistration} />
+                  <Scene hideNavBar key="sellerRegistrationScreen" component={SellerRegistration} />
                   <Scene hideNavBar key="offersSentScreen" component={OffersSent} />
                   <Scene hideNavBar key="offerDetailScreen" component={OfferDetail} />
+                  <Scene hideNavBar key="multiSelectDropDownScreen" component={MultiSelectDropDown} />
+                  <Scene hideNavBar key="mobileVerifyScreen" component={MobileVerifyScreen} />
+                  <Scene hideNavBar key="otpVerifyScreen" component={OtpVerifyScreen} />
                 </Stack>
               </Scene>
             </Drawer>

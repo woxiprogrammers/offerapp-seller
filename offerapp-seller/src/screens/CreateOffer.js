@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TextInput, StyleSheet, ScrollView } from 'react-native';
+import { View, TextInput, StyleSheet, ScrollView, Image } from 'react-native';
 import {
   Container,
   Header,
@@ -13,6 +13,7 @@ import {
   Form,
   Spinner
 } from 'native-base';
+import { ImagePicker } from 'expo';
 import SellerHeader from '../components/SellerHeader';
 import SellerFooter from '../components/SellerFooter';
 import DropDownSelect from '../components/DropDownSelect'
@@ -23,7 +24,12 @@ import { width, height, totalSize } from 'react-native-dimension';
 import { Actions } from 'react-native-router-flux';
 
 export default class OfferListing extends Component {
+  state = {
+    image: null,
+  };
+
   render() {
+    let { image } = this.state;
     return (
       <ScrollView>
         <Container style={{ marginTop: '5.8%' }}>
@@ -39,6 +45,8 @@ export default class OfferListing extends Component {
                 {/* Select Category  */}
                 <DropDownSelect selectLabel='Select Category' />
                 <Text style={{ paddingBottom: 10, paddingTop: 10 }}>Offer Validity</ Text>
+
+                {/* Date Picker */}
                 <DatePicker />
               </ View>
 
@@ -57,10 +65,15 @@ export default class OfferListing extends Component {
                   paddingLeft: '3%'
                 }}
               >
-                <Button info>
+                <Button info
+                  onPress={this._pickImage}>
                   <Text> Select </Text>
                 </ Button>
+                {image &&
+                  <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
               </View>
+
+              {/* Submit Button */}
               <View style={{ paddingTop: '3%' }}>
                 <Button block
                   style={{ backgroundColor: '#C10F41', borderRadius: 0, }}
@@ -74,4 +87,17 @@ export default class OfferListing extends Component {
       </ScrollView>
     );
   }
+  _pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      aspect: [4, 3],
+      base64: true,
+    });
+
+    console.log(result);
+
+    if (!result.cancelled) {
+      this.setState({ image: result.uri });
+    }
+  };
 }

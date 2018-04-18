@@ -67,7 +67,12 @@ export default class DrawerComponent extends React.Component {
             </Button>
 
             {/* Logout */}
-            <Button block light style={{ width: responsiveWidth(80) }}>
+            <Button block light
+              style={{
+                width: responsiveWidth(80)
+              }}
+              onPress={Actions.LoginScreen}
+            >
               <Text>Logout</Text>
             </Button>
           </View>

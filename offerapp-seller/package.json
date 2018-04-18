@@ -16,6 +16,7 @@
     "react-native-prompt-android": "^0.3.3",
     "react-native-responsive-dimensions": "^1.0.2",
     "react-native-router-flux": "^4.0.0-beta.28",
+    "react-native-select-multiple": "^1.2.0",
     "react-native-swiper": "^1.5.13"
   }
 }
