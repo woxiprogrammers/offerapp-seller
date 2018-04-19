@@ -107,7 +107,7 @@ class LoginScreen extends Component {
                                 </Form>
                             </View>
                             <View>
-                                <Button style={styles.loginStyle} onPress={Actions.offerListingScreen}>
+                                <Button style={styles.loginStyle} onPress={this.onButtonPress.bind(this)}>
                                     <Text style={styles.textStyle}>LOG IN</Text>
                                 </Button>
                             </View>

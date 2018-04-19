@@ -18,8 +18,8 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.offerapp.seller"
-
+      "package": "com.offerapp.seller",
+      "googleServicesFile": "./google-services.json"
     }
   }
 }
