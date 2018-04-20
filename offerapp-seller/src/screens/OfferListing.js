@@ -20,28 +20,16 @@ import SellerHeader from '../components/SellerHeader';
 import FabAdd from '../components/fab/FabAdd';
 import SellerFooter from '../components/SellerFooter';
 import { colors } from '../styles';
+import {
+  offerStatus,
+  offerList
+} from '../actions';
+import AllTab from '../tabs/AllTab';
 
 export default class OfferListing extends Component {
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      data: [],
-      offerList: []
-    }
-  }
-  componentWillMount() {
-    this.fetchData();
-  }
-
-  fetchData() {
-    fetch('http://www.mocky.io/v2/5aab5beb2e00006700138ce1', { method: "GET" })
-      .then((response) => response.json())
-      .then((responseData) => {
-        this.setState({ offerList: responseData.data.offer_list })
-        console.log(this.state.offerList);
-      })
-      .done();
+  
+  onStatuChange (text) {
+    this.props.offerStatus(text);
   }
 
   render() {
@@ -60,26 +48,7 @@ export default class OfferListing extends Component {
           {/* Sliding buttons */}
           <Tabs renderTabBar={() => <ScrollableTab />}>
             <Tab heading={<TabHeading><Text>All</Text></TabHeading>}>
-              <OfferCard
-                cardTitle='Buy 1 get 1 Free'
-                offerID='11'
-                startDate='23-02-2018'
-                endDate='23-030-2018'
-                likeCount='1'
-                grabCount="2"
-                wishlistCount='2'
-                offerStatus='Approved'
-              />
-              <OfferCard
-                cardTitle='Buy 1 get 1 Free'
-                offerID='11'
-                startDate='23-02-2018'
-                endDate='23-030-2018'
-                likeCount='1'
-                grabCount="2"
-                wishlistCount='2'
-                offerStatus='Approved'
-              />
+              <AllTab />
             </Tab>
             <Tab heading={<TabHeading><Text>Pending</Text></TabHeading>}>
               <OfferCard

@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import LoginReducers from './LoginReducers';
-// import MainReducers from './mainreducers';
+ import OfferLisitingReducers from './OfferListingReducer';
 // import GroupsReducers from './groupsreducers';
 // import WishListReducers from './wishlistreducers';
 // import InterestedReducers from './interestedreducers';
@@ -9,6 +9,7 @@ import LoginReducers from './LoginReducers';
 
 export default combineReducers({
   user: LoginReducers,
+  offerlist: OfferLisitingReducers
 //   main: MainReducers,
 //   groups: GroupsReducers,
 //   wishlist: WishListReducers,

@@ -8,11 +8,9 @@ import {
     LOGIN_USER_FAIL,
     LOGIN_USER,
     LOGOUT_USER,
-    URL
+    baseUrl
 } from '../constants';
 import { Permissions, Notifications } from 'expo';
-
-// const PUSH_ENDPOINT = 'https://your-server.com/users/push-token';
 
 async function registerForPushNotificationsAsync() {
   const { status: existingStatus } = await Permissions.getAsync(
@@ -43,7 +41,7 @@ export const loginUser = ({ user, password }) => {
   return (dispatch) => {
     dispatch({ type: LOGIN_USER });
     const path = 'login';
-    const loginUserURL = `${URL}/${path}/`;
+    const loginUserURL = `${baseUrl}/${path}/`;
     axios.post(loginUserURL, {
     mobile_no: user,
     password
@@ -52,7 +50,6 @@ export const loginUser = ({ user, password }) => {
       if (status === 200) {
         console.log('Password Correct!!!');
         const token = response.data.token;
-        console.log(response)
         registerForPushNotificationsAsync();
         try {
           await AsyncStorage.setItem('token', `${token}`);

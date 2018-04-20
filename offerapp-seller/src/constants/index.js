@@ -1,5 +1,5 @@
 export * from './LoginTypes';
-// export * from './MainTypes';
+export * from './OfferListingTypes';
 // export * from './LocationTypes';
 // export * from './GroupTypes';
 // export * from './WishListTypes';
@@ -8,4 +8,4 @@ export * from './LoginTypes';
 // export * from './CategoryTypes';
 
 // export const URL = 'http://192.168.43.29:8000';
-export const URL = 'https://offerapi.20agr17dev.xyz';
+export const baseUrl = 'https://offerapi.20agr17dev.xyz';
