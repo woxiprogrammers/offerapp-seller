@@ -6,23 +6,41 @@ import {
     baseUrl
 } from '../constants';
 
-export const offerList = ({ status }) => {
+export const offerList = ({
+    token,
+    status,
+    page 
+}) => {
     console.log("fetching offerlist");
+    console.log(`${baseUrl}/seller/offer/listing?token=${token}`);
     return (dispatch) => {
         dispatch({ type: OFFER_LISTED });
-        const url = `${baseUrl}` + "/seller/offer/listing?token=" + `${token}`;
-        axios.post(url, {
-            status_slug: status
+        axios({
+            url: `${baseUrl}/seller/offer/listing?token=${token}`,
+            method: 'post',
+            data: {
+                status_slug: status
+            }
         }).then(async (response) => {
-            const status = response.message;
-            if (status === "Success") {
-                console.log("Lisiting recieved")
-                console.log(reponse.data)
-                const data = response.data
-
+            var success = response.data.message;
+            if (success === "Success") {
+                dispatch(getOfferListSuccess(response.data.data))
+            } else {
+                console.log("Lisitng not recieved")
             }
         })
     }
+};
+export const getOfferListSuccess = (response) => {
+    console.log('Success Offers :')
+    console.log(response);
+    const { offer_list } = response;
+    return {
+        type: OFFER_LISTED,
+        offer_list
+        //   listingViewCategoryOffers: records,
+        //   pagination
+    };
 };
 
 export const offerStatus = (text) => {

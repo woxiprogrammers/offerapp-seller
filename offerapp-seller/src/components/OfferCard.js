@@ -24,6 +24,16 @@ import { Actions } from 'react-native-router-flux';
 
 export default class OfferCard extends Component {
   render() {
+    const {
+      cardTitle,
+      offerID,
+      startDate,
+      endDate,
+      likeCount,
+      grabCount,
+      wishlistCount,
+      offerStatus,
+    } = this.props;
     return (
       <Content>
         {/* offer cards */}
@@ -31,10 +41,10 @@ export default class OfferCard extends Component {
         <Card >
           <CardItem header>
             <Left>
-                <Text>{this.props.cardTitle}</Text>
+                <Text>{cardTitle}</Text>
             </Left>
             <Right>
-              <Text>Offer ID: {this.props.offerID}</Text>
+              <Text>Offer ID: {offerID}</Text>
             </Right>
 
           </CardItem>
@@ -46,12 +56,12 @@ export default class OfferCard extends Component {
               }}>
                 {/* Offer Start and End Date */}
                 <Left>
-                  <Text style={{ fontSize: responsiveFontSize(2) }}>Start date: {this.props.startDate} End Date: {this.props.endDate}</Text>
+                  <Text style={{ fontSize: responsiveFontSize(2) }}>Start date: {startDate} End Date: {endDate}</Text>
                 </Left>
 
                 {/* Offer Status */}
                 <Right>
-                  <Text >{this.props.offerStatus}</Text>
+                  <Text >{offerStatus}</Text>
                 </Right>
               </View>
             </Body>
@@ -67,35 +77,35 @@ export default class OfferCard extends Component {
 
               {/* Heart Button */}
               {renderIf(
-                this.props.wishlistCount,
+                wishlistCount,
                 <Button badge transparent style={{ paddingTop: '3%' }}>
                   <FontAwesome name="heart" size={22} color='red' />
                   <Badge primary style={{ marginTop: -10 }}>
-                    <Text >{this.props.wishlistCount}</Text>
+                    <Text >{wishlistCount}</Text>
                   </Badge>
                 </ Button>
               )}
 
               {/* Liked Button */}
               {renderIf(
-                this.props.likeCount,
+                likeCount,
                 <Button badge transparent
                   style={{ paddingTop: '3%' }}
                   onPress={Actions.iAmIntrestedScreen}>
                   <EvilIcons name="like" size={30} />
                   <Badge primary style={{ marginTop: -10 }}>
-                    <Text>{this.props.likeCount}</Text>
+                    <Text>{likeCount}</Text>
                   </Badge>
                 </Button>
               )}
 
               {/* Grabed Offers */}
               {renderIf(
-                this.props.grabCount,
+                grabCount,
                 <Button badge transparent style={{ paddingTop: '3%' }}>
                   <FontAwesome name="handshake-o" size={22} />
                   <Badge primary style={{ marginTop: -10 }}>
-                    <Text>{this.props.grabCount}</Text>
+                    <Text>{grabCount}</Text>
                   </Badge>
                 </Button>
               )}

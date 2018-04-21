@@ -83,31 +83,36 @@ class AllTab extends Component {
   }
   keyExtractor = (item, index) => { return index; };
   renderRow(offerDetails) {
-    // console.log('Rendering Row');
+    console.log('Rendering Row');
     // console.log(offerDetails);
     // console.log(offerDetails);
     const { item } = offerDetails;
+    console.log(item)
     const {
-      cardTitle,
-      offerID,
-      startDate,
-      endDate,
-      likeCount,
-      grabCount,
-      wishlistCount,
-      offerStatus,
+      offer_id,
+      seller_address_id,
+      offer_type_id,
+      offer_type_name,
+      offer_status_id,
+      offer_status_name,
+      offer_description,
+      valid_from,
+      valid_to,
+      wishlist_count,
+      interested_count,
+      grabbed_count
     } = item;
     return (
       <View>
         <OfferCard
-          cardTitle
-          offerID
-          startDate
-          endDate
-          likeCount
-          grabCount
-          wishlistCount
-          offerStatus
+          cardTitle={offer_type_name}
+          offerID={offer_id}
+          startDate={valid_from}
+          endDate={valid_to}
+          likeCount={interested_count}
+          grabCount={grabbed_count}
+          wishlistCount={wishlist_count}
+          offerStatus={offer_status_name}
         />
       </View>
     );
@@ -154,7 +159,6 @@ class AllTab extends Component {
 
 function mapStateToProps({ offerlist, user }) {
     const { token } = user;
-    console.log(token)
     return {
         ...offerlist,
         token
