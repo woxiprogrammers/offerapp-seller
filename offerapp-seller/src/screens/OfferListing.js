@@ -24,14 +24,13 @@ import {
   offerStatus,
   offerList
 } from '../actions';
-import AllTab from '../tabs/AllTab';
+import AllTab from './StatusTabs/AllTab';
+import PendingTab from './StatusTabs/PendingTab';
+import ApproveTab from './StatusTabs/ApproveTab';
+import DisapproveTab from './StatusTabs/DisapproveTab';
+import ExpireTab from './StatusTabs/ExpireTab';
 
 export default class OfferListing extends Component {
-  
-  onStatuChange (text) {
-    this.props.offerStatus(text);
-  }
-
   render() {
     return (
       <Container style={{ marginTop: '5.8%' }}>
@@ -41,53 +40,26 @@ export default class OfferListing extends Component {
 
         <Content >
           {/* seacrh bar */}
-          <Item regular>
+          {/* <Item regular>
             <Icon active name='ios-search' />
             <Input placeholder='Search' />
-          </Item>
+          </Item> */}
           {/* Sliding buttons */}
           <Tabs renderTabBar={() => <ScrollableTab />}>
             <Tab heading={<TabHeading><Text>All</Text></TabHeading>}>
               <AllTab />
             </Tab>
             <Tab heading={<TabHeading><Text>Pending</Text></TabHeading>}>
-              <OfferCard
-                cardTitle='Flat 50% off'
-                offerID='22'
-                startDate='23-02-2018'
-                endDate='23-030-2018'
-                offerStatus='Pending'
-              />
+              <PendingTab />
             </Tab>
             <Tab heading={<TabHeading><Text>Approved</Text></TabHeading>}>
-              <OfferCard
-                cardTitle='Cashback'
-                offerID='33'
-                startDate='23-02-2018'
-                endDate='23-030-2018'
-                likeCount='23'
-                grabCount="22"
-                wishlistCount='2'
-                offerStatus='Approved'
-              />
+              <ApproveTab />
             </Tab>
             <Tab heading={<TabHeading><Text>Disapproved</Text></TabHeading>}>
-              <OfferCard
-                cardTitle='Flat Rs. 100 off'
-                offerID='44'
-                startDate='23-02-2018'
-                endDate='23-030-2018'
-                offerStatus='Dispproved'
-              />
+              <DisapproveTab />
             </Tab>
             <Tab heading={<TabHeading><Text>Expired</Text></TabHeading>}>
-              <OfferCard
-                cardTitle='Flat Rs. 100 off'
-                offerID='55'
-                startDate='23-02-2018'
-                endDate='23-030-2018'
-                offerStatus='Expired'
-              />
+              <ExpireTab />
             </Tab>
           </Tabs>
         </Content>

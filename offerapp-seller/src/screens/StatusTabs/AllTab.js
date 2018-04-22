@@ -9,20 +9,16 @@ import {
   Spinner,
   View
 } from 'native-base';
-// import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import {
   responsiveHeight,
   responsiveWidth,
-  // responsiveFontSize
 } from 'react-native-responsive-dimensions';
 import {
-  // variables,
-  // mixins,
   colors,
- } from '../styles';
-import { offerStatus, offerList } from '../actions';
-import OfferCard from '../components/OfferCard';
+ } from '../../styles';
+import { offerStatus, offerList } from '../../actions';
+import OfferCard from '../../components/OfferCard';
 
 class AllTab extends Component {
   constructor(props) {
@@ -83,7 +79,7 @@ class AllTab extends Component {
   }
   keyExtractor = (item, index) => { return index; };
   renderRow(offerDetails) {
-    console.log('Rendering Row');
+    // console.log('Rendering Row');
     // console.log(offerDetails);
     // console.log(offerDetails);
     const { item } = offerDetails;
@@ -96,8 +92,8 @@ class AllTab extends Component {
       offer_status_id,
       offer_status_name,
       offer_description,
-      valid_from,
-      valid_to,
+      start_date,
+      end_date,
       wishlist_count,
       interested_count,
       grabbed_count
@@ -107,8 +103,8 @@ class AllTab extends Component {
         <OfferCard
           cardTitle={offer_type_name}
           offerID={offer_id}
-          startDate={valid_from}
-          endDate={valid_to}
+          startDate={start_date}
+          endDate={end_date}
           likeCount={interested_count}
           grabCount={grabbed_count}
           wishlistCount={wishlist_count}
@@ -121,6 +117,7 @@ class AllTab extends Component {
     const {
       containerStyle
     } = styles;
+    // const { offer_list_all } = this.props;
     const { offer_list } = this.props;
     console.log(offer_list);
     return (

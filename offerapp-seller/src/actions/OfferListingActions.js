@@ -1,18 +1,24 @@
 import axios from 'axios';
 import {
     OFFER_LISTED,
+    OFFER_LISTED_ALL,
+    OFFER_LISTED_APPROVE,
+    OFFER_LISTED_DISAPPROVE,
+    OFFER_LISTED_EXPIRE,
     OFFER_NOT_LISTED,
     OFFER_STATUS,
+    OFFER_LISTED_PENDING,
     baseUrl
 } from '../constants';
+
 
 export const offerList = ({
     token,
     status,
-    page 
-}) => {
+    page }) => {
     console.log("fetching offerlist");
     console.log(`${baseUrl}/seller/offer/listing?token=${token}`);
+
     return (dispatch) => {
         dispatch({ type: OFFER_LISTED });
         axios({
@@ -37,10 +43,35 @@ export const getOfferListSuccess = (response) => {
     const { offer_list } = response;
     return {
         type: OFFER_LISTED,
-        offer_list
-        //   listingViewCategoryOffers: records,
-        //   pagination
+        offer_list: offer_list
     };
+    // if (response.offer_status_slug === 'all') {
+    //     return {
+    //         type: OFFER_LISTED_ALL,
+    //         offer_list_all: offer_list
+    //     };
+    // } else if (response.offer_status_slug === 'approved') {
+    //     return {
+    //         type: OFFER_LISTED_APPROVE,
+    //         offer_list_approve: offer_list
+    //     }
+    // } else if (response.offer_status_slug === 'disapproved') {
+    //     return {
+    //         type: OFFER_LISTED_DISAPPROVE,
+    //         offer_list_disapprove: offer_list
+    //     }
+    // }else if (response.offer_status_slug === 'expired') {
+    //     return {
+    //         type: OFFER_LISTED_EXPIRE,
+    //         offer_list_expire: offer_list
+    //     }
+    // }else if (response.offer_status_slug === 'pending') {
+    //     return {
+    //         type: OFFER_LISTED_PENDING,
+    //         offer_list_pending: offer_list
+    //     }
+    // }
+
 };
 
 export const offerStatus = (text) => {
@@ -57,3 +88,4 @@ const offerListingSuccess = (dispatch, data) => {
         offer_list
     });
 }
+

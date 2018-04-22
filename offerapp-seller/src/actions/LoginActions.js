@@ -2,13 +2,13 @@ import axios from 'axios';
 import { Actions } from 'react-native-router-flux';
 import { AsyncStorage } from 'react-native';
 import {
-    USER_CHANGED,
-    PASSWORD_CHANGED,
-    LOGIN_USER_SUCCESS,
-    LOGIN_USER_FAIL,
-    LOGIN_USER,
-    LOGOUT_USER,
-    baseUrl
+  USER_CHANGED,
+  PASSWORD_CHANGED,
+  LOGIN_USER_SUCCESS,
+  LOGIN_USER_FAIL,
+  LOGIN_USER,
+  LOGOUT_USER,
+  baseUrl
 } from '../constants';
 import { Permissions, Notifications } from 'expo';
 
@@ -34,18 +34,20 @@ async function registerForPushNotificationsAsync() {
 
   // Get the token that uniquely identifies this device
   let PushToken = await Notifications.getExpoPushTokenAsync();
-  console.log("Push token: "+PushToken)
+  console.log("Push token: " + PushToken)
 }
 export const loginUser = ({ user, password }) => {
   console.log('Logging In');
   return (dispatch) => {
     dispatch({ type: LOGIN_USER });
     const path = 'login';
+    const role = 'seller'
     const loginUserURL = `${baseUrl}/${path}/`;
     axios.post(loginUserURL, {
-    mobile_no: user,
-    password
-  }).then(async (response) => {
+      // role_slug: role,
+      mobile_no: user,
+      password
+    }).then(async (response) => {
       const status = response.status;
       if (status === 200) {
         console.log('Password Correct!!!');
@@ -61,9 +63,9 @@ export const loginUser = ({ user, password }) => {
         loginUserFailed(dispatch);
       }
     }).catch((error) => {
-    console.log(error);
-    loginUserFailed(dispatch);
-  });
+      console.log(error);
+      loginUserFailed(dispatch);
+    });
   };
 };
 
@@ -93,11 +95,11 @@ export const logoutUser = () => {
 };
 
 const loginUserFailed = (dispatch) => {
-    dispatch({ type: LOGIN_USER_FAIL });
+  dispatch({ type: LOGIN_USER_FAIL });
 };
 
 const loginUserSuccess = (dispatch, token) => {
-    dispatch({
+  dispatch({
     type: LOGIN_USER_SUCCESS,
     token
   });
