@@ -83,7 +83,6 @@ class AllTab extends Component {
     // console.log(offerDetails);
     // console.log(offerDetails);
     const { item } = offerDetails;
-    console.log(item)
     const {
       offer_id,
       seller_address_id,
@@ -119,7 +118,6 @@ class AllTab extends Component {
     } = styles;
     // const { offer_list_all } = this.props;
     const { offer_list } = this.props;
-    console.log(offer_list);
     return (
       <Container style={containerStyle}>
         <Content

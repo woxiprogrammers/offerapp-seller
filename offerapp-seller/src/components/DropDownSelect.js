@@ -1,21 +1,27 @@
 import React, { Component } from "react";
 import { Dropdown } from 'react-native-material-dropdown';
-import { View } from 'react-native';
+import { View, Picker, StyleSheet } from 'react-native';
+import { responsiveWidth } from "react-native-responsive-dimensions";
 export default class SelectOfferCategory extends Component {
   render() {
-    let data = [{
-      value: 'Banana',
-    }, {
-      value: 'Mango',
-    }, {
-      value: 'Pear',
-    }];
- 
+    const{
+      selectLabel
+    } = this.props;
     return (
-        <Dropdown
-          label={this.props.selectLabel}
-          data={data}
-        />
+      <Picker
+        style={pickerStyle}
+        mode='dropdown'
+        selectedValue={selectLabel}
+      >
+        <Picker.Item label="+91" value="+91" />
+      </Picker>
     );
   }
 }
+const styles = StyleSheet.create({
+  pickerStyle: {
+    width: responsiveWidth(20),
+    paddingBottom: 10,
+    marginTop: 10,
+  }
+})

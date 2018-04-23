@@ -16,9 +16,6 @@ export const offerList = ({
     token,
     status,
     page }) => {
-    console.log("fetching offerlist");
-    console.log(`${baseUrl}/seller/offer/listing?token=${token}`);
-
     return (dispatch) => {
         dispatch({ type: OFFER_LISTED });
         axios({
@@ -38,8 +35,6 @@ export const offerList = ({
     }
 };
 export const getOfferListSuccess = (response) => {
-    console.log('Success Offers :')
-    console.log(response);
     const { offer_list } = response;
     return {
         type: OFFER_LISTED,
