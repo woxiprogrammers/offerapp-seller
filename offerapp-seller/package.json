@@ -6,11 +6,17 @@
     "native-base": "^2.3.10",
     "react": "16.2.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz",
+    "react-native-action-button": "^2.8.4",
+    "react-native-auto-height-image": "^1.0.0",
     "react-native-datepicker": "^1.6.0",
     "react-native-dimension": "^1.0.6",
     "react-native-material-dropdown": "^0.11.1",
+    "react-native-material-ui": "^1.20.0",
+    "react-native-multiple-select": "^0.4.1",
     "react-native-prompt-android": "^0.3.3",
     "react-native-responsive-dimensions": "^1.0.2",
-    "react-navigation": "^1.5.8"
+    "react-native-router-flux": "^4.0.0-beta.28",
+    "react-native-select-multiple": "^1.2.0",
+    "react-native-swiper": "^1.5.13"
   }
 }

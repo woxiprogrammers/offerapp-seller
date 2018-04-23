@@ -13,8 +13,8 @@ export default class SellerFooter extends Component {
     return (
       
       <Container>
-          <Footer style={{backgroundColor: '#C10F41'}}>
-            <FooterTab>
+          <Footer>
+            <FooterTab  style={{backgroundColor: '#C10F41'}}>
                 <Button vertical  
                 onPress={() => {
                   prompt(

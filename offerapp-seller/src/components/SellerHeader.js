@@ -7,7 +7,12 @@ import { Container,
   Right, 
   Button, 
   Icon, 
-  Title } from 'native-base';
+  Title,
+  Badge,
+  Text
+} from 'native-base';
+import { Actions } from 'react-native-router-flux';
+import { responsiveFontSize } from 'react-native-responsive-dimensions';
 
 export default class SellerHeader extends Component {
   render() {
@@ -15,17 +20,20 @@ export default class SellerHeader extends Component {
         <View style={{
             flex: 1,
             flexDirection: 'row'}}>
-        <Left>
-            <Button transparent>
+          <Left>
+            <Button transparent onPress={Actions.drawerOpen}>
               <Icon name='menu' style={{color:'white'}}/>
             </Button>
           </Left>
-          <Body>
+          <Body >
             <Title style={{color:'white'}}>{this.props.title}</Title>
           </Body>
           <Right>
-            <Button transparent>
+            <Button transparent badge>
               <Icon name='md-notifications' style={{color:'yellow'}}/>
+              <Badge primary >
+                  <Text>2</Text>
+                </Badge>
             </Button>
           </Right>
         </ View>

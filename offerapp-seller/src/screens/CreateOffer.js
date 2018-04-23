@@ -1,57 +1,103 @@
 import React, { Component } from 'react';
-import { View, TextInput, StyleSheet } from 'react-native';
-import { Container, 
+import { View, TextInput, StyleSheet, ScrollView, Image } from 'react-native';
+import {
+  Container,
   Header,
-  Content, 
+  Content,
   Icon,
   Button,
   Text,
   Input,
   Item,
-  Footer } from 'native-base';
+  Footer,
+  Form,
+  Spinner
+} from 'native-base';
+import { ImagePicker } from 'expo';
 import SellerHeader from '../components/SellerHeader';
 import SellerFooter from '../components/SellerFooter';
-import SelectOfferType from '../components/SelectOfferType';
-import SelectOfferCategory from '../components/SelectOfferCategory';
+import DropDownSelect from '../components/DropDownSelect'
 import DatePicker from '../components/DatePicker';
 import DescriptionBox from '../components/DescriptionBox'
 
 import { width, height, totalSize } from 'react-native-dimension';
+import { Actions } from 'react-native-router-flux';
 
 export default class OfferListing extends Component {
+  state = {
+    image: null,
+  };
+
   render() {
+    let { image } = this.state;
     return (
-        <Container>
-            <Header style={{backgroundColor: '#C10F41'}}>
-              <SellerHeader title='Create Offer'/>
-            </ Header>
-            <Content>
-              <View style={{paddingLeft:10, paddingRight: 10}}>
-                <SelectOfferType />
-                <SelectOfferCategory />
-                <Text style={{paddingBottom: 10, paddingTop: 10}}>Offer Validity</ Text>
-                  <DatePicker />
+      <ScrollView>
+        <Container style={{ marginTop: '5.8%' }}>
+          <Header style={{ backgroundColor: '#C10F41' }}>
+            <SellerHeader title='Create Offer' />
+          </ Header>
+          <Content>
+            <Form>
+              <View style={{ paddingLeft: 10, paddingRight: 10 }}>
+                {/* Select offer Type */}
+                <DropDownSelect selectLabel='Select Offer Type' />
+
+                {/* Select Category  */}
+                <DropDownSelect selectLabel='Select Category' />
+                <Text style={{ paddingBottom: 10, paddingTop: 10 }}>Offer Validity</ Text>
+
+                {/* Date Picker */}
+                <DatePicker />
               </ View>
-              
+
               {/* Offer Description */}
-              <View style={{paddingLeft:10, paddingRight: 10}}>
-                <Text style={{paddingBottom: 10, paddingTop: 10}}>Offer Description</ Text>
+              <View style={{ paddingLeft: 10, paddingRight: 10 }}>
+                <Text style={{ paddingBottom: 10, paddingTop: 10 }}>Offer Description</ Text>
                 <DescriptionBox />
               </View>
-            </ Content>
+
+              {/* Upload Photos */}
+              <Text style={{ paddingLeft: 10, paddingBottom: 10, paddingTop: 10 }}>Upload Photos</ Text>
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: 'row',
+                  paddingLeft: '3%'
+                }}
+              >
+                <Button info
+                  onPress={this._pickImage}>
+                  <Text> Select </Text>
+                </ Button>
+                {image &&
+                  <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+              </View>
+
+              {/* Submit Button */}
+              <View style={{ paddingTop: '3%' }}>
+                <Button block
+                  style={{ backgroundColor: '#C10F41', borderRadius: 0, }}
+                  onPress={Actions.offerListingScreen}>
+                  <Text> Submit </Text>
+                </ Button>
+              </View>
+            </Form>
+          </ Content>
         </ Container>
+      </ScrollView>
     );
   }
-}
+  _pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      aspect: [4, 3],
+      base64: true,
+    });
 
-const styles = StyleSheet.create({
-  descriptionBox:{
-    flex: 1,
-    justifyContent: 'center',
-    height: height(20), // 70% of height device screen
-    width: width(80), // 80% of width device screen
-    borderColor: 'black', 
-    borderWidth: 1, 
-    
-  },
-  });
+    console.log(result);
+
+    if (!result.cancelled) {
+      this.setState({ image: result.uri });
+    }
+  };
+}
