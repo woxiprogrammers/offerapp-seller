@@ -5,22 +5,22 @@ import { responsiveWidth } from "react-native-responsive-dimensions";
 export default class SelectOfferCategory extends Component {
   render() {
     const{
-      selectLabel
+      selectLabel,
+      selectValue
     } = this.props;
     return (
       <Picker
-        style={pickerStyle}
+        style={styles.pickerStyle}
         mode='dropdown'
-        selectedValue={selectLabel}
       >
-        <Picker.Item label="+91" value="+91" />
+        <Picker.Item label={selectLabel} value={selectValue} />
       </Picker>
     );
   }
 }
 const styles = StyleSheet.create({
   pickerStyle: {
-    width: responsiveWidth(20),
+    width: responsiveWidth(95),
     paddingBottom: 10,
     marginTop: 10,
   }

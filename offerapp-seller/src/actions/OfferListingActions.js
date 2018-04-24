@@ -80,7 +80,7 @@ const offerListingSuccess = (dispatch, data) => {
     const { offer_list } = data;
     dispatch({
         type: OFFER_LISTED,
-        offer_list
+        offer_list,
     });
 }
 

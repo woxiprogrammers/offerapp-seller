@@ -6,7 +6,27 @@ import { Container, Header, View, Item, Label, Input, Text, Left, Right, Button 
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 import { colors } from '../styles'
 import { Actions } from 'react-native-router-flux';
-export default class CreateGroup extends React.Component {
+import {
+    createGroup,
+    groupNameChanged,
+    groupDescriptionChanged
+} from '../actions/Group/CreateGroupAction';
+import { connect } from 'react-redux';
+
+export class CreateGroup extends React.Component {
+    onGroupNameChange(text) {
+        this.props.groupNameChanged(text);
+    }
+
+    onGroupDescChange(text) {
+        this.props.groupDescriptionChanged(text);
+    }
+
+    onButtonPress() {
+        const { groupName, groupDescription, token } = this.props;
+        this.props.createGroup({ groupName, groupDescription, token });
+    }
+    
     render() {
         return (
             <Container style={{ marginTop: '5.8%' }}>
@@ -21,9 +41,12 @@ export default class CreateGroup extends React.Component {
                     {/* Enter Group Name */}
                     <Item floatingLabel>
                         <Label>Group Name</Label>
-                        <Input />
+                        <Input
+                            onChangeText={this.onGroupNameChange.bind(this)}
+                            value={this.props.groupNameEntered}
+                        />
                     </Item>
-                    <View style={{ paddingTop: '3%' }}>
+                    {/* <View style={{ paddingTop: '3%' }}>
                         <Text>Admin</Text>
                     </View>
                     <View
@@ -31,31 +54,34 @@ export default class CreateGroup extends React.Component {
                             flexDirection: 'row',
                             justifyContent: 'space-between'
                         }}>
-                        <Left>
-                            {/* Enter Admin Name */}
-                            <Item floatingLabel>
+                        <Left> */}
+                    {/* Enter Admin Name */}
+                    {/* <Item floatingLabel>
                                 <Label>Name</Label>
                                 <Input />
                             </Item>
-                        </Left>
-                        <Right>
-                            {/* Enter Admin Contact No. */}
-                            <Item floatingLabel>
+                        </Left> 
+                        <Right>*/}
+                    {/* Enter Admin Contact No. */}
+                    {/* <Item floatingLabel>
                                 <Label>Contact Number</Label>
                                 <Input keyboardType={'numeric'} />
                             </Item>
                         </Right>
-                    </View>
+                    </View> */}
                     <View>
                         <Item floatingLabel>
                             <Label>Description</Label>
-                            <Input />
+                            <Input
+                                onChangeText={this.onGroupDescChange.bind(this)}
+                                value={this.props.groupDescriptionEntered}
+                            />
                         </Item>
                     </View>
                     <View style={{ paddingTop: '3%' }}>
                         <Button full
                             style={{ backgroundColor: colors.headerColor }}
-                            onPress={Actions.offerListingScreen}
+                            onPress={this.onButtonPress.bind(this)}
                         >
                             <Text>Submit</Text>
                         </Button>
@@ -65,3 +91,26 @@ export default class CreateGroup extends React.Component {
         )
     }
 }
+function mapStateToProps({ group, user }) {
+    const { token } = user;
+    const {createGroup} = group;
+   
+    return {
+        ...createGroup,
+        token
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        groupNameChanged: (text) => { return dispatch(groupNameChanged(text)); },
+        groupDescriptionChanged: (text) => { return dispatch(groupDescriptionChanged(text)); },
+        createGroup: ({ groupName, groupDescription, token }) => {
+            return dispatch(createGroup({ groupName, groupDescription, token }));
+        },
+    }
+}
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(CreateGroup);

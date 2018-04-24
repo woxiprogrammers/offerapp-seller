@@ -28,14 +28,14 @@ export default class SellerHeader extends Component {
           <Body >
             <Title style={{color:'white'}}>{this.props.title}</Title>
           </Body>
-          <Right>
+          {/* <Right>
             <Button transparent badge>
               <Icon name='md-notifications' style={{color:'yellow'}}/>
               <Badge primary >
                   <Text>2</Text>
                 </Badge>
             </Button>
-          </Right>
+          </Right> */}
         </ View>
     );
   }

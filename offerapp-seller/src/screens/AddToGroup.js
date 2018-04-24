@@ -57,13 +57,13 @@ export class AddtoGroup extends React.Component {
         const {
             group_id,
             group_name,
-            total_member,
+            // total_member,
         } = item;
         return (
             <View>
                 <DropDownSelect
-                    selectLabel="Select Group"
-                    // selectValues={group_name}
+                    selectLabel={group_name}
+                    selectValues={group_id}
                 />
             </View>
         );
@@ -88,10 +88,10 @@ export class AddtoGroup extends React.Component {
                             />
                         </Item>
                         {/* Select Group */}
-                        <DropDownSelect
+                        {/* <DropDownSelect
                             selectLabel="Select Group"
-                            selectValues={groups}
-                        />
+                            // selectValues={groups}
+                        /> */}
                         <FlatList
                             automaticallyAdjustContentInsets={false}
                             data={select_groups}
