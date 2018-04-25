@@ -22,7 +22,6 @@ export default class GroupDetailCard extends Component {
                             >
                                 {/* Group Details */}
                                 <Left>
-                                    <Text style={styles.TextSize}>Group No.: {this.props.groupNumber} </Text>
                                     <Text style={styles.TextSize}>Group Name: {this.props.groupName} </Text>
                                     <Text style={styles.TextSize}>Total Members: {this.props.totalMembers} </Text>
                                 </Left>
