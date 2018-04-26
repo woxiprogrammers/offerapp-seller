@@ -29,8 +29,6 @@ export const getListOfGroup = ({ token }) => {
 };
 export const groupListedSuccess = (response) => {
     const { select_groups } = response;
-    console.log("in ACtion")
-    console.log(select_groups)
     return {
         type: GROUP_LIST_SUCCESS,
         select_groups 

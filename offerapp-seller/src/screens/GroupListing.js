@@ -36,7 +36,7 @@ export class GroupListing extends React.Component {
         const { page, perPage, pageCount, totalCount } = pagination;
         const lastPage = totalCount <= ((page - 1) * perPage) + pageCount;
         if (!lastPage) {
-            this.props.getlistOfGroup(
+            this.props.getListOfGroup(
                 token,
                 page + 1
             );
@@ -47,7 +47,7 @@ export class GroupListing extends React.Component {
             token,
         } = this.props;
         const page = 1;
-        this.props.getlistOfGroup({
+        this.props.getListOfGroup({
             token,
             page
         });
@@ -74,14 +74,16 @@ export class GroupListing extends React.Component {
                 <GroupDetailCard
                     groupName={group_name}
                     totalMembers={total_member}
-                    onPress={Actions.offersSentScreen}
+                    getGroupID={group_id}
+                    onPress={() => {
+                        Actions.push('offersSentScreen', { getgroup_id: group_id })
+                    }}
                 />
             </View>
         );
     }
     render() {
         const { select_groups } = this.props;
-        console.log(select_groups)
         return (
             <Container style={{ marginTop: '5.8%' }}>
                 <Header style={{ backgroundColor: '#C10F41' }}>
