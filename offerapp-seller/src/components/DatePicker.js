@@ -15,6 +15,8 @@ export default class MyDatePicker extends Component {
     }
 
     render() {
+        // console.log(this.state.startDate);
+        // console.log(this.state.endDate);
         return (
             <Content>
                 <View

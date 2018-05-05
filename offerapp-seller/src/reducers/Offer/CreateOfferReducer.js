@@ -1,0 +1,133 @@
+import {
+    OFFER_CREATE_REQUEST,
+    OFFER_TYPE_REQUEST,
+    OFFER_CATEGORY_REQUEST,
+    OFFER_CREATE_SUCCESS,
+    OFFER_CREATE_FAILURE,
+    OFFER_TYPE_SUCCESS,
+    OFFER_TYPE_FAILURE,
+    OFFER_CATEGORY_CHANGE,
+    OFFER_START_DATE_CHANGE,
+    OFFER_END_DATE_CHANGE,
+    OFFER_DESCRIPTION_CHANGE,
+    OFFER_IMAGE_UPLOAD,
+    OFFER_CATEGORY_SUCCESS,
+    OFFER_CATEGORY_FAILURE,
+    OFFER_SUB_CATEGORY_FAILURE,
+    OFFER_SUB_CATEGORY_REQUEST,
+    OFFER_SUB_CATEGORY_SUCCESS,
+    OFFER_TYPE_ID_CHANGE,
+    OFFER_CATEGORY_ID_CHANGE,
+    OFFER_SUB_CATEGORY_ID_CHANGE,
+} from '../../constants'
+
+const INITIAL_STATE = {
+    select_offer_type: [],
+    select_category_type: [],
+    select_sub_category_type: [],
+    offer_type_id: 1,
+    category_id: 1,
+    offer_description: '',
+    start_date: '',
+    end_date: ''
+};
+
+export default (state = INITIAL_STATE, action) => {
+    switch (action.type) {
+        case OFFER_TYPE_REQUEST:
+            return {
+                ...state,
+            }
+        case OFFER_TYPE_SUCCESS:
+            return {
+                ...state,
+                select_offer_type: action.select_offer_type
+            }
+        case OFFER_TYPE_FAILURE:
+            return {
+                ...state,
+            }
+
+        case OFFER_CATEGORY_REQUEST:
+            return {
+                ...state,
+            }
+
+        case OFFER_CATEGORY_SUCCESS:
+            return {
+                ...state,
+                select_category_type: action.select_category_type
+            }
+
+        case OFFER_CATEGORY_FAILURE:
+            return {
+                ...state
+            }
+
+        case OFFER_SUB_CATEGORY_REQUEST:
+            return {
+                ...state,
+            }
+
+        case OFFER_SUB_CATEGORY_SUCCESS:
+            return {
+                ...state,
+                select_sub_category_type: action.select_sub_category_type
+            }
+
+        case OFFER_SUB_CATEGORY_FAILURE:
+            return {
+                ...state
+            }
+
+        case OFFER_TYPE_ID_CHANGE:
+            return {
+                ...state,
+                offer_type_id: action.payload
+            }
+        case OFFER_CATEGORY_ID_CHANGE:
+            return {
+                ...state,
+                category_id: action.payload
+            }
+        case OFFER_SUB_CATEGORY_ID_CHANGE:
+            return {
+                ...state,
+                category_id: action.payload
+            }
+        case OFFER_DESCRIPTION_CHANGE:
+            return {
+                ...state,
+                offer_description: action.payload
+            }
+
+        case OFFER_CREATE_REQUEST:
+            return {
+                ...state,
+            }
+
+        case OFFER_CREATE_SUCCESS:
+            return {
+                ...state,
+            }
+
+        case OFFER_CREATE_SUCCESS:
+            return {
+                ...state,
+            }
+
+        case OFFER_START_DATE_CHANGE:
+            return {
+                ...state,
+                start_date: action.payload
+            }
+
+        case OFFER_END_DATE_CHANGE:
+            return {
+                ...state,
+                end_date: action.payload
+            }
+        default:
+            return state;
+    }
+}

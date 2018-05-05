@@ -4,3 +4,4 @@ export * from './AddToGroupAction';
 export * from './Group/CreateGroupAction';
 export * from './Group/ListGroupAction';
 export * from './Group/GroupMemberAction';
+export * from './Offer/CreateOfferAction';

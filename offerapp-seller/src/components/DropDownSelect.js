@@ -2,18 +2,27 @@ import React, { Component } from "react";
 import { Dropdown } from 'react-native-material-dropdown';
 import { View, Picker, StyleSheet } from 'react-native';
 import { responsiveWidth } from "react-native-responsive-dimensions";
+import { selectOfferType } from "../actions";
 export default class SelectOfferCategory extends Component {
   render() {
-    const{
+    const {
       selectLabel,
-      selectValue
+      selectValue,
+      selectOfferTypeArr
     } = this.props;
+    console.log('Select Offer Type in Dropdown is :');
+    console.log(selectOfferTypeArr);
     return (
       <Picker
         style={styles.pickerStyle}
         mode='dropdown'
       >
-        <Picker.Item label={selectLabel} value={selectValue} />
+        {selectOfferTypeArr.map((item,i) =>{
+          return (<Picker.Item
+            key={i}
+            label={item.offer_type_name}
+            value={item.offer_type_id} />);
+        })}
       </Picker>
     );
   }
