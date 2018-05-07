@@ -166,19 +166,6 @@ export const createOfferRequest = ({
     end_date,
     // images[0 ] = 2639307578453ceb01ebf75ecb6259c1f37fe2c81a0baabc59.jpeg
 }) => {
-    console.log("IN ACTION")
-    console.log("Token is : ")
-    console.log(token)
-    console.log("catID is :")
-    console.log(category_id)
-    console.log("offer_description is : ")
-    console.log(offer_description)
-    console.log("Start date : ")
-    console.log(start_date)
-    console.log("End date is : ")
-    console.log(end_date)
-    console.log("offer_type_id is : ")
-    console.log(offer_type_id)
     return (dispatch) => {
         dispatch({ type: OFFER_CREATE_REQUEST });
         axios({

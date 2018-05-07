@@ -6,3 +6,4 @@ export * from './Group/ListGroupAction';
 export * from './Group/GroupMemberAction';
 export * from './Offer/CreateOfferAction';
 export * from './SignUpActions';
+export * from './Offer/OfferDetailAction'

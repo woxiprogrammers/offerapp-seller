@@ -37,7 +37,10 @@ export default class OfferCard extends Component {
     return (
       <Content>
         {/* offer cards */}
-        <TouchableOpacity onPress={Actions.offerDetailScreen}>
+        <TouchableOpacity
+          onPress={() => {
+            Actions.push('offerDetailScreen', { getOffer_id: offerID })
+          }}>
           <Card >
             <CardItem header>
               <Left>
@@ -46,7 +49,6 @@ export default class OfferCard extends Component {
               <Right>
                 <Text>Offer ID: {offerID}</Text>
               </Right>
-
             </CardItem>
 
             <CardItem>
