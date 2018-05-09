@@ -12,63 +12,47 @@ import {
     Text,
     View
 } from 'native-base';
-import { FlatList } from 'react-native'
+import {
+    FlatList,
+    Picker,
+    StyleSheet
+} from 'react-native'
 import SellerHeader from '../components/SellerHeader';
 import DropDownSelect from '../components/DropDownSelect'
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { selectGroup, mobileNumber } from '../actions/AddToGroupAction';
+import {
+    requestGroupList,
+    selectedGroupid,
+    getMobileNumber,
+    requestAddToGroup
+} from '../actions/AddToGroupAction';
+import { responsiveWidth } from 'react-native-responsive-dimensions';
 
 export class AddtoGroup extends React.Component {
-    constructor(props) {
-        super(props);
-        this.autoBind(
-            'renderRow',
-        );
-    }
-    autoBind(...methods) {
-        methods.forEach(method => {
-            this[method] = this[method].bind(this);
-            return this[method];
-        });
-    }
+
     componentWillMount() {
         const {
             token,
         } = this.props;
         console.log('Mounting select Group');
-        this.props.selectGroup({
+        this.props.requestGroupList({
             token
         })
     }
 
-    onMobileNumberChange(text) {
-        console.log(this.props.mobileNumber(text));
+    onMobileNoChange(text) {
+        this.props.getMobileNumber(text)
     }
 
-    keyExtractor = (item, index) => { return index; };
-    renderRow(offerDetails) {
-        // console.log('Rendering Row');
-        // console.log(offerDetails);
-        // console.log(offerDetails);
-        const { item } = offerDetails;
-        console.log("ADD to group render row")
-        console.log(item)
-        const {
-            group_id,
-            group_name,
-            // total_member,
-        } = item;
-        return (
-            <View>
-                <DropDownSelect
-                    selectLabel={group_name}
-                    selectValues={group_id}
-                />
-            </View>
-        );
+    onButtonPress() {
+        const { mobile_no, group_id, token } = this.props;
+        this.props.requestAddToGroup({
+            token,
+            mobile_no,
+            group_id
+        })
     }
-
     render() {
         const { select_groups } = this.props;
         return (
@@ -84,25 +68,34 @@ export class AddtoGroup extends React.Component {
                         <Item floatingLabel>
                             <Label>Mobile Number</Label>
                             <Input keyboardType={'numeric'}
-                                onChangeText={this.onMobileNumberChange.bind(this)}
+                                returnKeyType={ 'done' }
+                                onChangeText={this.onMobileNoChange.bind(this)}
+                                value={this.props.mobile_no}
                             />
                         </Item>
                         {/* Select Group */}
-                        {/* <DropDownSelect
-                            selectLabel="Select Group"
-                            // selectValues={groups}
-                        /> */}
-                        <FlatList
-                            automaticallyAdjustContentInsets={false}
-                            data={select_groups}
-                            refreshing={false}
-                            renderItem={this.renderRow}
-                            keyExtractor={this.keyExtractor}
+                        <Picker
+                            style={styles.pickerStyle}
+                            mode='dropdown'
+                            placeholder="Select Group"
+                            selectedValue={this.props.group_id}
+                            onValueChange={(itemValue, itemIndex) => {
+                                this.props.selectedGroupid(itemValue);
+                            }}
+                        >
+                            {select_groups.map((item, i) => {
+                                return (<Picker.Item
+                                    key={i}
+                                    value={item.group_id}
+                                    label={item.group_name}
+                                />);
+                            })}
+                        </Picker>
 
-                        />
+
                         <Button block danger
                             style={{ backgroundColor: '#C10F41', borderRadius: 0 }}
-                            onPress={Actions.offerListingScreen}
+                            onPress={this.onButtonPress.bind(this)}
                         >
                             <Text>Send Invitation</Text>
                         </Button>
@@ -112,26 +105,49 @@ export class AddtoGroup extends React.Component {
         )
     }
 }
-function mapStateToProps({ selectGroup, user }) {
+
+const styles = StyleSheet.create({
+    pickerStyle: {
+        width: responsiveWidth(95),
+        paddingBottom: 10,
+        marginTop: 10,
+    }
+})
+
+function mapStateToProps({ addToGroup, user }) {
     const { token } = user;
     return {
-        ...selectGroup,
+        ...addToGroup,
         token
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        selectGroup: ({
+        requestGroupList: ({
             token,
 
         }) => {
-            return dispatch(selectGroup({
+            return dispatch(requestGroupList({
                 token,
             }));
         },
-        selectGroup: (text) => {
-            return dispatch(selectGroup(text));
+        selectedGroupid: (text) => {
+            return dispatch(selectedGroupid(text));
+        },
+        getMobileNumber: (text) => {
+            return dispatch(getMobileNumber(text));
+        },
+        requestAddToGroup: ({
+            token,
+            mobile_no,
+            group_id
+        }) => {
+            return dispatch(requestAddToGroup({
+                token,
+                mobile_no,
+                group_id
+            }));
         },
     };
 }
