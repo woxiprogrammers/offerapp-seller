@@ -25,14 +25,14 @@ export const createGroup = ({
         }).then(async (response) => {
             var status = response.status;
             if (status === 200) {
-                Alert.alert("Group Created successfully");
+                Alert.alert("Group Created Successfully");
                 dispatch(groupCreatedSuccess(response.data.data));
             } else if (status === 500) {
                 Alert.alert("Group not created");
                 dispatch(groupCreatedFailure());
             }
         }).catch((error) => {
-            Alert.alert("Group Name already exists");
+            console.log(error)
             dispatch(groupCreatedFailure());
         });
     }

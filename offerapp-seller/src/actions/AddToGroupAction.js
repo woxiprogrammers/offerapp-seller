@@ -63,7 +63,6 @@ export const getMobileNumber = (text) => {
 
 export const requestAddToGroup =({token, group_id, mobile_no})=>{
     return(dispatch)=>{
-        console.log(`${baseUrl}/seller/group/add-member?token=${token}`)
         dispatch({type: ADD_TO_GROUP_REQUEST});
         axios({
             url: `${baseUrl}/seller/group/add-member?token=${token}`,
