@@ -25,8 +25,8 @@ export const offerList = ({
                 status_slug: status
             }
         }).then(async (response) => {
-            var success = response.data.message;
-            if (success === "Success") {
+            var success = response.status;
+            if (success === 200) {
                 dispatch(getOfferListSuccess(response.data.data))
             } else {
                 console.log("Lisitng not recieved")
