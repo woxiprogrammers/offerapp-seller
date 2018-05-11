@@ -21,9 +21,8 @@ export const getDetailOfGroup = ({ token, getGroup_id }) => {
             var status = response.status;
             if (status === 200) {
                 dispatch(groupDetailSuccess(response.data.data));
-                Alert.alert("Group detail recieved");
             } else if (status === 500) {
-                Alert.alert("Group detail not recieved please try again");
+                Alert.alert("Member List not recieved please try again");
                 dispatch(groupDetailFailure());
             }
         }).catch((error) => {

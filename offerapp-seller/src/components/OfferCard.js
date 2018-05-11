@@ -58,7 +58,11 @@ export default class OfferCard extends Component {
                 }}>
                   {/* Offer Start and End Date */}
                   <Left>
-                    <Text style={{ fontSize: responsiveFontSize(2) }}>Start date: {startDate} End Date: {endDate}</Text>
+                    <Text
+                      style={{ fontSize: responsiveFontSize(2) }}
+                    >
+                      Start date:{"\n"} {startDate} {"\n"} End Date:{"\n"} {endDate}
+                    </Text>
                   </Left>
 
                   {/* Offer Status */}
@@ -68,52 +72,57 @@ export default class OfferCard extends Component {
                 </View>
               </Body>
             </CardItem>
-            <CardItem footer style={{ backgroundColor: '#c3cbd8' }}>
-              <View style={{
-                flex: 1,
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                paddingLeft: 15,
-                paddingRight: 15
-              }}>
+            {renderIf(
+              offerStatus === 'Approved' || offerStatus === 'Expired',
+              <CardItem footer style={{ backgroundColor: '#c3cbd8' }}>
+                <View style={{
+                  flex: 1,
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  paddingLeft: 15,
+                  paddingRight: 15
+                }}>
 
-                {/* Heart Button */}
-                {renderIf(
-                  wishlistCount,
-                  <Button badge transparent style={{ paddingTop: '3%' }}>
-                    <FontAwesome name="heart" size={22} color='red' />
-                    <Badge primary style={{ marginTop: -10 }}>
-                      <Text >{wishlistCount}</Text>
-                    </Badge>
-                  </ Button>
-                )}
+                  {/* Heart Button */}
+                  {renderIf(
+                    wishlistCount,
+                    <Button badge transparent style={{ paddingTop: '3%' }}>
+                      <FontAwesome name="heart" size={22} color='red' />
+                      <Badge primary style={{ marginTop: -10 }}>
+                        <Text >{wishlistCount}</Text>
+                      </Badge>
+                    </ Button>
+                  )}
 
-                {/* Liked Button */}
-                {renderIf(
-                  likeCount,
-                  <Button badge transparent
-                    style={{ paddingTop: '3%' }}
-                    onPress={Actions.iAmIntrestedScreen}>
-                    <EvilIcons name="like" size={30} />
-                    <Badge primary style={{ marginTop: -10 }}>
-                      <Text>{likeCount}</Text>
-                    </Badge>
-                  </Button>
-                )}
+                  {/* Liked Button */}
+                  {renderIf(
+                    likeCount,
+                    <Button badge transparent
+                      style={{ paddingTop: '3%' }}
+                      onPress={() => {
+                        Actions.push('iAmIntrestedScreen', { getOffer_id: offerID })
+                      }}>
+                      <EvilIcons name="like" size={30} />
+                      <Badge primary style={{ marginTop: -10 }}>
+                        <Text>{likeCount}</Text>
+                      </Badge>
+                    </Button>
+                  )}
 
-                {/* Grabed Offers */}
-                {renderIf(
-                  grabCount,
-                  <Button badge transparent style={{ paddingTop: '3%' }}>
-                    <FontAwesome name="handshake-o" size={22} />
-                    <Badge primary style={{ marginTop: -10 }}>
-                      <Text>{grabCount}</Text>
-                    </Badge>
-                  </Button>
-                )}
+                  {/* Grabed Offers */}
+                  {renderIf(
+                    grabCount,
+                    <Button badge transparent style={{ paddingTop: '3%' }}>
+                      <FontAwesome name="handshake-o" size={22} />
+                      <Badge primary style={{ marginTop: -10 }}>
+                        <Text>{grabCount}</Text>
+                      </Badge>
+                    </Button>
+                  )}
 
-              </View>
-            </CardItem>
+                </View>
+              </CardItem>
+            )}
           </Card>
         </TouchableOpacity>
       </Content>

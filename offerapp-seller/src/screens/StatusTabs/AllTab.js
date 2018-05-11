@@ -79,9 +79,6 @@ class AllTab extends Component {
   }
   keyExtractor = (item, index) => { return index; };
   renderRow(offerDetails) {
-    // console.log('Rendering Row');
-    // console.log(offerDetails);
-    // console.log(offerDetails);
     const { item } = offerDetails;
     const {
       offer_id,

@@ -10,6 +10,11 @@ import prompt from 'react-native-prompt-android';
 
 export default class CustomerCard extends Component {
     render(){
+        const{
+            customerName,
+            customerMobile,
+            customerEmail
+        } = this.props;
         return(
             <Card>
                 <CardItem>
@@ -20,9 +25,9 @@ export default class CustomerCard extends Component {
                         >
                         {/* Customer Details */}
                             <Left>
-                                <Text style={styles.TextSize}>Name: {this.props.customerName} </Text>
-                                <Text style={styles.TextSize}>Mobile No.: {this.props.customerMobile} </Text>
-                                <Text style={styles.TextSize}>Email: {this.props.customerEmail} </Text>
+                                <Text style={styles.TextSize}>Name: {customerName} </Text>
+                                <Text style={styles.TextSize}>Mobile No.: {customerMobile} </Text>
+                                <Text style={styles.TextSize}>Email: {customerEmail} </Text>
                             </Left>
 
                             {/* Grab code Button */}

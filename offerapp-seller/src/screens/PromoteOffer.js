@@ -12,10 +12,10 @@ export default class PromoteOffer extends React.Component {
                 </Header>
                 <Form style={{ paddingLeft: '3%', paddingRight: '3%' }}>
                     <View>
-                        <DropDownSelect selectLabel='Select Offer' />
+                        {/* <DropDownSelect selectLabel='Select Offer' /> */}
                     </View>
                     <View>
-                        <DropDownSelect selectLabel='Select Group' />
+                        {/* <DropDownSelect selectLabel='Select Group' /> */}
                     </View>
                     <View>
                         <Button full

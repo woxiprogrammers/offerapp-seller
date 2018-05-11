@@ -2,6 +2,9 @@ import {
     OFFER_DETAIL_REQUEST,
     OFFER_DETAIL_SUCCESS,
     OFFER_DETAIL_FAILURE,
+    I_AM_INTRESTED_LIST_REQUEST,
+    I_AM_INTRESTED_LIST_SUCCESS,
+    I_AM_INTRESTED_LIST_FAILURE,
     baseUrl
 } from '../../constants'
 import { Alert } from 'react-native';
@@ -20,15 +23,11 @@ export const requestOfferDetails = ({ token, getOffer_id }) => {
             }
         }).then(async (response) => {
             var status = response.status;
-            console.log(status)
             if (status === 200) {
-                dispatch(offerDetailSuccess(response.data.data));
-                Alert.alert("offerDetail recieved");
-                console.log("OFFER DETAIL RECIEVED")
                 console.log(response.data.data)
+                dispatch(offerDetailSuccess(response.data.data))
             }
         }).catch((error) => {
-            console.log(error)
             Alert.alert("ERROR");
             dispatch(offerDetailFailure());
         });
@@ -36,10 +35,10 @@ export const requestOfferDetails = ({ token, getOffer_id }) => {
 }
 
 export const offerDetailSuccess = (response) => {
-    
+    const { offer_detail } = response
     return {
         type: OFFER_DETAIL_SUCCESS,
-        offer_detail: response
+        offer_detail
     };
 };
 
@@ -48,3 +47,40 @@ export const offerDetailFailure = () => {
         type: OFFER_DETAIL_FAILURE
     };
 };
+
+export const iAmIntrestedListRequest = ({ token, getOffer_id }) => {
+    // export const iAmIntrestedListRequest = () => {
+    return (dispatch) => {
+        dispatch({ type: I_AM_INTRESTED_LIST_REQUEST });
+        axios({
+            url: `${baseUrl}/seller/offer/interested-listing?token=${token}`,
+            method: 'post',
+            data: {
+                offer_id: getOffer_id
+            }
+        }).then(async (response) => {
+            var status = response.status;
+            if (status === 200) {
+                dispatch(iAmIntrestedListSuccess(response.data.data));
+            }
+        }).catch((error) => {
+            console.log(error)
+            Alert.alert("ERROR");
+            dispatch(iAmIntrestedListFailure());
+        })
+    }
+}
+
+export const iAmIntrestedListSuccess = (response) => {
+    const { customer_data } = response;
+    return {
+        type: I_AM_INTRESTED_LIST_SUCCESS,
+        customer_data
+    }
+}
+
+export const iAmIntrestedListFailure = () => {
+    return {
+        type: I_AM_INTRESTED_LIST_FAILURE
+    }
+}
