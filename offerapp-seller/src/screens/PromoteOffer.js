@@ -11,6 +11,7 @@ import {
 import {
     Picker,
     StyleSheet,
+    ScrollView
 } from 'react-native'
 import DropDownSelect from '../components/DropDownSelect'
 import { Actions } from 'react-native-router-flux';
@@ -24,52 +25,77 @@ export class PromoteOffer extends React.Component {
     componentWillMount() {
         const {
             token,
+            status
         } = this.props;
-        this.props.requestOfferList({ token });
+        this.props.requestOfferList({ token, status });
         this.props.requestGroupListToPromote({ token })
     }
+    
     render() {
         const {
             offer_list,
             select_groups
         } = this.props;
+        const selectedItems = []
         return (
             <Container style={{ marginTop: '5.8%' }}>
                 <Header style={{ backgroundColor: '#C10F41' }}>
                     <SellerHeader title='Promote Offer' />
                 </Header>
-                <Form style={{ paddingLeft: '3%', paddingRight: '3%' }}>
-                    <View>
-                        {/* Select offer Type */}
-                        <Picker
-                            style={styles.pickerStyle}
-                            mode='dropdown'
-                            selectedValue={this.props.offer_id}
-                            onValueChange={(itemValue, itemIndex) => {
-                                this.props.selectedOfferTypeid(itemValue);
-                            }}
-                        >
-                            {offer_list.map((item, i) => {
-                                return (<Picker.Item
-                                    key={i}
-                                    value={item.offer_id}
-                                    label={item.offer_name}
-                                />);
-                            })}
-                        </Picker>
-                    </View>
-                    <View>
-
-                    </View>
-                    <View>
-                        <Button full
-                            style={{ backgroundColor: '#C10F41' }}
-                            onPress={Actions.offerListingScreen}
-                        >
-                            <Text>Nofity</Text>
-                        </Button>
-                    </View>
-                </Form>
+                <ScrollView>
+                    <Form style={{ paddingLeft: '3%', paddingRight: '3%' }}>
+                        <View>
+                            <Text>Select Offer To Promote</Text>
+                            {/* Select offer Type */}
+                            <Picker
+                                style={styles.pickerStyle}
+                                mode='dropdown'
+                                selectedValue={this.props.offer_id}
+                                onValueChange={(itemValue, itemIndex) => {
+                                    this.props.selectedOfferTypeid(itemValue);
+                                }}
+                            >
+                                {offer_list.map((item, i) => {
+                                    return (<Picker.Item
+                                        key={i}
+                                        value={item.offer_id}
+                                        label={item.offer_type_name}
+                                    />);
+                                })}
+                            </Picker>
+                        </View>
+                        <View>
+                            {/* select group  */}
+                            <Text>Select Groups To Promote Offer</Text>
+                     
+                            <Picker
+                                style={styles.pickerStyle}
+                                mode='dropdown'
+                                selectedValue={this.props.group_id}
+                                onValueChange={(itemValue, itemIndex) => {
+                                    this.props.selectedOfferTypeid(itemValue);
+                                }}
+                            >
+                                {select_groups.map((item, i) => {
+                                    return (<Picker.Item
+                                        key={i}
+                                        value={item.group_id}
+                                        label={item.group_name}
+                                    />);
+                                })}
+                            </Picker>
+                            
+                        </View>
+                        <View>
+                            <Button full
+                                style={{ backgroundColor: '#C10F41' }}
+                                onPress={Actions.offerListingScreen}
+                            >
+                                <Text>Nofity</Text>
+                            </Button>
+                        </View>
+                    </Form>
+                </ScrollView>
             </Container>
         )
     }
@@ -97,6 +123,7 @@ function mapDispatchToProps(dispatch) {
     return {
         requestOfferList: ({
             token,
+            status
         }) => {
             return dispatch(requestOfferList({
                 token,
@@ -109,6 +136,9 @@ function mapDispatchToProps(dispatch) {
                 token,
             }));
         },
+        selectedOfferTypeid : (text) => {
+            return dispatch(selectedOfferTypeid(text))
+        }
     };
 }
 export default connect(

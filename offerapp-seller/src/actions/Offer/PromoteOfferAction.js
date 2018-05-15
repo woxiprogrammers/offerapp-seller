@@ -15,15 +15,16 @@ import axios from 'axios';
 export const requestOfferList = ({
     token,
     status,
-    page }) => {
-        console.log(`${baseUrl}/seller/offer/listing?token=${token}`)
+    page
+}) => {
+    console.log(`${baseUrl}/seller/offer/listing?token=${token}`)
     return (dispatch) => {
         dispatch({ type: OFFER_LIST_REQUEST });
         axios({
             url: `${baseUrl}/seller/offer/listing?token=${token}`,
             method: 'post',
             data: {
-                status_slug: status
+                status_slug: 'approved'
             }
         }).then(async (response) => {
             var success = response.data.message;
@@ -31,8 +32,8 @@ export const requestOfferList = ({
                 dispatch(getOfferListSuccess(response.data.data))
             }
         }).catch((error) => {
-            Alert.alert("ERROR");
             console.log(error)
+            Alert.alert("ERROR IN OFFER LIST");
             dispatch(getOfferListFailure());
         })
     }
@@ -47,13 +48,13 @@ export const getOfferListSuccess = (response) => {
 }
 
 export const getOfferListFailure = () => {
-    return{
+    return {
         type: OFFER_LIST_FAILURE
     }
 }
 
 export const selectedOfferTypeid = (text) => {
-    return{
+    return {
         type: OFFER_ID_CHANGE,
         payload: text
     }
@@ -95,7 +96,7 @@ export const rendergroupListFailure = () => {
 }
 
 export const selectedGroupid = (text) => {
-    return{
+    return {
         type: GROUP_ID_CHANGE,
         payload: text
     }

@@ -427,8 +427,6 @@ export class AccountInfo extends React.Component {
         }
     }
     render() {
-
-
         return (
             <Container style={{ marginTop: '5.8%' }}>
                 <Header style={{ backgroundColor: '#C10F41' }}>
