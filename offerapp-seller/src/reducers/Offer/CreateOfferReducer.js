@@ -25,11 +25,13 @@ const INITIAL_STATE = {
     select_offer_type: [],
     select_category_type: [],
     select_sub_category_type: [],
-    offer_type_id: 1,
-    category_id: 1,
+    offer_type_id: '',
+    category_id: '',
+    sub_category_id: '',
     offer_description: '',
     start_date: '',
-    end_date: ''
+    end_date: '',
+    isLoading: false
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -37,26 +39,33 @@ export default (state = INITIAL_STATE, action) => {
         case OFFER_TYPE_REQUEST:
             return {
                 ...state,
+                isLoading: true
             }
         case OFFER_TYPE_SUCCESS:
             return {
                 ...state,
-                select_offer_type: action.select_offer_type
+                select_offer_type: action.select_offer_type,
+                isLoading: false,
+                offer_type_id: action.select_offer_type[0].offer_type_id
             }
         case OFFER_TYPE_FAILURE:
             return {
                 ...state,
+                isLoading: false
             }
 
         case OFFER_CATEGORY_REQUEST:
             return {
                 ...state,
+                isLoading: true
             }
 
         case OFFER_CATEGORY_SUCCESS:
             return {
                 ...state,
-                select_category_type: action.select_category_type
+                select_category_type: action.select_category_type,
+                isLoading: false,
+                category_id: action.select_category_type[0].category_id
             }
 
         case OFFER_CATEGORY_FAILURE:
@@ -67,12 +76,15 @@ export default (state = INITIAL_STATE, action) => {
         case OFFER_SUB_CATEGORY_REQUEST:
             return {
                 ...state,
+                isLoading: true
             }
 
         case OFFER_SUB_CATEGORY_SUCCESS:
             return {
                 ...state,
-                select_sub_category_type: action.select_sub_category_type
+                select_sub_category_type: action.select_sub_category_type,
+                isLoading: false,
+                // sub_category_id: action.select_sub_category_type[0].sub_category_id
             }
 
         case OFFER_SUB_CATEGORY_FAILURE:
@@ -93,7 +105,7 @@ export default (state = INITIAL_STATE, action) => {
         case OFFER_SUB_CATEGORY_ID_CHANGE:
             return {
                 ...state,
-                category_id: action.payload
+                sub_category_id: action.payload
             }
         case OFFER_DESCRIPTION_CHANGE:
             return {
@@ -104,17 +116,15 @@ export default (state = INITIAL_STATE, action) => {
         case OFFER_CREATE_REQUEST:
             return {
                 ...state,
+                isLoading: true
             }
 
         case OFFER_CREATE_SUCCESS:
             return {
                 ...state,
+                isLoading: false
             }
 
-        case OFFER_CREATE_SUCCESS:
-            return {
-                ...state,
-            }
 
         case OFFER_START_DATE_CHANGE:
             return {
@@ -127,6 +137,7 @@ export default (state = INITIAL_STATE, action) => {
                 ...state,
                 end_date: action.payload
             }
+
         default:
             return state;
     }

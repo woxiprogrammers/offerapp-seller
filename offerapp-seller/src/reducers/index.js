@@ -3,13 +3,16 @@ import LoginReducers from './LoginReducers';
 import OfferLisitingReducers from './OfferListingReducer';
 import AddToGroupReducer from './AddToGroupReducer'
 import GroupReducers from './Group';
-import OfferReducer from './Offer'
-import SignUpReducer from './SignUpReducers'
+import OfferReducer from './Offer';
+import SignUpReducer from './SignUpReducers';
+import AccountInformationReducer from './AccountInformationReducer';
+
 export default combineReducers({
   user: LoginReducers,
   offerlist: OfferLisitingReducers,
   addToGroup: AddToGroupReducer,
   group: GroupReducers,
   offer: OfferReducer,
-  signup: SignUpReducer
+  signup: SignUpReducer,
+  accountInformation: AccountInformationReducer,
 });

@@ -102,6 +102,34 @@ export class CreateOffer extends Component {
       end_date,
     });
   }
+
+  renderSubmitButton() {
+    if (this.props.isLoading) {
+      return (
+        <View style={{ paddingTop: '3%' }}>
+          <Button
+            block
+            style={{ backgroundColor: '#C10F41', borderRadius: 0, }}>
+            <Spinner color='white' />
+          </ Button>
+        </View>
+      )
+    } else {
+      return (
+        <View style={{ paddingTop: '3%' }}>
+          <Button block
+            style={{ backgroundColor: '#C10F41', borderRadius: 0, }}
+            onPress={this.onButtonPress.bind(this)}
+          >
+            <Text> Submit </Text>
+          </ Button>
+        </View>
+      )
+    }
+
+  }
+
+
   render() {
     let { image } = this.state;
     const {
@@ -109,6 +137,7 @@ export class CreateOffer extends Component {
       select_sub_category_type,
       select_category_type
     } = this.props;
+
 
     return (
       <ScrollView>
@@ -206,10 +235,10 @@ export class CreateOffer extends Component {
                   <DatePicker
                     date={this.state.startDate}
                     mode="date"
-                    placeholder="DD-MM-YYYY"
-                    format="DD-MM-YYYY"
+                    placeholder="YYYY-MM-DD"
+                    format="YYYY-MM-DD"
                     minDate={this.state.todaysDate}
-                    maxDate="01-06-2019"
+                    // maxDate="01-06-2019"
                     confirmBtnText="Confirm"
                     cancelBtnText="Cancel"
                     customStyles={{
@@ -231,10 +260,10 @@ export class CreateOffer extends Component {
                   <DatePicker
                     date={this.state.endDate}
                     mode="date"
-                    placeholder="DD-MM-YYYY"
-                    format="DD-MM-YYYY"
+                    placeholder="YYYY-MM-DD"
+                    format="YYYY-MM-DD"
                     minDate={this.state.startDate}
-                    maxDate="01-06-2019"
+                    // maxDate="01-06-2019"
                     confirmBtnText="Confirm"
                     cancelBtnText="Cancel"
                     customStyles={{
@@ -265,7 +294,7 @@ export class CreateOffer extends Component {
               </View>
 
               {/* Upload Photos */}
-              <Text style={{ paddingLeft: 10, paddingBottom: 10, paddingTop: 10 }}>Upload Photos</ Text>
+              {/* <Text style={{ paddingLeft: 10, paddingBottom: 10, paddingTop: 10 }}>Upload Photos</ Text>
               <View
                 style={{
                   flex: 1,
@@ -279,17 +308,10 @@ export class CreateOffer extends Component {
                 </ Button>
                 {image &&
                   <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
-              </View>
+              </View> */}
 
               {/* Submit Button */}
-              <View style={{ paddingTop: '3%' }}>
-                <Button block
-                  style={{ backgroundColor: '#C10F41', borderRadius: 0, }}
-                  onPress={this.onButtonPress.bind(this)}
-                >
-                  <Text> Submit </Text>
-                </ Button>
-              </View>
+              {this.renderSubmitButton()}
             </Form>
           </ Content>
         </ Container>
@@ -342,6 +364,9 @@ function mapDispatchToProps(dispatch) {
     },
     selectedofferCategoryId: (text) => {
       return dispatch(selectedofferCategoryId(text));
+    },
+    selectedSubCategoryId: (text) => {
+      return dispatch(selectedSubCategoryId(text));
     },
     selectSubCategoryType: ({
       token,

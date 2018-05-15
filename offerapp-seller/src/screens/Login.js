@@ -25,7 +25,8 @@ import {
     userChanged,
     passwordChanged,
     loginUser
-  } from '../actions';
+} from '../actions';
+import { responsiveHeight, responsiveFontSize, responsiveWidth } from 'react-native-responsive-dimensions';
 
 class LoginScreen extends Component {
     onUserChange(text) {
@@ -43,19 +44,23 @@ class LoginScreen extends Component {
     renderButton() {
         const { loginStyle, textStyle } = styles;
         if (this.props.loginLoading) {
-            return (<Button style={loginStyle}>
-                <Spinner color='white' />
-            </Button>);
+            return (
+                <Button style={loginStyle}>
+                    <Spinner color='white' />
+                </Button>
+            );
         } else if (this.props.error) {
             return (
                 <Button style={loginStyle}>
                     <Text style={textStyle}>LOG FAILED</Text>
-                </Button>);
+                </Button>
+            );
         }
         return (
             <Button style={loginStyle} onPress={this.onButtonPress.bind(this)}>
                 <Text style={textStyle}>LOG IN</Text>
-            </Button>);
+            </Button>
+        );
     }
     render() {
         const {
@@ -138,21 +143,20 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         alignSelf: 'center',
         flex: 1,
-        paddingTop: variables.SCREEN_HEIGHT / 10
+        paddingTop: responsiveHeight(10)
     },
     loginStyle: {
         justifyContent: 'center',
         backgroundColor: colors.login,
-        width: variables.LOGIN_BUTTON_WIDTH,
-        marginTop: variables.SCREEN_HEIGHT / 25
-
+        width: responsiveWidth(85),
+        marginTop: responsiveHeight(4)
     },
     contentStyle: {
         alignItems: 'center',
     },
     formStyle: {
-        width: variables.LOGIN_BUTTON_WIDTH,
-        marginTop: variables.SCREEN_HEIGHT / 10,
+        width: responsiveWidth(85),
+        marginTop: responsiveHeight(10),
     },
     itemViewStyle: {
         backgroundColor: colors.lightGrayTransparent,
@@ -162,32 +166,32 @@ const styles = StyleSheet.create({
     signupStyle: {
         justifyContent: 'center',
         backgroundColor: colors.signup,
-        width: variables.LOGIN_BUTTON_WIDTH,
-        marginTop: variables.SCREEN_HEIGHT / 15
+        width: responsiveWidth(85),
+        marginTop: responsiveHeight(6.6)
     },
     itemStyle: {
-        width: variables.LOGIN_BUTTON_WIDTH * 0.95,
+        width: responsiveWidth(80.75),
         alignSelf: 'center',
     },
     passwordStyle: {
-        marginTop: variables.SCREEN_HEIGHT / 55
+        marginTop: responsiveHeight(1.8)
     },
     orstyle: {
         justifyContent: 'center',
         flex: 1,
-        marginTop: variables.SCREEN_HEIGHT / 75,
+        marginTop: responsiveHeight(1.3),
         alignItems: 'center'
     },
     headerStyle: {
         color: 'white',
-        fontSize: variables.SCREEN_HEIGHT / 15
+        fontSize: responsiveFontSize(6.6)
     },
     textStyle: {
-        fontSize: variables.SCREEN_HEIGHT / 45
+        fontSize: responsiveFontSize(2.2)
     },
     backgroundImageStyle: {
-        height: variables.SCREEN_HEIGHT,
-        width: variables.SCREEN_WIDTH
+        height: responsiveHeight(100),
+        width: responsiveWidth(100)
     }
 });
 

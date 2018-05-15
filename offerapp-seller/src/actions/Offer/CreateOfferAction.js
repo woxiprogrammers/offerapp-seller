@@ -79,7 +79,7 @@ export const selectCategoryType = ({ token }) => {
                 dispatch(offerCategoryFailure());
             }
         }).catch((error) => {
-            Alert.alert("ERROR OCCURE CATEGORIES");
+            Alert.alert("ERROR IN CATEGORIES");
             dispatch(offerCategoryFailure());
         });
     }
@@ -125,6 +125,7 @@ export const selectSubCategoryType = ({ token, category_id }) => {
                 dispatch(offerSubCategoryFailure());
             }
         }).catch((error) => {
+            console.log(error)
             Alert.alert("SUB CATEGORIES ERROR");
             dispatch(offerSubCategoryFailure());
         });
