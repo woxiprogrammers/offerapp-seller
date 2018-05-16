@@ -7,6 +7,10 @@ import {
     OFFER_LIST_FAILURE,
     OFFER_ID_CHANGE,
     GROUP_ID_CHANGE,
+    PROMOTE_OFFER_REQUEST,
+    PROMOTE_OFFER_SUCCESS,
+    PROMOTE_OFFER_FAILURE,
+    GROUP_SELECTED,
     baseUrl
 } from '../../constants'
 import { Alert } from 'react-native';
@@ -17,7 +21,6 @@ export const requestOfferList = ({
     status,
     page
 }) => {
-    console.log(`${baseUrl}/seller/offer/listing?token=${token}`)
     return (dispatch) => {
         dispatch({ type: OFFER_LIST_REQUEST });
         axios({
@@ -99,5 +102,50 @@ export const selectedGroupid = (text) => {
     return {
         type: GROUP_ID_CHANGE,
         payload: text
+    }
+}
+
+export const seledtedGroups = (array) => {
+    return{
+        type: GROUP_SELECTED,
+        payload: array
+    }
+}
+export const requestPromoteOffer = ({
+    token,
+    offer_id,
+    selected_group_id
+}) => {
+    return (dispatch) => {
+        dispatch({ type: PROMOTE_OFFER_REQUEST });
+        axios({
+            url: `${baseUrl}/seller/group/promote?token=${token}`,
+            method: 'post',
+            data: {
+                offer_id,
+                group_id : selected_group_id
+            }
+        }).then(async(response)=>{
+            var status = response.status;
+            if(status === 200) {
+                dispatch(offerPromotedSuccessfully());
+                Alert.alert("OFFER PROMOTED SUCCESSFULLY !!!");
+            }
+        }). catch((error) => {
+            console.log(error);
+            dispatch(offerPromotedFailed())
+        })
+    }
+}
+
+export const offerPromotedSuccessfully =()=>{
+    return{
+        type: PROMOTE_OFFER_SUCCESS
+    }
+}
+
+export const offerPromotedFailed =()=>{
+    return{
+        type: PROMOTE_OFFER_FAILURE
     }
 }

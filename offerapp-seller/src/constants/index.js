@@ -6,6 +6,7 @@ export * from './Group/GroupListingTypes';
 export * from './Group/GroupMemberTypes';
 export * from './Offer/CreateOfferTypes';
 export * from './Offer/OfferDetailTypes';
-export * from './AccountInformationTypes'
+export * from './AccountInformationTypes';
+export * from './Offer/PromoteOfferTypes';
 
 export const baseUrl = 'https://offerapi.20agr17dev.xyz';

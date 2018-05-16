@@ -7,7 +7,11 @@ import {
     OFFER_LIST_FAILURE,
     OFFER_ID_CHANGE,
     GROUP_ID_CHANGE,
-    baseUrl
+    GROUP_SELECTED,
+    baseUrl,
+    PROMOTE_OFFER_REQUEST,
+    PROMOTE_OFFER_SUCCESS,
+    PROMOTE_OFFER_FAILURE
 } from '../../constants'
 
 const INITIAL_STATE = {
@@ -16,7 +20,8 @@ const INITIAL_STATE = {
     select_groups: [],
     group_id: '',
     isLoading: false,
-    status: 'approved'
+    status: 'approved',
+    selected_group_id: []
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -60,12 +65,35 @@ export default (state = INITIAL_STATE, action) => {
                 isLoading: false
             }
 
-            case GROUP_ID_CHANGE:
+        case GROUP_ID_CHANGE:
             return {
                 ...state,
                 group_id: action.payload
             }
-            
+
+
+        case PROMOTE_OFFER_REQUEST:
+            return {
+                ...state,
+                isLoading: true,
+            }
+
+        case PROMOTE_OFFER_FAILURE:
+            return {
+                ...state,
+                isLoading: false,
+            }
+        case PROMOTE_OFFER_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+            }
+
+        case GROUP_SELECTED:
+        return{
+            ...state,
+            selected_group_id: action.payload
+        }
         default:
             return state
     }

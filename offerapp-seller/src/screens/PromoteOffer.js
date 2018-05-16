@@ -6,7 +6,8 @@ import {
     View,
     Form,
     Button,
-    Text
+    Text,
+    Spinner
 } from 'native-base';
 import {
     Picker,
@@ -18,9 +19,14 @@ import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import {
     requestOfferList,
-    requestGroupListToPromote
+    requestGroupListToPromote,
+    selectedGroupid,
+    selectedOfferTypeid,
+    requestPromoteOffer,
+    seledtedGroups
 } from '../actions/Offer/PromoteOfferAction'
 import { responsiveWidth } from 'react-native-responsive-dimensions';
+import SectionedMultiSelect from 'react-native-sectioned-multi-select';
 export class PromoteOffer extends React.Component {
     componentWillMount() {
         const {
@@ -30,13 +36,58 @@ export class PromoteOffer extends React.Component {
         this.props.requestOfferList({ token, status });
         this.props.requestGroupListToPromote({ token })
     }
-    
+    onButtonPress() {
+        const {
+            token,
+            offer_id,
+            selected_group_id
+        } = this.props;
+        this.props.requestPromoteOffer({
+            token,
+            offer_id,
+            selected_group_id
+        })
+    }
+    constructor() {
+        super()
+        this.state = {
+            selectedItems: [],
+        }
+    }
+    onSelectedItemsChange = (selectedItems) => {
+        const {
+            selected_group_id
+        } = this.props;
+        this.props.seledtedGroups(selectedItems)
+    }
+
+    renderNotifyButton() {
+        if (this.props.isLoading) {
+            return (
+                <Button full
+                    style={{ backgroundColor: '#C10F41' }}
+                >
+                    <Spinner color='white' />
+                </Button>
+            )
+
+        } else {
+            return (
+                <Button full
+                    style={{ backgroundColor: '#C10F41' }}
+                    onPress={this.onButtonPress.bind(this)}
+                >
+                    <Text>Nofity</Text>
+                </Button>
+            )
+
+        }
+    }
     render() {
         const {
             offer_list,
             select_groups
         } = this.props;
-        const selectedItems = []
         return (
             <Container style={{ marginTop: '5.8%' }}>
                 <Header style={{ backgroundColor: '#C10F41' }}>
@@ -66,33 +117,22 @@ export class PromoteOffer extends React.Component {
                         </View>
                         <View>
                             {/* select group  */}
-                            <Text>Select Groups To Promote Offer</Text>
-                     
-                            <Picker
-                                style={styles.pickerStyle}
-                                mode='dropdown'
-                                selectedValue={this.props.group_id}
-                                onValueChange={(itemValue, itemIndex) => {
-                                    this.props.selectedOfferTypeid(itemValue);
-                                }}
-                            >
-                                {select_groups.map((item, i) => {
-                                    return (<Picker.Item
-                                        key={i}
-                                        value={item.group_id}
-                                        label={item.group_name}
-                                    />);
-                                })}
-                            </Picker>
-                            
+                            <SectionedMultiSelect
+                                items={select_groups}
+                                uniqueKey='group_id'
+                                subKey=''
+                                selectText='Select the groups to promote the offer'
+                                showDropDowns={true}
+                                selectChildren={true}
+                                searchPlaceholderText='Serach Group'
+                                showDropDowns={false}
+                                displayKey='group_name'
+                                onSelectedItemsChange={this.onSelectedItemsChange}
+                                selectedItems={this.props.selected_group_id}
+                            />
                         </View>
                         <View>
-                            <Button full
-                                style={{ backgroundColor: '#C10F41' }}
-                                onPress={Actions.offerListingScreen}
-                            >
-                                <Text>Nofity</Text>
-                            </Button>
+                           {this.renderNotifyButton()}
                         </View>
                     </Form>
                 </ScrollView>
@@ -129,6 +169,17 @@ function mapDispatchToProps(dispatch) {
                 token,
             }));
         },
+        requestPromoteOffer: ({
+            token,
+            offer_id,
+            selected_group_id
+        }) => {
+            return dispatch(requestPromoteOffer({
+                token,
+                offer_id,
+                selected_group_id
+            }));
+        },
         requestGroupListToPromote: ({
             token,
         }) => {
@@ -136,11 +187,19 @@ function mapDispatchToProps(dispatch) {
                 token,
             }));
         },
-        selectedOfferTypeid : (text) => {
+        selectedOfferTypeid: (text) => {
             return dispatch(selectedOfferTypeid(text))
-        }
+        },
+        selectedGroupid: (text) => {
+            return dispatch(selectedGroupid(text))
+        },
+        seledtedGroups: (array) => {
+            return dispatch(seledtedGroups(array))
+        },
+
     };
 }
+
 export default connect(
     mapStateToProps,
     mapDispatchToProps
