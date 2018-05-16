@@ -17,7 +17,11 @@ export default class GroupDetailCard extends Component {
             getGroupID
         } = this.props;
         return (
-            <TouchableOpacity onPress={Actions.offersSentScreen}>
+            <TouchableOpacity
+                onPress={() => {
+                    Actions.push('offersSentScreen', { getGroup_id: getGroupID })
+                }}
+            >
                 <Card >
                     <CardItem>
                         <Body>

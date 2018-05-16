@@ -8,5 +8,6 @@ export * from './Offer/CreateOfferTypes';
 export * from './Offer/OfferDetailTypes';
 export * from './AccountInformationTypes';
 export * from './Offer/PromoteOfferTypes';
+export * from './Offer/OffersSentTypes';
 
 export const baseUrl = 'https://offerapi.20agr17dev.xyz';

@@ -9,13 +9,17 @@ import {
     requestOfferDetails
 } from '../actions'
 import OfferDetailCard from '../components/offerDetailCard'
+
 export class OfferDetail extends React.Component {
     componentWillMount() {
         const {
             getOffer_id,
             token
         } = this.props;
-        this.props.requestOfferDetails({ token, getOffer_id });
+        this.props.requestOfferDetails({ 
+            token, 
+            getOffer_id 
+        });
     }
     render() {
         const { offer_detail } = this.props;
@@ -42,7 +46,7 @@ export class OfferDetail extends React.Component {
 
 function mapStateToProps({ user, offer }) {
     const { token } = user;
-    const { offerDetail } = offer
+    const { offerDetail } = offer;
     return {
         ...offerDetail,
         token
@@ -59,7 +63,7 @@ function mapDispatchToProps(dispatch) {
                 token,
                 getOffer_id
             })));
-        }
+        },
     };
 }
 export default connect(

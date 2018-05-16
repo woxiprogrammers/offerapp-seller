@@ -60,9 +60,6 @@ export class GroupListing extends React.Component {
     }
     keyExtractor = (item, index) => { return index; };
     renderRow(offerDetails) {
-        // console.log('Rendering Row');
-        // console.log(offerDetails);
-        // console.log(offerDetails);
         const { item } = offerDetails;
         const {
             group_id,
