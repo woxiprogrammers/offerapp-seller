@@ -106,7 +106,7 @@ export const selectedofferCategoryId = (text) => {
 }
 
 // SELECT OFFER SUB CATEGORY
-export const selectSubCategoryType = ({ token, category_id }) => {
+export const selectSubCategoryType = ({ token, category_id , has_subcategory}) => {
     return (dispatch) => {
         dispatch({ type: OFFER_SUB_CATEGORY_REQUEST });
         axios({

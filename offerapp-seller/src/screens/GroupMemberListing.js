@@ -11,8 +11,8 @@ export class GroupMemberListing extends React.Component {
     constructor(props) {
         super(props);
         this.autoBind(
-            'onEndReached',
-            'onRefresh',
+            // 'onEndReached',
+            // 'onRefresh',
             'renderRow',
         );
     }
@@ -28,30 +28,30 @@ export class GroupMemberListing extends React.Component {
             // page
         });
     }
-    onEndReached() {
-        const {
-            pagination,
-            token,
-        } = this.props;
-        const { page, perPage, pageCount, totalCount } = pagination;
-        const lastPage = totalCount <= ((page - 1) * perPage) + pageCount;
-        if (!lastPage) {
-            this.props.getDetailOfGroup(
-                token,
-                page + 1
-            );
-        }
-    }
-    onRefresh() {
-        const {
-            token,
-        } = this.props;
-        const page = 1;
-        this.props.getDetailOfGroup({
-            token,
-            page
-        });
-    }
+    // onEndReached() {
+    //     const {
+    //         pagination,
+    //         token,
+    //     } = this.props;
+    //     const { page, perPage, pageCount, totalCount } = pagination;
+    //     const lastPage = totalCount <= ((page - 1) * perPage) + pageCount;
+    //     if (!lastPage) {
+    //         this.props.getDetailOfGroup(
+    //             token,
+    //             page + 1
+    //         );
+    //     }
+    // }
+    // onRefresh() {
+    //     const {
+    //         token,
+    //     } = this.props;
+    //     const page = 1;
+    //     this.props.getDetailOfGroup({
+    //         token,
+    //         page
+    //     });
+    // }
     autoBind(...methods) {
         methods.forEach(method => {
             this[method] = this[method].bind(this);
@@ -93,8 +93,8 @@ export class GroupMemberListing extends React.Component {
                             refreshing={false}
                             renderItem={this.renderRow}
                             keyExtractor={this.keyExtractor}
-                            onRefresh={() => { return this.onRefresh(); }}
-                            onEndReached={() => { return this.onEndReached(); }}
+                            // onRefresh={() => { return this.onRefresh(); }}
+                            // onEndReached={() => { return this.onEndReached(); }}
                         />
                     </View>
                 </Content>

@@ -24,8 +24,8 @@ class AllTab extends Component {
   constructor(props) {
     super(props);
     this.autoBind(
-      'onEndReached',
-      'onRefresh',
+     // 'onEndReached',
+     // 'onRefresh',
       'renderRow',
     );
   }
@@ -43,34 +43,34 @@ class AllTab extends Component {
       page
     });
   }
-  onEndReached() {
-    const {
-      pagination,
-      token,
-      status
-    } = this.props;
-    const { page, perPage, pageCount, totalCount } = pagination;
-    const lastPage = totalCount <= ((page - 1) * perPage) + pageCount;
-    if (!lastPage) {
-      this.props.offerList(
-        token,
-        status,
-        page + 1
-      );
-    }
-  }
-  onRefresh() {
-    const {
-      token,
-      status
-    } = this.props;
-    const page = 1;
-    this.props.offerList({
-      token,
-      status,
-      page
-    });
-  }
+  // onEndReached() {
+  //   const {
+  //     pagination,
+  //     token,
+  //     status
+  //   } = this.props;
+  //   const { page, perPage, pageCount, totalCount } = pagination;
+  //   const lastPage = totalCount <= ((page - 1) * perPage) + pageCount;
+  //   if (!lastPage) {
+  //     this.props.offerList(
+  //       token,
+  //       status,
+  //       page + 1
+  //     );
+  //   }
+  // }
+  // onRefresh() {
+  //   const {
+  //     token,
+  //     status
+  //   } = this.props;
+  //   const page = 1;
+  //   this.props.offerList({
+  //     token,
+  //     status,
+  //     page
+  //   });
+  // }
   autoBind(...methods) {
       methods.forEach(method => {
         this[method] = this[method].bind(this);
@@ -131,8 +131,8 @@ class AllTab extends Component {
             refreshing={false}
             renderItem={this.renderRow}
             keyExtractor={this.keyExtractor}
-            onRefresh={() => { return this.onRefresh(); }}
-            onEndReached={() => { return this.onEndReached(); }}
+            // onRefresh={() => { return this.onRefresh(); }}
+            // onEndReached={() => { return this.onEndReached(); }}
           />
         </Content>
        </Container>

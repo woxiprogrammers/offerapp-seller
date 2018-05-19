@@ -23,8 +23,16 @@ export class CreateGroup extends React.Component {
     }
 
     onButtonPress() {
-        const { groupName, groupDescription, token } = this.props;
-        this.props.createGroup({ groupName, groupDescription, token });
+        const { 
+            groupName, 
+            groupDescription,
+            token 
+        } = this.props;
+        this.props.createGroup({ 
+            groupName, 
+            groupDescription, 
+            token 
+        });
     }
     
     render() {
@@ -46,29 +54,6 @@ export class CreateGroup extends React.Component {
                             value={this.props.groupNameEntered}
                         />
                     </Item>
-                    {/* <View style={{ paddingTop: '3%' }}>
-                        <Text>Admin</Text>
-                    </View>
-                    <View
-                        style={{
-                            flexDirection: 'row',
-                            justifyContent: 'space-between'
-                        }}>
-                        <Left> */}
-                    {/* Enter Admin Name */}
-                    {/* <Item floatingLabel>
-                                <Label>Name</Label>
-                                <Input />
-                            </Item>
-                        </Left> 
-                        <Right>*/}
-                    {/* Enter Admin Contact No. */}
-                    {/* <Item floatingLabel>
-                                <Label>Contact Number</Label>
-                                <Input keyboardType={'numeric'} />
-                            </Item>
-                        </Right>
-                    </View> */}
                     <View>
                         <Item floatingLabel>
                             <Label>Description</Label>
@@ -94,7 +79,6 @@ export class CreateGroup extends React.Component {
 function mapStateToProps({ group, user }) {
     const { token } = user;
     const {createGroup} = group;
-   
     return {
         ...createGroup,
         token
@@ -103,8 +87,12 @@ function mapStateToProps({ group, user }) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        groupNameChanged: (text) => { return dispatch(groupNameChanged(text)); },
-        groupDescriptionChanged: (text) => { return dispatch(groupDescriptionChanged(text)); },
+        groupNameChanged: (text) => { 
+            return dispatch(groupNameChanged(text));
+         },
+        groupDescriptionChanged: (text) => { 
+            return dispatch(groupDescriptionChanged(text)); 
+        },
         createGroup: ({ groupName, groupDescription, token }) => {
             return dispatch(createGroup({ groupName, groupDescription, token }));
         },

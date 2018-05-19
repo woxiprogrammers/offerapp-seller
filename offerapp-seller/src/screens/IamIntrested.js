@@ -29,26 +29,26 @@ export class IamIntrested extends Component {
     constructor(props) {
         super(props);
         this.autoBind(
-            'onEndReached',
-            'onRefresh',
+            // 'onEndReached',
+            // 'onRefresh',
             'renderRow',
         );
     }
 
-    onEndReached() {
-        const {
-            token,
-            getOffer_id
-        } = this.props;
-        this.props.iAmIntrestedListRequest({token, getOffer_id});
-    }
-    onRefresh() {
-        const {
-            token,
-            getOffer_id
-        } = this.props;
-        this.props.iAmIntrestedListRequest({token, getOffer_id});
-    }
+    // onEndReached() {
+    //     const {
+    //         token,
+    //         getOffer_id
+    //     } = this.props;
+    //     this.props.iAmIntrestedListRequest({token, getOffer_id});
+    // }
+    // onRefresh() {
+    //     const {
+    //         token,
+    //         getOffer_id
+    //     } = this.props;
+    //     this.props.iAmIntrestedListRequest({token, getOffer_id});
+    // }
     autoBind(...methods) {
         methods.forEach(method => {
             this[method] = this[method].bind(this);
@@ -103,8 +103,8 @@ export class IamIntrested extends Component {
                         refreshing={false}
                         renderItem={this.renderRow}
                         keyExtractor={this.keyExtractor}
-                        onRefresh={() => { return this.onRefresh(); }}
-                        onEndReached={() => { return this.onEndReached(); }}
+                        // onRefresh={() => { return this.onRefresh(); }}
+                        // onEndReached={() => { return this.onEndReached(); }}
                     />
                 </Content>
             </Container>

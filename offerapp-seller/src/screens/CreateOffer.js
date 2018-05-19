@@ -135,9 +135,9 @@ export class CreateOffer extends Component {
     const {
       select_offer_type,
       select_sub_category_type,
-      select_category_type
+      select_category_type,
+      has_subcategory
     } = this.props;
-
 
     return (
       <ScrollView>
@@ -173,21 +173,27 @@ export class CreateOffer extends Component {
                   selectedValue={this.props.category_id}
                   onValueChange={(itemValue, itemIndex) => {
                     this.props.selectedofferCategoryId(itemValue);
+                    has_subcategory: select_category_type[itemIndex].has_subcategory
                     const {
                       token,
                       category_id
                     } = this.props;
                     this.props.selectSubCategoryType({
                       token,
-                      category_id: itemValue
+                      category_id: itemValue,
+                      
                     })
                   }}
                 >
                   {select_category_type.map((item, i) => {
-                    return (<Picker.Item
-                      key={i}
-                      label={item.category_name}
-                      value={item.category_id} />);
+                    return (
+                      <Picker.Item
+                        key={i}
+                        label={item.category_name}
+                        value={item.category_id} 
+
+                      />
+                    );
                   })}
                 </Picker>
 
@@ -202,11 +208,12 @@ export class CreateOffer extends Component {
                   }}
                 >
                   {select_sub_category_type.map((item, i) => {
-                    return (<Picker.Item
-                      key={i}
-                      value={item.sub_category_id}
-                      label={item.sub_category_name}
-                    />);
+                    return (
+                      <Picker.Item
+                        key={i}
+                        value={item.sub_category_id}
+                        label={item.sub_category_name}
+                      />);
                   })}
                 </Picker>
                 <Text style={{ paddingBottom: 10, paddingTop: 10 }}>Offer Validity</ Text>

@@ -31,7 +31,8 @@ const INITIAL_STATE = {
     offer_description: '',
     start_date: '',
     end_date: '',
-    isLoading: false
+    isLoading: false,
+    has_subcategory: false
 };
 
 export default (state = INITIAL_STATE, action) => {
