@@ -18,13 +18,36 @@ import {
     OFFER_TYPE_ID_CHANGE,
     OFFER_CATEGORY_ID_CHANGE,
     OFFER_SUB_CATEGORY_ID_CHANGE,
+    UPLOAD_IMAGE,
     baseUrl
 } from '../../constants'
 import { Alert } from 'react-native';
 import axios from 'axios';
 
+async function permissionForCamerRoll() {
+    const { status: existingStatusForCameraRoll } = await Permissions.getAsync(
+        Permissions.CAMERA_ROLL
+    );
+    let finalStatus = existingStatusForCameraRoll;
+
+    // only ask if permissions have not already been determined, because
+    // iOS won't necessarily prompt the user a second time.
+    if (existingStatusForCameraRoll !== 'granted') {
+        // Android remote notification permissions are granted dimageUring the app
+        // install, so this will only ask on iOS
+        const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+        finalStatus = status;
+    }
+
+    // Stop here if the user did not grant permissions
+    if (finalStatus !== 'granted') {
+        return;
+    }
+}
+
 // SELECT OFFER TYPE
 export const selectOfferType = ({ token }) => {
+    permissionForCamerRoll();
     return (dispatch) => {
         dispatch({ type: OFFER_TYPE_REQUEST });
         axios({
@@ -34,12 +57,9 @@ export const selectOfferType = ({ token }) => {
             var status = response.status;
             if (status === 200) {
                 dispatch(offerTypeSuccess(response.data.data));
-            } else if (status === 500) {
-                Alert.alert("TYPES not RECIEVED");
-                dispatch(offerTypeFailure());
             }
         }).catch((error) => {
-            Alert.alert("TYPES ERROR");
+            Alert.alert("ERROR");
             dispatch(offerTypeFailure());
         });
     }
@@ -106,7 +126,7 @@ export const selectedofferCategoryId = (text) => {
 }
 
 // SELECT OFFER SUB CATEGORY
-export const selectSubCategoryType = ({ token, category_id , has_subcategory}) => {
+export const selectSubCategoryType = ({ token, category_id, has_subcategory }) => {
     return (dispatch) => {
         dispatch({ type: OFFER_SUB_CATEGORY_REQUEST });
         axios({
@@ -227,11 +247,37 @@ export const endDateChange = (text) => {
     };
 };
 
+export const uploadIamge = ({
+    imageUri,
+    token
+}) => {
+   
+    let imageUriParts = imageUri.split('.');
+    let fileType = imageUriParts[imageUriParts.length - 1];
 
-// export const groupDescriptionChanged = (text) => {
-//     return {
-//         type: GROUP_DESC_CHANGE,
-//         payload: text
-//     };
-// };
-
+    let formData = new FormData();
+    formData.append('photo', {
+        imageUri,
+        name: `photo.${fileType}`,
+        type: `image/${fileType}`,
+    });
+    return (dispatch) => {
+        dispatch({ type: UPLOAD_IMAGE });
+        axios({
+            url: `${baseUrl}save-image?token=${token}`,
+            method: 'post',
+            data: {
+                image: formData
+            }
+        }).then(async (response) => {
+            var status = response.status;
+            if (status === 200) {
+                console.log(response.data.filename);
+                Alert.alert(response.data.filename)
+            }
+        }).catch((error) => {
+            console.log(error);
+            Alert.alert("IMAGE NOT UPLOADED")
+        })
+    }
+}

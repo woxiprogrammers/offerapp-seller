@@ -32,7 +32,8 @@ import {
   offerDescriptionChanged,
   createOfferRequest,
   startDateChange,
-  endDateChange
+  endDateChange,
+  uploadIamge
 } from '../actions';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
 import renderIf from '../condition/renderIf'
@@ -301,7 +302,7 @@ export class CreateOffer extends Component {
               </View>
 
               {/* Upload Photos */}
-              {/* <Text style={{ paddingLeft: 10, paddingBottom: 10, paddingTop: 10 }}>Upload Photos</ Text>
+              <Text style={{ paddingLeft: 10, paddingBottom: 10, paddingTop: 10 }}>Upload Photos</ Text>
               <View
                 style={{
                   flex: 1,
@@ -315,7 +316,7 @@ export class CreateOffer extends Component {
                 </ Button>
                 {image &&
                   <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
-              </View> */}
+              </View>
 
               {/* Submit Button */}
               {this.renderSubmitButton()}
@@ -332,8 +333,18 @@ export class CreateOffer extends Component {
       aspect: [4, 3],
       base64: true,
     });
+    let imageUri = result.uri;
+    console.log("IMAGE URI IS")
+    console.log(imageUri);
+    
+    const{
+      token
+    } = this.props;
 
-    console.log(result);
+    this.props.uploadIamge({
+      imageUri,
+      token
+    })
 
     if (!result.cancelled) {
       this.setState({ image: result.uri });
@@ -357,6 +368,15 @@ function mapDispatchToProps(dispatch) {
     }) => {
       return dispatch(selectOfferType({
         token,
+      }));
+    },
+    uploadIamge: ({
+      token,
+      imageUri
+    }) => {
+      return dispatch(uploadIamge({
+        token,
+        imageUri
       }));
     },
     selectCategoryType: ({

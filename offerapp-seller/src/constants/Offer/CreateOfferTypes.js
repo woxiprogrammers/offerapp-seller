@@ -20,6 +20,8 @@ export const OFFER_IMAGE_UPLOAD = 'offer_image_upload';
 export const OFFER_SUB_CATEGORY_REQUEST = 'offer_sub_category_request';
 export const OFFER_SUB_CATEGORY_SUCCESS = 'offer_sub_category_success';
 export const OFFER_SUB_CATEGORY_FAILURE = 'offer_sub_category_failure';
-export const OFFER_SUB_CATEGORY_ID_CHANGE = 'offer_sub_category_change'
+export const OFFER_SUB_CATEGORY_ID_CHANGE = 'offer_sub_category_change';
+
+export const UPLOAD_IMAGE = 'upload_image';
 
 
