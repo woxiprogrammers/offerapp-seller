@@ -6,49 +6,62 @@ import {
     OFFER_LISTED_EXPIRE,
     OFFER_LISTED_PENDING,
     OFFER_NOT_LISTED,
+    OFFER_LIST_REQUEST,
     OFFER_STATUS
 } from '../constants'
 
 const INITIAL_STATE = {
     offer_list: [],
     status: '',
+    isLoading: false
 };
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
+        case OFFER_LIST_REQUEST:
+        return{
+            ...state,
+            isLoading: true
+        }
         case OFFER_LISTED:
             return {
                 ...state,
-                offer_list: action.offer_list
+                offer_list: action.offer_list,
+                isLoading: false
             };
 
         case OFFER_LISTED_ALL:
             return {
                 ...state,
-                offer_list: action.offer_list
+                offer_list: action.offer_list,
+                isLoading: false
             };
 
         case OFFER_LISTED_APPROVE:
             return {
                 ...state,
-                offer_list: action.offer_list
+                offer_list: action.offer_list,
+                isLoading: false
             };
 
         case OFFER_LISTED_DISAPPROVE:
             return {
                 ...state,
-                offer_list: action.offer_list
+                offer_list: action.offer_list,
+                isLoading: false
             };
 
         case OFFER_LISTED_EXPIRE:
             return {
                 ...state,
-                offer_list: action.offer_list
+                offer_list: action.offer_list,
+                isLoading: false
             };
         case OFFER_STATUS:
             return {
                 ...state,
-                status: action.payload
+                status: action.payload,
+                isLoading: false
             }
         default:
             return state;

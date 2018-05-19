@@ -20,12 +20,12 @@ import {
 import { offerStatus, offerList } from '../../actions';
 import OfferCard from '../../components/OfferCard';
 
-class AllTab extends Component {
+class ApproveTab extends Component {
   constructor(props) {
     super(props);
     this.autoBind(
-     // 'onEndReached',
-      //'onRefresh',
+     'onEndReached',
+      'onRefresh',
       'renderRow',
     );
   }
@@ -33,9 +33,9 @@ class AllTab extends Component {
     const {
       token,
     } = this.props;
-    const status = 'approve'; 
+    const status = 'approved'; 
     const page = 1;
-    console.log('Mounting All Tab');
+    console.log('Mounting ApproveTab');
     this.props.offerStatus(status);
     this.props.offerList({
       token,
@@ -43,34 +43,34 @@ class AllTab extends Component {
       page
     });
   }
-  // onEndReached() {
-  //   const {
-  //     pagination,
-  //     token,
-  //     status
-  //   } = this.props;
-  //   const { page, perPage, pageCount, totalCount } = pagination;
-  //   const lastPage = totalCount <= ((page - 1) * perPage) + pageCount;
-  //   if (!lastPage) {
-  //     this.props.offerList(
-  //       token,
-  //       status,
-  //       page + 1
-  //     );
-  //   }
-  // }
-  // onRefresh() {
-  //   const {
-  //     token,
-  //     status
-  //   } = this.props;
-  //   const page = 1;
-  //   this.props.offerList({
-  //     token,
-  //     status,
-  //     page
-  //   });
-  // }
+  onEndReached() {
+    const {
+      pagination,
+      token,
+      status
+    } = this.props;
+    const { page, perPage, pageCount, totalCount } = pagination;
+    const lastPage = totalCount <= ((page - 1) * perPage) + pageCount;
+    if (!lastPage) {
+      this.props.offerList(
+        token,
+        status,
+        page + 1
+      );
+    }
+  }
+  onRefresh() {
+    const {
+      token,
+      status
+    } = this.props;
+    const page = 1;
+    this.props.offerList({
+      token,
+      status,
+      page
+    });
+  }
   autoBind(...methods) {
       methods.forEach(method => {
         this[method] = this[method].bind(this);
@@ -83,6 +83,7 @@ class AllTab extends Component {
     // console.log(offerDetails);
     // console.log(offerDetails);
     const { item } = offerDetails;
+    console.log("APPRoved OFFERS")
     console.log(item)
     const {
       offer_id,
@@ -113,6 +114,27 @@ class AllTab extends Component {
       </View>
     );
   }
+  renderOfferList() {
+    if (this.props.isLoading) {
+      return (
+        <View style={{ paddingTop: '25%' }}>
+          <Spinner color='black' />
+        </View>
+      )
+    } else {
+      return (
+        <FlatList
+          automaticallyAdjustContentInsets={false}
+          data={this.props.offer_list}
+          refreshing={false}
+          renderItem={this.renderRow}
+          keyExtractor={this.keyExtractor}
+        // onRefresh={() => { return this.onRefresh(); }}
+        // onEndReached={() => { return this.onEndReached(); }}
+        />
+      )
+    }
+  }
   render() {
     const {
       containerStyle
@@ -128,15 +150,7 @@ class AllTab extends Component {
             paddingLeft: responsiveWidth(2.5),
           }}
         >
-          <FlatList
-            automaticallyAdjustContentInsets={false}
-            data={offer_list}
-            refreshing={false}
-            renderItem={this.renderRow}
-            keyExtractor={this.keyExtractor}
-            // onRefresh={() => { return this.onRefresh(); }}
-            // onEndReached={() => { return this.onEndReached(); }}
-          />
+         {this.renderOfferList()}
         </Content>
        </Container>
      );
@@ -182,4 +196,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AllTab);
+)(ApproveTab);

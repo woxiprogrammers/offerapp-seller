@@ -16,7 +16,7 @@ import {
 } from 'react-native-responsive-dimensions';
 import {
   colors,
- } from '../../styles';
+} from '../../styles';
 import { offerStatus, offerList } from '../../actions';
 import OfferCard from '../../components/OfferCard';
 
@@ -24,16 +24,16 @@ class AllTab extends Component {
   constructor(props) {
     super(props);
     this.autoBind(
-     // 'onEndReached',
+      'onEndReached',
       'onRefresh',
-     // 'renderRow',
+      'renderRow',
     );
   }
   componentWillMount() {
     const {
       token,
     } = this.props;
-    const status = 'all'; 
+    const status = 'all';
     const page = 1;
     console.log('Mounting All Tab');
     this.props.offerStatus(status);
@@ -43,39 +43,39 @@ class AllTab extends Component {
       page
     });
   }
-  // onEndReached() {
-  //   const {
-  //     pagination,
-  //     token,
-  //     status
-  //   } = this.props;
-  //   const { page, perPage, pageCount, totalCount } = pagination;
-  //   const lastPage = totalCount <= ((page - 1) * perPage) + pageCount;
-  //   if (!lastPage) {
-  //     this.props.offerList(
-  //       token,
-  //       status,
-  //       page + 1
-  //     );
-  //   }
-  // }
-  // onRefresh() {
-  //   const {
-  //     token,
-  //     status
-  //   } = this.props;
-  //   const page = 1;
-  //   this.props.offerList({
-  //     token,
-  //     status,
-  //     page
-  //   });
-  // }
+  onEndReached() {
+    const {
+      pagination,
+      token,
+      status
+    } = this.props;
+    const { page, perPage, pageCount, totalCount } = pagination;
+    const lastPage = totalCount <= ((page - 1) * perPage) + pageCount;
+    if (!lastPage) {
+      this.props.offerList(
+        token,
+        status,
+        page + 1
+      );
+    }
+  }
+  onRefresh() {
+    const {
+      token,
+      status
+    } = this.props;
+    const page = 1;
+    this.props.offerList({
+      token,
+      status,
+      page
+    });
+  }
   autoBind(...methods) {
-      methods.forEach(method => {
-        this[method] = this[method].bind(this);
-        return this[method];
-      });
+    methods.forEach(method => {
+      this[method] = this[method].bind(this);
+      return this[method];
+    });
   }
   keyExtractor = (item, index) => { return index; };
   renderRow(offerDetails) {
@@ -109,12 +109,32 @@ class AllTab extends Component {
       </View>
     );
   }
+  renderOfferList() {
+    if (this.props.isLoading) {
+      return (
+        <View style={{ paddingTop: '25%' }}>
+          <Spinner color='black' />
+        </View>
+      )
+    } else {
+      return (
+        <FlatList
+          automaticallyAdjustContentInsets={false}
+          data={this.props.offer_list}
+          refreshing={false}
+          renderItem={this.renderRow}
+          keyExtractor={this.keyExtractor}
+        // onRefresh={() => { return this.onRefresh(); }}
+        // onEndReached={() => { return this.onEndReached(); }}
+        />
+      )
+    }
+  }
   render() {
     const {
       containerStyle
     } = styles;
     // const { offer_list_all } = this.props;
-    const { offer_list } = this.props;
     return (
       <Container style={containerStyle}>
         <Content
@@ -124,22 +144,14 @@ class AllTab extends Component {
             paddingLeft: responsiveWidth(2.5),
           }}
         >
-          <FlatList
-            automaticallyAdjustContentInsets={false}
-            data={offer_list}
-            refreshing={false}
-            renderItem={this.renderRow}
-            keyExtractor={this.keyExtractor}
-            // onRefresh={() => { return this.onRefresh(); }}
-            // onEndReached={() => { return this.onEndReached(); }}
-          />
+          {this.renderOfferList()}
         </Content>
-       </Container>
-     );
-   }
- }
+      </Container>
+    );
+  }
+}
 
- const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   containerStyle: {
     backgroundColor: colors.white,
   },
@@ -150,32 +162,32 @@ class AllTab extends Component {
 });
 
 function mapStateToProps({ offerlist, user }) {
-    const { token } = user;
-    return {
-        ...offerlist,
-        token
-    };
+  const { token } = user;
+  return {
+    ...offerlist,
+    token
+  };
 }
 
 function mapDispatchToProps(dispatch) {
-    return {
-        offerList: ({
-          token,
-          status,
-          page
-          }) => {
-          return dispatch(offerList({
-            token,
-            status,
-            page
-            }));
-        },
-        offerStatus: (text) => {
-          return dispatch(offerStatus(text));
-        },
-    };
+  return {
+    offerList: ({
+      token,
+      status,
+      page
+    }) => {
+      return dispatch(offerList({
+        token,
+        status,
+        page
+      }));
+    },
+    offerStatus: (text) => {
+      return dispatch(offerStatus(text));
+    },
+  };
 }
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(AllTab);

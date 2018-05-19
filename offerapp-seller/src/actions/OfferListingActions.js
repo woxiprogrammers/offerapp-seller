@@ -8,6 +8,7 @@ import {
     OFFER_NOT_LISTED,
     OFFER_STATUS,
     OFFER_LISTED_PENDING,
+    OFFER_LIST_REQUEST,
     baseUrl
 } from '../constants';
 
@@ -17,7 +18,7 @@ export const offerList = ({
     status,
     page }) => {
     return (dispatch) => {
-        dispatch({ type: OFFER_LISTED });
+        dispatch({ type: OFFER_LIST_REQUEST });
         axios({
             url: `${baseUrl}/seller/offer/listing?token=${token}`,
             method: 'post',
@@ -31,6 +32,9 @@ export const offerList = ({
             } else {
                 console.log("Lisitng not recieved")
             }
+        }).catch((error) => {
+            console.log(error);
+            console.log("ERROR")
         })
     }
 };
