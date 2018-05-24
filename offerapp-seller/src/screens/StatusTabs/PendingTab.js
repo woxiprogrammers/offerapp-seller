@@ -35,7 +35,7 @@ class PendingTab extends Component {
     } = this.props;
     const status = 'pending'; 
     const page = 1;
-    console.log('Mounting All Tab');
+    console.log('Mounting Pending Tab');
     this.props.offerStatus(status);
     this.props.offerList({
       token,
@@ -79,7 +79,6 @@ class PendingTab extends Component {
   }
   keyExtractor = (item, index) => { return index; };
   renderRow(offerDetails) {
-    console.log('Rendering Row');
     const { item } = offerDetails;
     const {
       offer_id,
@@ -89,8 +88,8 @@ class PendingTab extends Component {
       offer_status_id,
       offer_status_name,
       offer_description,
-      valid_from,
-      valid_to,
+      start_date,
+      end_date,
     //   wishlist_count,
     //   interested_count,
     //   grabbed_count
@@ -100,8 +99,8 @@ class PendingTab extends Component {
         <OfferCard
           cardTitle={offer_type_name}
           offerID={offer_id}
-          startDate={valid_from}
-          endDate={valid_to}
+          startDate={start_date}
+          endDate={end_date}
         //   likeCount={interested_count}
         //   grabCount={grabbed_count}
         //   wishlistCount={wishlist_count}
@@ -121,7 +120,7 @@ class PendingTab extends Component {
       return (
         <FlatList
           automaticallyAdjustContentInsets={false}
-          data={this.props.offer_list}
+          data={this.props.offer_list_pending}
           refreshing={false}
           renderItem={this.renderRow}
           keyExtractor={this.keyExtractor}
@@ -135,12 +134,10 @@ class PendingTab extends Component {
     const {
       containerStyle
     } = styles;
-    const { offer_list } = this.props;
-    console.log(offer_list);
     return (
       <Container style={containerStyle}>
         <Content
-          showsVerticalScrollIndicator={false}
+          showsVerticalScrollIndicator={true}
           contentContainerStyle={{
             paddingTop: responsiveHeight(1),
             paddingLeft: responsiveWidth(2.5),

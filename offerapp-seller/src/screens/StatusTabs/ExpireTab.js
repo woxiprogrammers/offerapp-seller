@@ -16,7 +16,7 @@ import {
 } from 'react-native-responsive-dimensions';
 import {
   colors,
- } from '../../styles';
+} from '../../styles';
 import { offerStatus, offerList } from '../../actions';
 import OfferCard from '../../components/OfferCard';
 
@@ -33,9 +33,9 @@ class ExpireTab extends Component {
     const {
       token,
     } = this.props;
-    const status = 'expired'; 
+    const status = 'expired';
     const page = 1;
-    console.log('Mounting All Tab');
+    console.log('Mounting EXPIRE Tab');
     this.props.offerStatus(status);
     this.props.offerList({
       token,
@@ -72,18 +72,14 @@ class ExpireTab extends Component {
     });
   }
   autoBind(...methods) {
-      methods.forEach(method => {
-        this[method] = this[method].bind(this);
-        return this[method];
-      });
+    methods.forEach(method => {
+      this[method] = this[method].bind(this);
+      return this[method];
+    });
   }
   keyExtractor = (item, index) => { return index; };
   renderRow(offerDetails) {
-    // console.log('Rendering Row');
-    // console.log(offerDetails);
-    // console.log(offerDetails);
     const { item } = offerDetails;
-    console.log(item)
     const {
       offer_id,
       seller_address_id,
@@ -92,16 +88,16 @@ class ExpireTab extends Component {
       offer_status_id,
       offer_status_name,
       offer_description,
-      valid_from,
-      valid_to,
+      start_date,
+      end_date,
     } = item;
     return (
       <View>
         <OfferCard
           cardTitle={offer_type_name}
           offerID={offer_id}
-          startDate={valid_from}
-          endDate={valid_to}
+          startDate={start_date}
+          endDate={ebd_date}
           offerStatus={offer_status_name}
         />
       </View>
@@ -118,7 +114,7 @@ class ExpireTab extends Component {
       return (
         <FlatList
           automaticallyAdjustContentInsets={false}
-          data={this.props.offer_list}
+          data={this.props.offer_list_expired}
           refreshing={false}
           renderItem={this.renderRow}
           keyExtractor={this.keyExtractor}
@@ -132,8 +128,6 @@ class ExpireTab extends Component {
     const {
       containerStyle
     } = styles;
-    const { offer_list } = this.props;
-    console.log(offer_list);
     return (
       <Container style={containerStyle}>
         <Content
@@ -145,12 +139,12 @@ class ExpireTab extends Component {
         >
           {this.renderOfferList()}
         </Content>
-       </Container>
-     );
-   }
- }
+      </Container>
+    );
+  }
+}
 
- const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   containerStyle: {
     backgroundColor: colors.white,
   },
@@ -161,32 +155,32 @@ class ExpireTab extends Component {
 });
 
 function mapStateToProps({ offerlist, user }) {
-    const { token } = user;
-    return {
-        ...offerlist,
-        token
-    };
+  const { token } = user;
+  return {
+    ...offerlist,
+    token
+  };
 }
 
 function mapDispatchToProps(dispatch) {
-    return {
-        offerList: ({
-          token,
-          status,
-          page
-          }) => {
-          return dispatch(offerList({
-            token,
-            status,
-            page
-            }));
-        },
-        offerStatus: (text) => {
-          return dispatch(offerStatus(text));
-        },
-    };
+  return {
+    offerList: ({
+      token,
+      status,
+      page
+    }) => {
+      return dispatch(offerList({
+        token,
+        status,
+        page
+      }));
+    },
+    offerStatus: (text) => {
+      return dispatch(offerStatus(text));
+    },
+  };
 }
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(ExpireTab);

@@ -35,7 +35,7 @@ class DisapproveTab extends Component {
     } = this.props;
     const status = 'disapproved'; 
     const page = 1;
-    console.log('Mounting All Tab');
+    console.log('Mounting Disapprove Tab');
     this.props.offerStatus(status);
     this.props.offerList({
       token,
@@ -79,11 +79,7 @@ class DisapproveTab extends Component {
   }
   keyExtractor = (item, index) => { return index; };
   renderRow(offerDetails) {
-    // console.log('Rendering Row');
-    // console.log(offerDetails);
-    // console.log(offerDetails);
     const { item } = offerDetails;
-    console.log(item)
     const {
       offer_id,
       seller_address_id,
@@ -92,16 +88,16 @@ class DisapproveTab extends Component {
       offer_status_id,
       offer_status_name,
       offer_description,
-      valid_from,
-      valid_to,
+      start_date,
+      end_date,
     } = item;
     return (
       <View>
         <OfferCard
           cardTitle={offer_type_name}
           offerID={offer_id}
-          startDate={valid_from}
-          endDate={valid_to}
+          startDate={start_date}
+          endDate={end_date}
           offerStatus={offer_status_name}
         />
       </View>
@@ -118,7 +114,7 @@ class DisapproveTab extends Component {
       return (
         <FlatList
           automaticallyAdjustContentInsets={false}
-          data={this.props.offer_list}
+          data={this.props.offer_list_disapproved}
           refreshing={false}
           renderItem={this.renderRow}
           keyExtractor={this.keyExtractor}
@@ -132,8 +128,6 @@ class DisapproveTab extends Component {
     const {
       containerStyle
     } = styles;
-    const { offer_list } = this.props;
-    console.log(offer_list);
     return (
       <Container style={containerStyle}>
         <Content

@@ -12,3 +12,5 @@ export const OFFER_LIST_SUCCESS = 'offer_list_success';
 export const OFFER_LIST_FAILURE = 'offer_list_failure';
 
 export const OFFER_ID_CHANGE = 'offer_id_change';
+
+export const NO_OFFERS = 'no_offers';

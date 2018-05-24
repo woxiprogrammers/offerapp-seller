@@ -84,19 +84,15 @@ export default class OfferCard extends Component {
                 }}>
 
                   {/* Heart Button */}
-                  {renderIf(
-                    wishlistCount,
+                  
                     <Button badge transparent style={{ paddingTop: '3%' }}>
                       <FontAwesome name="heart" size={22} color='red' />
                       <Badge primary style={{ marginTop: -10 }}>
                         <Text >{wishlistCount}</Text>
                       </Badge>
                     </ Button>
-                  )}
 
                   {/* Liked Button */}
-                  {renderIf(
-                    likeCount,
                     <Button badge transparent
                       style={{ paddingTop: '3%' }}
                       onPress={() => {
@@ -107,19 +103,14 @@ export default class OfferCard extends Component {
                         <Text>{likeCount}</Text>
                       </Badge>
                     </Button>
-                  )}
 
                   {/* Grabed Offers */}
-                  {renderIf(
-                    grabCount,
                     <Button badge transparent style={{ paddingTop: '3%' }}>
                       <FontAwesome name="handshake-o" size={22} />
                       <Badge primary style={{ marginTop: -10 }}>
                         <Text>{grabCount}</Text>
                       </Badge>
                     </Button>
-                  )}
-
                 </View>
               </CardItem>
             )}

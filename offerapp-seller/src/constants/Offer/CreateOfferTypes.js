@@ -22,6 +22,8 @@ export const OFFER_SUB_CATEGORY_SUCCESS = 'offer_sub_category_success';
 export const OFFER_SUB_CATEGORY_FAILURE = 'offer_sub_category_failure';
 export const OFFER_SUB_CATEGORY_ID_CHANGE = 'offer_sub_category_change';
 
-export const UPLOAD_IMAGE = 'upload_image';
+export const UPLOAD_IMAGE_REQUEST = 'upload_image_request';
+export const UPLOAD_IMAGE_SUCCESS = 'upload_image_success';
+export const UPLOAD_IMAGE_FAILURE = 'upload_image_failure';
 
 

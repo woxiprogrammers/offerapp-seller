@@ -9,9 +9,12 @@ import {
     OFFER_STATUS,
     OFFER_LISTED_PENDING,
     OFFER_LIST_REQUEST,
+    NO_OFFERS,
     baseUrl
 } from '../constants';
-
+import {
+    Alert
+} from 'react-native';
 
 export const offerList = ({
     token,
@@ -29,48 +32,93 @@ export const offerList = ({
             var success = response.status;
             if (success === 200) {
                 dispatch(getOfferListSuccess(response.data.data))
-            } else {
-                console.log("Lisitng not recieved")
             }
         }).catch((error) => {
             console.log(error);
-            console.log("ERROR")
+            Alert.alert("ERROR")
         })
     }
 };
+function isEmpty(obj) {
+    for (var key in obj) {
+        if (obj.hasOwnProperty(key))
+            return false;
+    }
+    return true;
+}
 export const getOfferListSuccess = (response) => {
-    const { offer_list } = response;
-    return {
-        type: OFFER_LISTED,
-        offer_list: offer_list
-    };
-    // if (response.offer_status_slug === 'all') {
-    //     return {
-    //         type: OFFER_LISTED_ALL,
-    //         offer_list_all: offer_list
-    //     };
-    // } else if (response.offer_status_slug === 'approved') {
-    //     return {
-    //         type: OFFER_LISTED_APPROVE,
-    //         offer_list_approve: offer_list
-    //     }
-    // } else if (response.offer_status_slug === 'disapproved') {
-    //     return {
-    //         type: OFFER_LISTED_DISAPPROVE,
-    //         offer_list_disapprove: offer_list
-    //     }
-    // }else if (response.offer_status_slug === 'expired') {
-    //     return {
-    //         type: OFFER_LISTED_EXPIRE,
-    //         offer_list_expire: offer_list
-    //     }
-    // }else if (response.offer_status_slug === 'pending') {
-    //     return {
-    //         type: OFFER_LISTED_PENDING,
-    //         offer_list_pending: offer_list
-    //     }
-    // }
 
+    if (response.status_slug === 'all') {
+        const { offer_list } = response;
+        if (isEmpty(offer_list)) {
+            Alert.alert("No Offers");
+            return {
+                type: NO_OFFERS
+            };
+           
+        } else {
+            return {
+                type: OFFER_LISTED_ALL,
+                offer_list
+            };
+        }
+    } else if (response.status_slug === 'approved') {
+        const { offer_list } = response;
+        if (isEmpty(offer_list)) {
+            Alert.alert("No Offers");
+            return {
+                type: NO_OFFERS
+            };
+           
+        } else {
+            return {
+                type: OFFER_LISTED_APPROVE,
+                offer_list
+            };
+        }
+    } else if (response.status_slug === 'disapproved') {
+        const { offer_list } = response;
+        if (isEmpty(offer_list)) {
+            Alert.alert("No Offers");
+            return {
+                type: NO_OFFERS
+            };
+           
+        } else {
+            return {
+                type: OFFER_LISTED_DISAPPROVE,
+                offer_list
+            };
+        }
+    } else if (response.status_slug === 'expired') {
+        const { offer_list } = response;
+        if (isEmpty(offer_list)) {
+            Alert.alert("No Offers");
+            return {
+                type: NO_OFFERS
+            };
+           
+        } else {
+            return {
+                type: OFFER_LISTED_EXPIRE,
+                offer_list
+            };
+        }
+    } else if (response.status_slug === 'pending') {
+        const { offer_list } = response;
+        if (isEmpty(offer_list)) {
+            Alert.alert("No Offers");
+            return {
+                type: NO_OFFERS
+            };
+           
+        } else {
+            return {
+                type: OFFER_LISTED_PENDING,
+                offer_list
+            };
+        }
+    }
 };
 
 export const offerStatus = (text) => {

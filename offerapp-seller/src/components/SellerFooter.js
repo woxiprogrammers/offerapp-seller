@@ -9,6 +9,21 @@ import prompt from 'react-native-prompt-android';
 import { Alert } from 'react-native';
 
 export default class SellerFooter extends Component {
+  
+  renderGCPrompt(){
+      prompt(
+        'Enter Grab Code',
+        "Enter customer's Grab Code to complete the transaction",
+        [
+          {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+          {text: 'OK', onPress: grabCode => console.log('OK Pressed, Grab Code: ' + grabCode)},
+        ],
+        {
+          type: 'numeric',
+          placeholder: 'Enter Grab Code'
+        }
+      );
+  }
   render() {
     return (
       
@@ -17,16 +32,7 @@ export default class SellerFooter extends Component {
             <FooterTab  style={{backgroundColor: '#C10F41'}}>
                 <Button vertical  
                 onPress={() => {
-                  prompt(
-                    'Enter Grab Code',
-                    "Enter customer's Grab Code to complete the transaction",
-                    [
-                      {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-                      {text: 'OK', onPress: grabCode => console.log('OK Pressed, Grab Code: ' + grabCode)},
-                    ],
-                    {
-                    }
-                  );
+                  {this.renderGCPrompt()}
                 }}>
                     
                     <FontAwesome name="handshake-o" size={22} color='white' />

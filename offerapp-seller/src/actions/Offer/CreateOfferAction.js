@@ -18,11 +18,14 @@ import {
     OFFER_TYPE_ID_CHANGE,
     OFFER_CATEGORY_ID_CHANGE,
     OFFER_SUB_CATEGORY_ID_CHANGE,
-    UPLOAD_IMAGE,
+    UPLOAD_IMAGE_REQUEST,
+    UPLOAD_IMAGE_SUCCESS,
+    UPLOAD_IMAGE_FAILURE,
     baseUrl
 } from '../../constants'
 import { Alert } from 'react-native';
 import axios from 'axios';
+import { Permissions, CAMERA_ROLL } from 'expo';
 
 async function permissionForCamerRoll() {
     const { status: existingStatusForCameraRoll } = await Permissions.getAsync(
@@ -248,36 +251,55 @@ export const endDateChange = (text) => {
 };
 
 export const uploadIamge = ({
-    imageUri,
+    selectedImage,
     token
 }) => {
-   
-    let imageUriParts = imageUri.split('.');
-    let fileType = imageUriParts[imageUriParts.length - 1];
-
-    let formData = new FormData();
-    formData.append('photo', {
-        imageUri,
-        name: `photo.${fileType}`,
-        type: `image/${fileType}`,
+    const data = new FormData();
+    data.append('name');
+    data.append('selectedImage', {
+        uri: selectedImage.uri,
+        type: selectedImage.type,
+        name: 'testPhotoName'
     });
+    const config = {
+        headers: { 'content-type': 'multipart/form-data' }
+    }
     return (dispatch) => {
-        dispatch({ type: UPLOAD_IMAGE });
+        dispatch({ type: UPLOAD_IMAGE_REQUEST });
         axios({
             url: `${baseUrl}save-image?token=${token}`,
             method: 'post',
-            data: {
-                image: formData
-            }
+            data:{
+                image_for: 'offer-create',
+                image: selectedImage.uri,
+            },
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'multipart/form-data',
+              },
         }).then(async (response) => {
             var status = response.status;
             if (status === 200) {
+                dispatch(imageUploadedSuccessfully(response.data));
                 console.log(response.data.filename);
-                Alert.alert(response.data.filename)
+                Alert.alert(response.data.filename);
             }
         }).catch((error) => {
             console.log(error);
+            dispatch(imageNotUploaded())
             Alert.alert("IMAGE NOT UPLOADED")
         })
+    }
+}
+
+export const imageUploadedSuccessfully = (response) => {
+    return {
+        type: UPLOAD_IMAGE_SUCCESS
+    }
+}
+
+export const imageNotUploaded = () => {
+    return {
+        type: UPLOAD_IMAGE_FAILURE
     }
 }

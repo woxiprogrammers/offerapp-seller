@@ -36,8 +36,9 @@ import {
   uploadIamge
 } from '../actions';
 import { responsiveWidth } from 'react-native-responsive-dimensions';
-import renderIf from '../condition/renderIf'
-import DatePicker from 'react-native-datepicker'
+import renderIf from '../condition/renderIf';
+import DatePicker from 'react-native-datepicker';
+import ImagePickerWoxi from '../components/ImagePicker';
 
 export class CreateOffer extends Component {
 
@@ -129,7 +130,15 @@ export class CreateOffer extends Component {
     }
 
   }
-
+  renderSpinner() {
+    if (this.props.isLoading) {
+      return (
+        <View>
+          <Spinner color='black' />
+        </View>
+      )
+    }
+  }
 
   render() {
     let { image } = this.state;
@@ -182,7 +191,7 @@ export class CreateOffer extends Component {
                     this.props.selectSubCategoryType({
                       token,
                       category_id: itemValue,
-                      
+
                     })
                   }}
                 >
@@ -191,7 +200,7 @@ export class CreateOffer extends Component {
                       <Picker.Item
                         key={i}
                         label={item.category_name}
-                        value={item.category_id} 
+                        value={item.category_id}
 
                       />
                     );
@@ -313,10 +322,13 @@ export class CreateOffer extends Component {
                 <Button info
                   onPress={this._pickImage}>
                   <Text> Select </Text>
+                 
                 </ Button>
+                 {this.renderSpinner()}
                 {image &&
                   <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
               </View>
+              {/* <ImagePickerWoxi /> */}
 
               {/* Submit Button */}
               {this.renderSubmitButton()}
@@ -328,26 +340,24 @@ export class CreateOffer extends Component {
   }
 
   _pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
+    let selectedImage = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
       aspect: [4, 3],
       base64: true,
     });
-    let imageUri = result.uri;
-    console.log("IMAGE URI IS")
-    console.log(imageUri);
-    
-    const{
+
+    console.log(selectedImage.uri)
+    const {
       token
     } = this.props;
 
     this.props.uploadIamge({
-      imageUri,
+      selectedImage,
       token
     })
 
-    if (!result.cancelled) {
-      this.setState({ image: result.uri });
+    if (!selectedImage.cancelled) {
+      this.setState({ image: selectedImage.uri });
     }
   };
 }
@@ -372,11 +382,11 @@ function mapDispatchToProps(dispatch) {
     },
     uploadIamge: ({
       token,
-      imageUri
+      selectedImage
     }) => {
       return dispatch(uploadIamge({
         token,
-        imageUri
+        selectedImage
       }));
     },
     selectCategoryType: ({

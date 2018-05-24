@@ -19,7 +19,9 @@ import {
     OFFER_TYPE_ID_CHANGE,
     OFFER_CATEGORY_ID_CHANGE,
     OFFER_SUB_CATEGORY_ID_CHANGE,
-    UPLOAD_IMAGE
+    UPLOAD_IMAGE_REQUEST,
+    UPLOAD_IMAGE_SUCCESS,
+    UPLOAD_IMAGE_FAILURE
 } from '../../constants'
 
 const INITIAL_STATE = {
@@ -39,9 +41,20 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case UPLOAD_IMAGE:
+        case UPLOAD_IMAGE_FAILURE:
         return{
-            ...state
+            ...state,
+            isLoading: false
+        }
+        case UPLOAD_IMAGE_SUCCESS:
+        return{
+            ...state,
+            isLoading: false
+        }
+        case UPLOAD_IMAGE_REQUEST:
+        return{
+            ...state,
+            isLoading: true
         }
         case OFFER_TYPE_REQUEST:
             return {

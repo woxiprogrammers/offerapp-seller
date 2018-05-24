@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
   StyleSheet,
-  FlatList
+  FlatList,
 } from 'react-native';
 import {
   Container,
@@ -25,7 +25,7 @@ class AllTab extends Component {
     super(props);
     this.autoBind(
       'onEndReached',
-      'onRefresh',
+      // 'onRefresh',
       'renderRow',
     );
   }
@@ -43,40 +43,40 @@ class AllTab extends Component {
       page
     });
   }
-  onEndReached() {
-    const {
-      pagination,
-      token,
-      status
-    } = this.props;
-    const { page, perPage, pageCount, totalCount } = pagination;
-    const lastPage = totalCount <= ((page - 1) * perPage) + pageCount;
-    if (!lastPage) {
-      this.props.offerList(
-        token,
-        status,
-        page + 1
-      );
-    }
-  }
-  onRefresh() {
-    const {
-      token,
-      status
-    } = this.props;
-    const page = 1;
-    this.props.offerList({
-      token,
-      status,
-      page
-    });
-  }
-  autoBind(...methods) {
-    methods.forEach(method => {
-      this[method] = this[method].bind(this);
-      return this[method];
-    });
-  }
+  // onEndReached() {
+  //   const {
+  //     pagination,
+  //     token,
+  //     status
+  //   } = this.props;
+  //   const { page, perPage, pageCount, totalCount } = pagination;
+  //   const lastPage = totalCount <= ((page - 1) * perPage) + pageCount;
+  //   if (!lastPage) {
+  //     this.props.offerList(
+  //       token,
+  //       status,
+  //       page + 1
+  //     );
+  //   }
+  // }
+  // onRefresh() {
+  //   const {
+  //     token,
+  //     status
+  //   } = this.props;
+  //   const page = 1;
+  //   this.props.offerList({
+  //     token,
+  //     status,
+  //     page
+  //   });
+  // }
+  // autoBind(...methods) {
+  //   methods.forEach(method => {
+  //     this[method] = this[method].bind(this);
+  //     return this[method];
+  //   });
+  // }
   keyExtractor = (item, index) => { return index; };
   renderRow(offerDetails) {
     const { item } = offerDetails;
@@ -119,9 +119,7 @@ class AllTab extends Component {
     } else {
       return (
         <FlatList
-          automaticallyAdjustContentInsets={false}
-          data={this.props.offer_list}
-          refreshing={false}
+          data={this.props.offer_list_all}
           renderItem={this.renderRow}
           keyExtractor={this.keyExtractor}
         // onRefresh={() => { return this.onRefresh(); }}
@@ -134,14 +132,13 @@ class AllTab extends Component {
     const {
       containerStyle
     } = styles;
-    // const { offer_list_all } = this.props;
     return (
       <Container style={containerStyle}>
         <Content
-          showsVerticalScrollIndicator={false}
           contentContainerStyle={{
             paddingTop: responsiveHeight(1),
             paddingLeft: responsiveWidth(2.5),
+            paddingRight: responsiveWidth(2.5)
           }}
         >
           {this.renderOfferList()}
