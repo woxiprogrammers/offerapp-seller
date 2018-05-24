@@ -88,6 +88,7 @@ export class PromoteOffer extends React.Component {
             offer_list,
             select_groups
         } = this.props;
+        console.log(this.props.selected_group_id)
         return (
             <Container style={{ marginTop: '5.8%' }}>
                 <Header style={{ backgroundColor: '#C10F41' }}>
@@ -107,11 +108,13 @@ export class PromoteOffer extends React.Component {
                                 }}
                             >
                                 {offer_list.map((item, i) => {
-                                    return (<Picker.Item
-                                        key={i}
-                                        value={item.offer_id}
-                                        label={item.offer_type_name}
-                                    />);
+                                    return (
+                                        <Picker.Item
+                                            key={i}
+                                            value={item.offer_id}
+                                            label={item.offer_type_name}
+                                        />
+                                    );
                                 })}
                             </Picker>
                         </View>
@@ -132,7 +135,7 @@ export class PromoteOffer extends React.Component {
                             />
                         </View>
                         <View>
-                           {this.renderNotifyButton()}
+                            {this.renderNotifyButton()}
                         </View>
                     </Form>
                 </ScrollView>

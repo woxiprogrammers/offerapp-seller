@@ -36,7 +36,7 @@ const INITIAL_STATE = {
     end_date: '',
     isLoading: false,
     has_subcategory: false,
-    filename: ''
+    images: []
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -49,7 +49,8 @@ export default (state = INITIAL_STATE, action) => {
         case UPLOAD_IMAGE_SUCCESS:
         return{
             ...state,
-            isLoading: false
+            isLoading: false,
+            images: action.images
         }
         case UPLOAD_IMAGE_REQUEST:
         return{

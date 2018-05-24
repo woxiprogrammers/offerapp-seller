@@ -188,7 +188,7 @@ export const createOfferRequest = ({
     offer_description,
     start_date,
     end_date,
-    // images[0 ] = 2639307578453ceb01ebf75ecb6259c1f37fe2c81a0baabc59.jpeg
+    filename
 }) => {
     return (dispatch) => {
         dispatch({ type: OFFER_CREATE_REQUEST });
@@ -202,6 +202,7 @@ export const createOfferRequest = ({
                 offer_description: offer_description,
                 start_date: start_date,
                 end_date: end_date,
+                images: filename
             }
         }).then(async (response) => {
             var status = response.status;
@@ -251,50 +252,53 @@ export const endDateChange = (text) => {
 };
 
 export const uploadIamge = ({
-    selectedImage,
+    result,
     token
 }) => {
-    const data = new FormData();
-    data.append('name');
-    data.append('selectedImage', {
-        uri: selectedImage.uri,
-        type: selectedImage.type,
-        name: 'testPhotoName'
-    });
-    const config = {
-        headers: { 'content-type': 'multipart/form-data' }
-    }
+    // ImagePicker saves the taken photo to disk and returns a local URI to it
+    let localUri = result.uri;
+    let filename = localUri.split('/').pop();
+
+    // Infer the type of the image
+    let match = /\.(\w+)$/.exec(filename);
+    let type = match ? `image/${match[1]}` : `image`;
+
+    // Upload the image using the fetch and FormData APIs
+    let formData = new FormData();
+    // Assume "photo" is the name of the form field the server expects
+    formData.append("image_for", 'offer-create')
+    formData.append('image', { uri: localUri, name: filename, type });
     return (dispatch) => {
         dispatch({ type: UPLOAD_IMAGE_REQUEST });
-        axios({
-            url: `${baseUrl}save-image?token=${token}`,
-            method: 'post',
-            data:{
-                image_for: 'offer-create',
-                image: selectedImage.uri,
+        return fetch(`${baseUrl}/save-image?token=${token}`, {
+            method: 'POST',
+            body: formData,
+            header: {
+                'content-type': 'multipart/form-data',
             },
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'multipart/form-data',
-              },
-        }).then(async (response) => {
-            var status = response.status;
-            if (status === 200) {
-                dispatch(imageUploadedSuccessfully(response.data));
-                console.log(response.data.filename);
-                Alert.alert(response.data.filename);
-            }
-        }).catch((error) => {
-            console.log(error);
-            dispatch(imageNotUploaded())
-            Alert.alert("IMAGE NOT UPLOADED")
         })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log("file name in response ")
+                console.log(responseJson.filename)
+                dispatch(imageUploadedSuccessfully(responseJson.filename))
+            })
+            .catch((error) => {
+                Alert.alert("IMAGE NOT UPLOADED");
+                console.log(error);
+                dispatch(imageNotUploaded())
+            })
     }
 }
 
+let images = [];
 export const imageUploadedSuccessfully = (response) => {
+    images.push(response)
+    console.log("images")
+    console.log(images)
     return {
-        type: UPLOAD_IMAGE_SUCCESS
+        type: UPLOAD_IMAGE_SUCCESS,
+        images
     }
 }
 

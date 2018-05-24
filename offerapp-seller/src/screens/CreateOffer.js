@@ -38,7 +38,6 @@ import {
 import { responsiveWidth } from 'react-native-responsive-dimensions';
 import renderIf from '../condition/renderIf';
 import DatePicker from 'react-native-datepicker';
-import ImagePickerWoxi from '../components/ImagePicker';
 
 export class CreateOffer extends Component {
 
@@ -93,7 +92,7 @@ export class CreateOffer extends Component {
       offer_description,
       start_date,
       end_date,
-      // image
+      images
     } = this.props;
     this.props.createOfferRequest({
       token,
@@ -102,6 +101,7 @@ export class CreateOffer extends Component {
       offer_description,
       start_date,
       end_date,
+      images
     });
   }
 
@@ -168,11 +168,13 @@ export class CreateOffer extends Component {
                   }}
                 >
                   {select_offer_type.map((item, i) => {
-                    return (<Picker.Item
+                    return (
+                    <Picker.Item
                       key={i}
                       value={item.offer_type_id}
                       label={item.offer_type_name}
-                    />);
+                    />
+                  );
                   })}
                 </Picker>
 
@@ -328,7 +330,6 @@ export class CreateOffer extends Component {
                 {image &&
                   <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
               </View>
-              {/* <ImagePickerWoxi /> */}
 
               {/* Submit Button */}
               {this.renderSubmitButton()}
@@ -340,24 +341,20 @@ export class CreateOffer extends Component {
   }
 
   _pickImage = async () => {
-    let selectedImage = await ImagePicker.launchImageLibraryAsync({
+    let result = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
       aspect: [4, 3],
-      base64: true,
     });
-
-    console.log(selectedImage.uri)
     const {
       token
     } = this.props;
-
     this.props.uploadIamge({
-      selectedImage,
+      result,
       token
     })
 
-    if (!selectedImage.cancelled) {
-      this.setState({ image: selectedImage.uri });
+    if (!result.cancelled) {
+      this.setState({ image: result.uri });
     }
   };
 }
@@ -382,11 +379,11 @@ function mapDispatchToProps(dispatch) {
     },
     uploadIamge: ({
       token,
-      selectedImage
+      result
     }) => {
       return dispatch(uploadIamge({
         token,
-        selectedImage
+        result
       }));
     },
     selectCategoryType: ({
@@ -430,6 +427,7 @@ function mapDispatchToProps(dispatch) {
       offer_description,
       start_date,
       end_date,
+      images
     }) => {
       return dispatch(createOfferRequest({
         token,
@@ -438,6 +436,7 @@ function mapDispatchToProps(dispatch) {
         offer_description,
         start_date,
         end_date,
+        images
       }));
     },
   };

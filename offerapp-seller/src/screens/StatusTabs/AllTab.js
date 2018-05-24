@@ -43,22 +43,22 @@ class AllTab extends Component {
       page
     });
   }
-  // onEndReached() {
-  //   const {
-  //     pagination,
-  //     token,
-  //     status
-  //   } = this.props;
-  //   const { page, perPage, pageCount, totalCount } = pagination;
-  //   const lastPage = totalCount <= ((page - 1) * perPage) + pageCount;
-  //   if (!lastPage) {
-  //     this.props.offerList(
-  //       token,
-  //       status,
-  //       page + 1
-  //     );
-  //   }
-  // }
+  onEndReached() {
+    const {
+      pagination,
+      token,
+      status
+    } = this.props;
+    const { page, perPage, pageCount, totalCount } = pagination;
+    const lastPage = totalCount <= ((page - 1) * perPage) + pageCount;
+    if (!lastPage) {
+      this.props.offerList(
+        token,
+        status,
+        page + 1
+      );
+    }
+  }
   // onRefresh() {
   //   const {
   //     token,
@@ -71,12 +71,12 @@ class AllTab extends Component {
   //     page
   //   });
   // }
-  // autoBind(...methods) {
-  //   methods.forEach(method => {
-  //     this[method] = this[method].bind(this);
-  //     return this[method];
-  //   });
-  // }
+  autoBind(...methods) {
+    methods.forEach(method => {
+      this[method] = this[method].bind(this);
+      return this[method];
+    });
+  }
   keyExtractor = (item, index) => { return index; };
   renderRow(offerDetails) {
     const { item } = offerDetails;
