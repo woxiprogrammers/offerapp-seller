@@ -19,8 +19,8 @@ export default class SellerFooter extends Component {
           {text: 'OK', onPress: grabCode => console.log('OK Pressed, Grab Code: ' + grabCode)},
         ],
         {
-          type: 'numeric',
-          placeholder: 'Enter Grab Code'
+          // type: 'numeric',
+          // placeholder: 'Enter Grab Code'
         }
       );
   }

@@ -112,9 +112,7 @@ class LoginScreen extends Component {
                                 </Form>
                             </View>
                             <View>
-                                <Button style={styles.loginStyle} onPress={this.onButtonPress.bind(this)}>
-                                    <Text style={styles.textStyle}>LOG IN</Text>
-                                </Button>
+                            {this.renderButton()}
                             </View>
                             <View style={passwordStyle}>
                                 <Text style={{ color: 'white', fontSize: variables.SCREEN_HEIGHT / 50 }}>
