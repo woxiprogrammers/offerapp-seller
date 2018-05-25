@@ -188,7 +188,7 @@ export const createOfferRequest = ({
     offer_description,
     start_date,
     end_date,
-    filename
+    images
 }) => {
     return (dispatch) => {
         dispatch({ type: OFFER_CREATE_REQUEST });
@@ -202,7 +202,7 @@ export const createOfferRequest = ({
                 offer_description: offer_description,
                 start_date: start_date,
                 end_date: end_date,
-                images: filename
+                images
             }
         }).then(async (response) => {
             var status = response.status;

@@ -16,8 +16,7 @@ import {
 import { ImagePicker } from 'expo';
 import SellerHeader from '../components/SellerHeader';
 import SellerFooter from '../components/SellerFooter';
-import DropDownSelect from '../components/DropDownSelect'
-import DescriptionBox from '../components/DescriptionBox'
+import DescriptionBox from '../components/DescriptionBox';
 import { connect } from 'react-redux';
 import { width, height, totalSize } from 'react-native-dimension';
 import { Actions } from 'react-native-router-flux';
