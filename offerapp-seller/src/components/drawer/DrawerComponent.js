@@ -18,11 +18,7 @@ export default class DrawerComponent extends React.Component {
                 <Text
                   style={{ fontSize: responsiveFontSize(3), color: 'white' }}
                 >
-                  Hello, Annu</Text>
-                <Text
-                  style={{ fontSize: responsiveFontSize(2), color: 'white' }}
-                >
-                  Reward Points:1234</Text>
+                  Hello, Seller</Text>
               </View>
               <View style={{ paddingLeft: responsiveWidth(5) }}>
                 <Thumbnail
@@ -32,7 +28,7 @@ export default class DrawerComponent extends React.Component {
               </View>
             </View>
           </TouchableWithoutFeedback>
-          <View style={{ flex: 1, alignSelf: 'center', paddingTop: variables.SCREEN_HEIGHT / 2 }}>
+          <View style={{ flex: 1, alignSelf: 'center', paddingTop: '2%' }}>
 
             {/* Account Information */}
             <Button block light

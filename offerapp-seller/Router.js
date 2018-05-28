@@ -17,6 +17,7 @@ import MultiSelectDropDown from './src/components/MultiSelectDropDown'
 import Login from './src/screens/Login'
 import MobileVerifyScreen from './src/screens/MobileVerifyScreen';
 import OtpVerifyScreen from './src/screens/OtpVerifyScreen';
+import GrabOfferScreen from './src/screens/GrabOfferScreen';
 class RouterComponent extends React.Component {
   render() {
     console.log('Router Running !!');
@@ -47,6 +48,7 @@ class RouterComponent extends React.Component {
                   <Scene hideNavBar key="multiSelectDropDownScreen" component={MultiSelectDropDown} />
                   <Scene hideNavBar key="mobileVerifyScreen" component={MobileVerifyScreen} />
                   <Scene hideNavBar key="otpVerifyScreen" component={OtpVerifyScreen} />
+                  <Scene hideNavBar key="grabOfferScreen" component={GrabOfferScreen}/>
                 </Stack>
               </Scene>
             </Drawer>
