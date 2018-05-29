@@ -25,7 +25,7 @@ class AllTab extends Component {
     super(props);
     this.autoBind(
       'onEndReached',
-      // 'onRefresh',
+      'onRefresh',
       'renderRow',
     );
   }
@@ -44,33 +44,33 @@ class AllTab extends Component {
     });
   }
   onEndReached() {
+    console.log('End Reached');
     const {
-      pagination,
+      pagination_all,
       token,
-      status
+      status,
     } = this.props;
-    const { page, perPage, pageCount, totalCount } = pagination;
+    const { perPage, pageCount, totalCount } = pagination_all;
+    let { page } = pagination_all;
     const lastPage = totalCount <= ((page - 1) * perPage) + pageCount;
     if (!lastPage) {
-      this.props.offerList(
-        token,
-        status,
-        page + 1
-      );
+      page += 1;
+      this.props.offerList({ token, status, page });
     }
   }
-  // onRefresh() {
-  //   const {
-  //     token,
-  //     status
-  //   } = this.props;
-  //   const page = 1;
-  //   this.props.offerList({
-  //     token,
-  //     status,
-  //     page
-  //   });
-  // }
+  onRefresh() {
+    const {
+      token,
+      status,
+    } = this.props;
+    const page = 1;
+    this.props.offerStatus(status);
+    this.props.offerList({
+      token,
+      status,
+      page
+    });
+  }
   autoBind(...methods) {
     methods.forEach(method => {
       this[method] = this[method].bind(this);
@@ -118,13 +118,16 @@ class AllTab extends Component {
       )
     } else {
       return (
-        <FlatList
-          data={this.props.offer_list_all}
-          renderItem={this.renderRow}
-          keyExtractor={this.keyExtractor}
-        // onRefresh={() => { return this.onRefresh(); }}
-        // onEndReached={() => { return this.onEndReached(); }}
-        />
+        <View>
+          <FlatList
+            refreshing={this.props.isLoading}
+            data={this.props.offer_list_all}
+            renderItem={this.renderRow}
+            keyExtractor={this.keyExtractor}
+            onRefresh={() => { return this.onRefresh(); }}
+            onEndReached={() => { return this.onEndReached(); }}
+          />
+        </View>
       )
     }
   }

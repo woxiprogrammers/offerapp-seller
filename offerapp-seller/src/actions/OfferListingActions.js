@@ -19,23 +19,32 @@ import {
 export const offerList = ({
     token,
     status,
-    page }) => {
+    page
+}) => {
     return (dispatch) => {
+        console.log('Getting Page :');
+        console.log(page);
+        console.log('Status is :');
+        console.log(status);
+        
         dispatch({ type: OFFER_LIST_REQUEST });
         axios({
             url: `${baseUrl}/seller/offer/listing?token=${token}`,
             method: 'post',
             data: {
-                status_slug: status
+                status_slug: status,
+                page
             }
         }).then(async (response) => {
             var success = response.status;
             if (success === 200) {
-                dispatch(getOfferListSuccess(response.data.data))
+                dispatch(getOfferListSuccess(response.data.data, response.data.data.pagination));
             }
         }).catch((error) => {
             console.log(error);
-            Alert.alert("ERROR")
+            Alert.alert("ERROR");
+            dispatch(getOfferfail());
+            
         })
     }
 };
@@ -46,8 +55,16 @@ function isEmpty(obj) {
     }
     return true;
 }
-export const getOfferListSuccess = (response) => {
 
+export const getOfferfail = () => {
+    return{
+        type: OFFER_NOT_LISTED
+    };
+}
+export const getOfferListSuccess = (response, pagination) => {
+    
+    console.log('offerList Success :');
+    console.log(pagination);
     if (response.status_slug === 'all') {
         const { offer_list } = response;
         if (isEmpty(offer_list)) {
@@ -55,11 +72,12 @@ export const getOfferListSuccess = (response) => {
             return {
                 type: NO_OFFERS
             };
-           
+
         } else {
             return {
                 type: OFFER_LISTED_ALL,
-                offer_list
+                offer_list,
+                pagination
             };
         }
     } else if (response.status_slug === 'approved') {
@@ -69,7 +87,7 @@ export const getOfferListSuccess = (response) => {
             return {
                 type: NO_OFFERS
             };
-           
+
         } else {
             return {
                 type: OFFER_LISTED_APPROVE,
@@ -83,7 +101,7 @@ export const getOfferListSuccess = (response) => {
             return {
                 type: NO_OFFERS
             };
-           
+
         } else {
             return {
                 type: OFFER_LISTED_DISAPPROVE,
@@ -97,7 +115,7 @@ export const getOfferListSuccess = (response) => {
             return {
                 type: NO_OFFERS
             };
-           
+
         } else {
             return {
                 type: OFFER_LISTED_EXPIRE,
@@ -111,7 +129,7 @@ export const getOfferListSuccess = (response) => {
             return {
                 type: NO_OFFERS
             };
-           
+
         } else {
             return {
                 type: OFFER_LISTED_PENDING,

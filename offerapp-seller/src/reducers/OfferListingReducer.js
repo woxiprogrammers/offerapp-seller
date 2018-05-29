@@ -18,13 +18,14 @@ const INITIAL_STATE = {
     offer_list_expired: [],
     offer_list_pending: [],
     status: '',
-    isLoading: false
+    isLoading: false,
+    pagination_all: { page: 1 },
 };
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case NO_OFFERS :
-            return{
+        case NO_OFFERS:
+            return {
                 ...state,
                 isLoading: false
             }
@@ -33,18 +34,27 @@ export default (state = INITIAL_STATE, action) => {
                 ...state,
                 isLoading: true
             }
-        case OFFER_LISTED:
+        case OFFER_NOT_LISTED:
             return {
                 ...state,
-                offer_list: action.offer_list,
                 isLoading: false
             };
 
         case OFFER_LISTED_ALL:
+            const { offer_list = [] } = action;
+            // console.log('Calling Offer List Reducers !!!!');
+            // console.log(state.offer_list_all);
             return {
                 ...state,
-                offer_list_all: action.offer_list,
+                offer_list_all: [
+                    ...state.offer_list_all,
+                    ...offer_list
+                  ],
+                pagination_all: {
+                ...action.pagination,
+                },
                 isLoading: false
+
             };
 
         case OFFER_LISTED_PENDING:

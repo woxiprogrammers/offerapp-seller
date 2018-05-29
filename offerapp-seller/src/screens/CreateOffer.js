@@ -217,6 +217,7 @@ export class CreateOffer extends Component {
                     this.props.selectedSubCategoryId(itemValue);
 
                   }}
+                  returnKeyType={ 'done' }
                 >
                   {select_sub_category_type.map((item, i) => {
                     return (
