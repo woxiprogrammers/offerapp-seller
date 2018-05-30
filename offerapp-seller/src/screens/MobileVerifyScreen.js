@@ -26,14 +26,14 @@ import {
   responsiveFontSize
 } from 'react-native-responsive-dimensions';
 import {
-//  variables,
+  //  variables,
   colors,
 } from '../styles';
- import backgroundImage from '../assets/images/BackgroundImage.png';
- import {
-   getOtp,
-   mobileVerifyChanged
- } from '../actions';
+import backgroundImage from '../assets/images/BackgroundImage.png';
+import {
+  getOtp,
+  mobileVerifyChanged
+} from '../actions';
 
 class MobileVerifyScreen extends React.Component {
   onMobileVerifyChange(text) {
@@ -56,11 +56,11 @@ class MobileVerifyScreen extends React.Component {
         <Button style={getotpStyle}>
           <Text style={otpButtonStyle}>OTP NOT SENT</Text>
         </Button>);
-   }
-   return (
-     <Button style={getotpStyle} onPress={this.onButtonPress.bind(this)}>
-       <Text style={otpButtonStyle}>GET OTP</Text>
-     </Button>);
+    }
+    return (
+      <Button style={getotpStyle} onPress={this.onButtonPress.bind(this)}>
+        <Text style={otpButtonStyle}>GET OTP</Text>
+      </Button>);
   }
   render() {
     const {
@@ -74,17 +74,17 @@ class MobileVerifyScreen extends React.Component {
       textStyle,
       itemStyle,
       formStyle,
-      } = styles;
+    } = styles;
     return (
       <View>
         <ImageBackground
-        style={backgroundImageStyle}
-        source={backgroundImage}
+          style={backgroundImageStyle}
+          source={backgroundImage}
         >
           <Container style={containerStyle}>
             <Header
-            style={headerStyle}
-            iosBarStyle='light-content'
+              style={headerStyle}
+              iosBarStyle='light-content'
             >
               <Left style={{ marginRight: -(responsiveWidth(30)) }}>
                 <Button transparent onPress={Actions.pop}>
@@ -92,7 +92,7 @@ class MobileVerifyScreen extends React.Component {
                 </Button>
               </Left>
               <Body>
-                <Title style={titleStyle}>Sign Up-Step 1</Title>
+                <Title style={titleStyle}>Sign Up > Step 1</Title>
               </Body>
               <Right style={{ marginLeft: -(responsiveWidth(25)) }} />
             </Header>
@@ -104,11 +104,13 @@ class MobileVerifyScreen extends React.Component {
                 <Form style={formStyle}>
                   <View style={itemViewStyle}>
                     <Item >
-                      <Label> +91</Label>
+                      <Label style={{ color: '#d2d2d2' }}> +91</Label>
                     </Item>
-                    <Item floatingLabel style={itemStyle}>
-                      <Label> Enter your number</Label>
+                    <Item stackedLabel style={itemStyle}>
+                      <Label style={{ color: '#d2d2d2' }}> Enter your number</Label>
                       <Input
+                        returnKeyType={'done'}
+                        style={{ color: '#d2d2d2' }}
                         onChangeText={this.onMobileVerifyChange.bind(this)}
                         value={this.props.mobileVerify}
                         keyboardType='numeric'
@@ -156,7 +158,13 @@ const styles = StyleSheet.create({
     marginTop: responsiveHeight(5),
     textAlign: 'center',
     color: 'white',
-   },
+  },
+  titleTextStyle: {
+    fontSize: responsiveFontSize(3.3),
+    marginTop: responsiveHeight(5),
+    textAlign: 'center',
+    color: 'white',
+  },
   getotpStyle: {
     width: responsiveWidth(50),
     marginTop: responsiveHeight(10),
@@ -197,21 +205,21 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps({ signup }) {
-    return {
-        ...signup
-    };
+  return {
+    ...signup
+  };
 }
 
 function mapDispatchToProps(dispatch) {
-    return {
-        mobileVerifyChanged: (text) => { return dispatch(mobileVerifyChanged(text)); },
-        getOtp: ({ mobileVerify }) => {
-          return dispatch(getOtp({ mobileVerify }));
-        },
-    };
+  return {
+    mobileVerifyChanged: (text) => { return dispatch(mobileVerifyChanged(text)); },
+    getOtp: ({ mobileVerify }) => {
+      return dispatch(getOtp({ mobileVerify }));
+    },
+  };
 }
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(MobileVerifyScreen);

@@ -108,7 +108,7 @@ class OtpVerifyScreen extends React.Component {
               <Text style={textStyle}>{this.props.mobileVerify}</Text>
               <Button onPress={Actions.pop} transparent style={editStyle} >
                   <Icon
-                    style={{ color: colors.darkGrayTransparent }}
+                    style={{ color: 'white' }}
                     ios='ios-create-outline' android="md-create"
                   />
               </Button>
@@ -117,10 +117,13 @@ class OtpVerifyScreen extends React.Component {
               <Form style={formStyle}>
                 <View style={itemViewStyle}>
                   <Item stackedLabel style={itemStyle} >
-                    <Label> Enter OTP</Label>
+                    <Label style={{color: 'white'}}> Enter OTP</Label>
                     <Input
                       onChangeText={this.onOtpVerifyChange.bind(this)}
                       value={this.props.otpVerify}
+                      keyboardType = 'numeric'
+                      returnKeyType={'done'}
+                      style={{color: 'white'}}
                     />
                   </Item>
                 </View>
@@ -165,7 +168,7 @@ contentStyle: {
 textStyle: {
   fontSize: responsiveHeight(3.5),
   marginTop: responsiveHeight(5),
-  color: colors.darkGray,
+  color: 'white',
   textAlign: 'center',
 },
 verifyOtpStyle: {
@@ -191,10 +194,10 @@ itemViewStyle: {
   width: responsiveWidth(40),
   alignItems: 'center',
   flexDirection: 'row',
-  marginTop: 9,
+  marginTop: '9%',
 },
 itemStyle: {
-  marginTop: responsiveHeight(-3.5),
+  marginTop: responsiveHeight(-3.3),
   alignSelf: 'center',
   flex: 1,
 },

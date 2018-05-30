@@ -54,7 +54,7 @@ export class AddtoGroup extends React.Component {
         })
     }
     render() {
-        const { select_groups } = this.props;
+        const { select_group } = this.props;
         return (
             <Container style={{ marginTop: '5.8%' }}>
                 <Header style={{ backgroundColor: '#C10F41' }}>
@@ -83,7 +83,7 @@ export class AddtoGroup extends React.Component {
                                 this.props.selectedGroupid(itemValue);
                             }}
                         >
-                            {select_groups.map((item, i) => {
+                            {select_group.map((item, i) => {
                                 return (<Picker.Item
                                     key={i}
                                     value={item.group_id}

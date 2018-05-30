@@ -85,10 +85,10 @@ export const requestGroupListToPromote = ({ token }) => {
 }
 
 export const rendergroupListSuccess = (response) => {
-    const { select_groups } = response
+    const { select_group } = response
     return {
         type: RENDER_GROUP_LIST_SUCCESS,
-        select_groups
+        select_group
     }
 }
 

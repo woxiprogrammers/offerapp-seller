@@ -17,11 +17,12 @@ import {
 const INITIAL_STATE = {
     offer_list: [],
     offer_id: '',
-    select_groups: [],
+    select_group: [],
     group_id: '',
     isLoading: false,
     status: 'approved',
-    selected_group_id: []
+    selected_group_id: [],
+    sendingNotification: false
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -55,8 +56,8 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 isLoading: false,
-                select_groups: action.select_groups,
-                group_id: action.select_groups[0].group_id
+                select_group: action.select_group,
+                group_id: action.select_group[0].group_id
             }
 
         case RENDER_GROUP_LIST_FAILURE:
@@ -75,18 +76,18 @@ export default (state = INITIAL_STATE, action) => {
         case PROMOTE_OFFER_REQUEST:
             return {
                 ...state,
-                isLoading: true,
+                sendingNotification: true,
             }
 
         case PROMOTE_OFFER_FAILURE:
             return {
                 ...state,
-                isLoading: false,
+                sendingNotification: false,
             }
         case PROMOTE_OFFER_SUCCESS:
             return {
                 ...state,
-                isLoading: false,
+                sendingNotification: false,
             }
 
         case GROUP_SELECTED:

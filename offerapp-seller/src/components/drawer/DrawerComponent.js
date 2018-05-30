@@ -7,6 +7,8 @@ import {
 } from '../../styles';
 import { Button, Content, Container, Thumbnail } from 'native-base';
 import { responsiveWidth, responsiveFontSize, responsiveHeight } from 'react-native-responsive-dimensions';
+import { MaterialCommunityIcons, Entypo, FontAwesome, MaterialIcons } from '@expo/vector-icons';
+
 export default class DrawerComponent extends React.Component {
   render() {
     return (
@@ -16,7 +18,7 @@ export default class DrawerComponent extends React.Component {
             <View style={styles.profileStyle}>
               <View style={{ flexDirection: 'column', alignSelf: 'center' }}>
                 <Text
-                  style={{ fontSize: responsiveFontSize(3), color: 'white' }}
+                  style={{ fontSize: responsiveFontSize(3) }}
                 >
                   Hello, Seller</Text>
               </View>
@@ -27,49 +29,50 @@ export default class DrawerComponent extends React.Component {
                 />
               </View>
             </View>
+           
           </TouchableWithoutFeedback>
+          <View style={{ backgroundColor: '#e2e2e2', height: responsiveHeight(0.1), paddingTop: '2%'}} />
           <View style={{ flex: 1, alignSelf: 'center', paddingTop: '2%' }}>
-
             {/* Account Information */}
-            <Button block light
+            <Button full light
               style={{ width: responsiveWidth(80) }}
               onPress={Actions.accountInfoScreen}
             >
-              <Text>Account Information</Text>
+              <MaterialCommunityIcons name="account" size={30} style={{color: colors.headerColor}}/><Text>Account Information</Text>
             </Button>
 
             {/* Manage Offer */}
-            <Button block light
+            <Button full light
               style={{ width: responsiveWidth(80) }}
               onPress={Actions.offerListingScreen}
             >
-              <Text>Manage Offer</Text>
+             <MaterialIcons name="local-offer" size={30} style={{color: colors.headerColor}}/><Text>Manage Offer</Text>
             </Button>
 
             {/* Promote Offer */}
-            <Button block light
+            <Button full light
               style={{ width: responsiveWidth(80) }}
               onPress={Actions.promoteOfferScreen}
             >
-              <Text>Promote Offer</Text>
+               <Entypo name="notification" size={30} style={{color: colors.headerColor}}/><Text>Promote Offer</Text>
             </Button>
 
             {/* Manage Group */}
-            <Button block light
+            <Button full light
               style={{ width: responsiveWidth(80) }}
               onPress={Actions.groupListingScreen}
             >
-              <Text>Manage Group</Text>
+              <FontAwesome name="group" size={30} style={{color: colors.headerColor}}/><Text>Manage Group</Text>
             </Button>
 
             {/* Logout */}
-            <Button block light
+            <Button full light
               style={{
                 width: responsiveWidth(80)
               }}
               onPress={Actions.LoginScreen}
             >
-              <Text>Logout</Text>
+              <Entypo name="log-out" size={30} style={{color: colors.headerColor}}/><Text>Logout</Text>
             </Button>
           </View>
         </Content>
@@ -79,7 +82,7 @@ export default class DrawerComponent extends React.Component {
 }
 const styles = StyleSheet.create({
   containerStyle: {
-    backgroundColor: colors.darkGray
+    backgroundColor: 'white'
   },
   profileStyle: {
     paddingTop: responsiveHeight(6),

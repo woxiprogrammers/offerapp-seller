@@ -32,8 +32,8 @@ class RouterComponent extends React.Component {
             >
               <Scene hideNavBar panHandlers={null} key="mainroot">
                 <Stack key="root">
-                  <Scene hideNavBar initial key="LoginScreen" component={Login} />
-                  <Scene hideNavBar key="offerListingScreen" component={OfferListing} />
+                  <Scene hideNavBar  key="LoginScreen" component={Login} />
+                  <Scene hideNavBar initial key="offerListingScreen" component={OfferListing} />
                   <Scene hideNavBar key="createOfferScreen" component={CreateOffer} />
                   <Scene hideNavBar key="addToGroupScreen" component={AddToGroup} />
                   <Scene hideNavBar key="iAmIntrestedScreen" component={IamIntrested} />
@@ -48,7 +48,7 @@ class RouterComponent extends React.Component {
                   <Scene hideNavBar key="multiSelectDropDownScreen" component={MultiSelectDropDown} />
                   <Scene hideNavBar key="mobileVerifyScreen" component={MobileVerifyScreen} />
                   <Scene hideNavBar key="otpVerifyScreen" component={OtpVerifyScreen} />
-                  <Scene hideNavBar key="grabOfferScreen" component={GrabOfferScreen}/>
+                  <Scene hideNavBar key="grabOfferScreen" component={GrabOfferScreen} />
                 </Stack>
               </Scene>
             </Drawer>

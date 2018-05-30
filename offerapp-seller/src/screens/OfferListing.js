@@ -29,6 +29,7 @@ import PendingTab from './StatusTabs/PendingTab';
 import ApproveTab from './StatusTabs/ApproveTab';
 import DisapproveTab from './StatusTabs/DisapproveTab';
 import ExpireTab from './StatusTabs/ExpireTab';
+import { responsiveHeight } from 'react-native-responsive-dimensions';
 
 export default class OfferListing extends Component {
   render() {
@@ -45,20 +46,65 @@ export default class OfferListing extends Component {
             <Input placeholder='Search' />
           </Item> */}
           {/* Sliding buttons */}
-          <Tabs renderTabBar={() => <ScrollableTab />}>
-            <Tab heading={<TabHeading><Text>All</Text></TabHeading>}>
+          <Tabs renderTabBar={() => <ScrollableTab />} >
+            <Tab
+              tabBarUnderlineStyle={{
+                backgroundColor: 'white', height: responsiveHeight(0.3)
+              }}
+              tabStyle={{}} heading={
+                <TabHeading style={{ backgroundColor: '#3b5998' }}>
+                  <Text style={{ color: 'white' }}>All</Text>
+                </TabHeading>
+              }
+            >
               <AllTab />
             </Tab>
-            <Tab heading={<TabHeading><Text>Pending</Text></TabHeading>}>
+            <Tab
+              tabBarUnderlineStyle={{
+                backgroundColor: 'white', height: responsiveHeight(0.3)
+              }}
+              tabStyle={{}} heading={
+                <TabHeading style={{ backgroundColor: '#3b5998' }}>
+                  <Text style={{ color: 'white' }}>Pending</Text>
+                </TabHeading>
+              }
+            >
               <PendingTab />
             </Tab>
-            <Tab heading={<TabHeading><Text>Approved</Text></TabHeading>}>
+            <Tab
+              tabBarUnderlineStyle={{
+                backgroundColor: 'white', height: responsiveHeight(0.3)
+              }}
+              tabStyle={{}} heading={
+                <TabHeading style={{ backgroundColor: '#3b5998' }}>
+                  <Text style={{ color: 'white' }}>Approved</Text>
+                </TabHeading>
+              }
+            >
               <ApproveTab />
             </Tab>
-            <Tab heading={<TabHeading><Text>Disapproved</Text></TabHeading>}>
+            <Tab
+              tabBarUnderlineStyle={{
+                backgroundColor: 'white', height: responsiveHeight(0.3)
+              }}
+              tabStyle={{}} heading={
+                <TabHeading style={{ backgroundColor: '#3b5998' }}>
+                  <Text style={{ color: 'white' }}>Disapproved</Text>
+                </TabHeading>
+              }
+            >
               <DisapproveTab />
             </Tab>
-            <Tab heading={<TabHeading><Text>Expired</Text></TabHeading>}>
+            <Tab
+              tabBarUnderlineStyle={{
+                backgroundColor: 'white', height: responsiveHeight(0.3)
+              }}
+              tabStyle={{}} heading={
+                <TabHeading style={{ backgroundColor: '#3b5998' }}>
+                  <Text style={{ color: 'white' }}>Expired</Text>
+                </TabHeading>
+              }
+            >
               <ExpireTab />
             </Tab>
           </Tabs>

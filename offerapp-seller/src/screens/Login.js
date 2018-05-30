@@ -75,7 +75,8 @@ class LoginScreen extends Component {
             textStyle,
             itemStyle,
             formStyle,
-            orstyle
+            orstyle,
+            textStyleForFieldHeaders
         } = styles;
         return (
             <View>
@@ -92,7 +93,7 @@ class LoginScreen extends Component {
                                 <Form>
                                     <View style={itemViewStyle}>
                                         <Item stackedLabel style={itemStyle} >
-                                            <Label style={textStyle}> UserName</Label>
+                                            <Label style={textStyleForFieldHeaders}> Mobile Number</Label>
                                             <Input
                                                 onChangeText={this.onUserChange.bind(this)}
                                                 value={this.props.user}
@@ -101,7 +102,7 @@ class LoginScreen extends Component {
                                     </View>
                                     <View style={itemViewStyle}>
                                         <Item stackedLabel style={itemStyle}>
-                                            <Label style={textStyle}> Password</Label>
+                                            <Label style={textStyleForFieldHeaders}> Password</Label>
                                             <Input
                                                 secureTextEntry
                                                 onChangeText={this.onPasswordChange.bind(this)}
@@ -115,7 +116,7 @@ class LoginScreen extends Component {
                             {this.renderButton()}
                             </View>
                             <View style={passwordStyle}>
-                                <Text style={{ color: 'white', fontSize: variables.SCREEN_HEIGHT / 50 }}>
+                                <Text style={{ color: 'white', fontSize: responsiveFontSize(2.5) }}>
                                     Forget Password ?</Text>
                             </View>
                             <View style={orstyle} >
@@ -147,7 +148,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: colors.login,
         width: responsiveWidth(85),
-        marginTop: responsiveHeight(4)
+        marginTop: responsiveHeight(4),
     },
     contentStyle: {
         alignItems: 'center',
@@ -185,7 +186,11 @@ const styles = StyleSheet.create({
         fontSize: responsiveFontSize(6.6)
     },
     textStyle: {
-        fontSize: responsiveFontSize(2.2)
+        fontSize: responsiveFontSize(2.5)
+    },
+    textStyleForFieldHeaders:{
+        fontSize: responsiveFontSize(2),
+        color: '#d2d2d2'
     },
     backgroundImageStyle: {
         height: responsiveHeight(100),

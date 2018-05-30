@@ -21,6 +21,9 @@ import {
 } from 'react-native-responsive-dimensions';
 import renderIf from '../condition/renderIf'
 import { Actions } from 'react-native-router-flux';
+import {
+  colors
+} from '../styles'
 
 export default class OfferCard extends Component {
   render() {
@@ -44,7 +47,7 @@ export default class OfferCard extends Component {
           <Card >
             <CardItem header>
               <Left>
-                <Text>{cardTitle}</Text>
+                <Text style={{color: colors.headerColor}}>{cardTitle}</Text>
               </Left>
               <Right>
                 <Text>Offer ID: {offerID}</Text>
@@ -84,33 +87,33 @@ export default class OfferCard extends Component {
                 }}>
 
                   {/* Heart Button */}
-                  
-                    <Button badge transparent style={{ paddingTop: '3%' }}>
-                      <FontAwesome name="heart" size={22} color='red' />
-                      <Badge primary style={{ marginTop: -10 }}>
-                        <Text >{wishlistCount}</Text>
-                      </Badge>
-                    </ Button>
+
+                  <Button badge transparent style={{ paddingTop: '3%' }}>
+                    <FontAwesome name="heart" size={22} color='red' />
+                    <Badge primary style={{ marginTop: -10 }}>
+                      <Text >{wishlistCount}</Text>
+                    </Badge>
+                  </ Button>
 
                   {/* Liked Button */}
-                    <Button badge transparent
-                      style={{ paddingTop: '3%' }}
-                      onPress={() => {
-                        Actions.push('iAmIntrestedScreen', { getOffer_id: offerID })
-                      }}>
-                      <EvilIcons name="like" size={30} />
-                      <Badge primary style={{ marginTop: -10 }}>
-                        <Text>{likeCount}</Text>
-                      </Badge>
-                    </Button>
+                  <Button badge transparent
+                    style={{ paddingTop: '3%' }}
+                    onPress={() => {
+                      Actions.push('iAmIntrestedScreen', { getOffer_id: offerID })
+                    }}>
+                    <EvilIcons name="like" size={30} />
+                    <Badge primary style={{ marginTop: -10 }}>
+                      <Text>{likeCount}</Text>
+                    </Badge>
+                  </Button>
 
                   {/* Grabed Offers */}
-                    <Button badge transparent style={{ paddingTop: '3%' }}>
-                      <FontAwesome name="handshake-o" size={22} />
-                      <Badge primary style={{ marginTop: -10 }}>
-                        <Text>{grabCount}</Text>
-                      </Badge>
-                    </Button>
+                  <Button badge transparent style={{ paddingTop: '3%' }}>
+                    <FontAwesome name="handshake-o" size={22} />
+                    <Badge primary style={{ marginTop: -10 }}>
+                      <Text>{grabCount}</Text>
+                    </Badge>
+                  </Button>
                 </View>
               </CardItem>
             )}

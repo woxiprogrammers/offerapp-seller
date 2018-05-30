@@ -107,7 +107,8 @@ class SignUpFillUpScreen extends React.Component {
       headerStyle,
       acceptStyle,
       formStyle,
-      titleStyle
+      titleStyle,
+      lableStyle
     } = styles;
     const {
       suShopName,
@@ -118,7 +119,7 @@ class SignUpFillUpScreen extends React.Component {
     } = this.props;
     const { isChecked } = this.state;
     return (
-      <View>
+      <View >
         <ImageBackground
           style={backgroundImageStyle}
           source={backgroundImage}
@@ -149,8 +150,8 @@ class SignUpFillUpScreen extends React.Component {
             <Form style={formStyle}>
               <View style={{ flexDirection: 'row' }}>
                 <View style={viewFirstNameStyle}>
-                  <Item stackedLabel>
-                    <Label> First Name</Label>
+                  <Item floatingLabel>
+                    <Label style={lableStyle}>First Name</Label>
                     <Input
                       onChangeText={
                           value => {
@@ -164,8 +165,8 @@ class SignUpFillUpScreen extends React.Component {
                   </Item>
                 </View>
                 <View style={viewLastNameStyle}>
-                  <Item stackedLabel>
-                    <Label> Last Name</Label>
+                  <Item floatingLabel>
+                    <Label style={lableStyle}> Last Name</Label>
                     <Input
                       onChangeText={
                           value => {
@@ -180,8 +181,8 @@ class SignUpFillUpScreen extends React.Component {
                 </View>
               </View>
               <View style={viewItemStyle}>
-                <Item stackedLabel >
-                  <Label> Email Address</Label>
+                <Item floatingLabel >
+                  <Label style={lableStyle}> Email Address</Label>
                   <Input
                     onChangeText={
                         value => {
@@ -195,8 +196,8 @@ class SignUpFillUpScreen extends React.Component {
                 </Item>
               </View>
               <View style={viewItemStyle}>
-                <Item stackedLabel >
-                  <Label> Password</Label>
+                <Item floatingLabel >
+                  <Label style={lableStyle}> Password</Label>
                   <Input
                     secureTextEntry
                     onChangeText={
@@ -235,7 +236,10 @@ const styles = StyleSheet.create({
   containerStyle: {
     backgroundColor: colors.lightGrayTransparent,
     marginTop: 20,
-    flex: 1
+    flex: 1,
+  },
+  lableStyle:{
+    color: '#d2d2d2'
   },
   headerStyle: {
     borderBottomColor: colors.headerColor,
@@ -281,9 +285,10 @@ formStyle: {
   alignItems: 'center',
   marginTop: 20,
   flex: 1,
+ 
 },
 viewItemStyle: {
-  backgroundColor: '#D4D4D4',
+  backgroundColor: 'white',
   width: responsiveWidth(100),
   height: responsiveHeight(12),
   justifyContent: 'center',
@@ -291,15 +296,16 @@ viewItemStyle: {
   paddingBottom: responsiveHeight(2)
 },
 viewFirstNameStyle: {
+  width: responsiveWidth(50),
   marginRight: responsiveWidth(3),
   height: responsiveHeight(12),
-  backgroundColor: '#D4D4D4',
+  backgroundColor: 'white',
   flex: 1,
   paddingBottom: responsiveHeight(2)
 },
 viewLastNameStyle: {
   height: responsiveHeight(12),
-  backgroundColor: '#D4D4D4',
+  backgroundColor: 'white',
   flex: 1,
   paddingBottom: responsiveHeight(2)
 },
@@ -307,7 +313,7 @@ acceptStyle: {
   marginTop: responsiveHeight(3),
   height: responsiveHeight(5),
   width: responsiveWidth(100),
-  backgroundColor: '#D4D4D4',
+  backgroundColor: 'white',
   flexDirection: 'row',
   alignItems: 'center'
 },

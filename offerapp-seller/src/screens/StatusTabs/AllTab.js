@@ -109,14 +109,16 @@ class AllTab extends Component {
       </View>
     );
   }
-  renderOfferList() {
+  renderSpinner(){
     if (this.props.isLoading) {
       return (
         <View style={{ paddingTop: '25%' }}>
           <Spinner color='black' />
         </View>
       )
-    } else {
+  }
+}
+  renderOfferList() {
       return (
         <View>
           <FlatList
@@ -127,10 +129,12 @@ class AllTab extends Component {
             onRefresh={() => { return this.onRefresh(); }}
             onEndReached={() => { return this.onEndReached(); }}
           />
+          {this.renderSpinner()}
         </View>
+        
       )
     }
-  }
+  
   render() {
     const {
       containerStyle

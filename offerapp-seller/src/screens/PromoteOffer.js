@@ -62,7 +62,7 @@ export class PromoteOffer extends React.Component {
     }
 
     renderNotifyButton() {
-        if (this.props.isLoading) {
+        if (this.props.sendingNotification) {
             return (
                 <Button full
                     style={{ backgroundColor: '#C10F41' }}
@@ -86,7 +86,7 @@ export class PromoteOffer extends React.Component {
     render() {
         const {
             offer_list,
-            select_groups
+            select_group
         } = this.props;
         console.log(this.props.selected_group_id)
         return (
@@ -121,7 +121,7 @@ export class PromoteOffer extends React.Component {
                         <View>
                             {/* select group  */}
                             <SectionedMultiSelect
-                                items={select_groups}
+                                items={select_group}
                                 uniqueKey='group_id'
                                 subKey=''
                                 selectText='Select the groups to promote the offer'

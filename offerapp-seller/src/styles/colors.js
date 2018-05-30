@@ -29,3 +29,9 @@ export const lightGrayTransparent = 'rgba(226, 229, 239, 0.3)';
 export const grayTransparent = 'rgba(152, 164, 173, 0.3)';
 export const darkGrayTransparent = 'rgba(34, 54, 65, 0.5)';
 export const darkGrayMoreTransparent = 'rgba(34, 54, 65, 0.7)';
+
+//Login colors
+export const login = '#BF095C';
+
+//Signup colors
+export const signup = '#3B5A9D';

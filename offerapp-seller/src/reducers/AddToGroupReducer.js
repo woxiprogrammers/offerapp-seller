@@ -10,7 +10,7 @@ import {
 } from '../constants';
 
 const INITIAL_STATE = {
-    select_groups: [],
+    select_group: [],
     group_id: '',
     mobile_no: ''
 }
@@ -23,10 +23,12 @@ export default (state = INITIAL_STATE, action) => {
             }
         
             case RENDER_GROUP_LIST_SUCCESS:
+            console.log("in REDUCER")
+            console.log(action.select_group)
             return {
                 ...state,
-                select_groups: action.select_groups,
-                group_id: action.select_groups[0].group_id
+                select_group: action.select_group,
+                group_id: action.select_group[0].group_id
             }
         
             case RENDER_GROUP_LIST_FAILURE:
