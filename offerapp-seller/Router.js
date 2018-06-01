@@ -18,6 +18,9 @@ import Login from './src/screens/Login'
 import MobileVerifyScreen from './src/screens/MobileVerifyScreen';
 import OtpVerifyScreen from './src/screens/OtpVerifyScreen';
 import GrabOfferScreen from './src/screens/GrabOfferScreen';
+import ForgotPasswordMobileVerifyScreen from './src/screens/ForgotPasswordMobileVerifyScreen';
+import ForgotPasswordScreen from './src/screens/ForgotPasswordScreen';
+import ForgotPasswordVerifyOtpScreen from './src/screens/ForgotPasswordVerifyOtpScreen';
 class RouterComponent extends React.Component {
   render() {
     console.log('Router Running !!');
@@ -49,6 +52,9 @@ class RouterComponent extends React.Component {
                   <Scene hideNavBar key="mobileVerifyScreen" component={MobileVerifyScreen} />
                   <Scene hideNavBar key="otpVerifyScreen" component={OtpVerifyScreen} />
                   <Scene hideNavBar key="grabOfferScreen" component={GrabOfferScreen} />
+                  <Scene hideNavBar key="forgotPasswordMobileVerifyScreen" component={ForgotPasswordMobileVerifyScreen} />
+                  <Scene hideNavBar key="forgotPasswordVerifyOtpScreen" component={ForgotPasswordVerifyOtpScreen} />
+                  <Scene hideNavBar key="forgotPasswordScreen" component={ForgotPasswordScreen} />
                 </Stack>
               </Scene>
             </Drawer>

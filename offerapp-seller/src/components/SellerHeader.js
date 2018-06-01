@@ -12,7 +12,7 @@ import { Container,
   Text
 } from 'native-base';
 import { Actions } from 'react-native-router-flux';
-import { responsiveFontSize } from 'react-native-responsive-dimensions';
+import { responsiveFontSize, responsiveWidth } from 'react-native-responsive-dimensions';
 
 export default class SellerHeader extends Component {
   render() {
@@ -26,7 +26,7 @@ export default class SellerHeader extends Component {
             </Button>
           </Left>
           <Body >
-            <Title style={{color:'white'}}>{this.props.title}</Title>
+            <Title style={{color:'white', width: responsiveWidth(80), fontSize: responsiveFontSize(3)}}>{this.props.title}</Title>
           </Body>
           {/* <Right>
             <Button transparent badge>

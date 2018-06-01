@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
-import { StyleSheet, ImageBackground } from 'react-native';
+import {
+    StyleSheet,
+    ImageBackground,
+    TouchableOpacity
+} from 'react-native';
 import {
     Container,
     Content,
@@ -97,6 +101,7 @@ class LoginScreen extends Component {
                                             <Input
                                                 onChangeText={this.onUserChange.bind(this)}
                                                 value={this.props.user}
+                                                keyboardType='numeric'
                                             />
                                         </Item>
                                     </View>
@@ -113,11 +118,14 @@ class LoginScreen extends Component {
                                 </Form>
                             </View>
                             <View>
-                            {this.renderButton()}
+                                {this.renderButton()}
                             </View>
                             <View style={passwordStyle}>
-                                <Text style={{ color: 'white', fontSize: responsiveFontSize(2.5) }}>
-                                    Forget Password ?</Text>
+                                <TouchableOpacity
+                                    onPress={() => { Actions.forgotPasswordMobileVerifyScreen(); }}
+                                >
+                                    <Text style={{ color: 'white', fontSize: responsiveFontSize(2.5) }}> Forget Password ?</Text>
+                                </TouchableOpacity>
                             </View>
                             <View style={orstyle} >
                                 <Text style={{ color: 'white' }}>
@@ -188,7 +196,7 @@ const styles = StyleSheet.create({
     textStyle: {
         fontSize: responsiveFontSize(2.5)
     },
-    textStyleForFieldHeaders:{
+    textStyleForFieldHeaders: {
         fontSize: responsiveFontSize(2),
         color: '#d2d2d2'
     },

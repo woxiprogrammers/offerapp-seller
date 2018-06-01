@@ -6,7 +6,7 @@ import GroupReducers from './Group';
 import OfferReducer from './Offer';
 import SignUpReducer from './SignUpReducers';
 import AccountInformationReducer from './AccountInformationReducer';
-
+import ForgotPasswordReducer from './ForgotPasswordReducers';
 export default combineReducers({
   user: LoginReducers,
   offerlist: OfferLisitingReducers,
@@ -15,4 +15,5 @@ export default combineReducers({
   offer: OfferReducer,
   signup: SignUpReducer,
   accountInformation: AccountInformationReducer,
+  forgotpassword: ForgotPasswordReducer
 });
