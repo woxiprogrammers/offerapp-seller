@@ -16,7 +16,7 @@ import {
 } from 'react-native-responsive-dimensions';
 import {
   colors,
- } from '../../styles';
+} from '../../styles';
 import { offerStatus, offerList } from '../../actions';
 import OfferCard from '../../components/OfferCard';
 
@@ -24,8 +24,8 @@ class PendingTab extends Component {
   constructor(props) {
     super(props);
     this.autoBind(
-     'onEndReached',
-     'onRefresh',
+      'onEndReached',
+      'onRefresh',
       'renderRow',
     );
   }
@@ -33,7 +33,7 @@ class PendingTab extends Component {
     const {
       token,
     } = this.props;
-    const status = 'pending'; 
+    const status = 'pending';
     const page = 1;
     console.log('Mounting Pending Tab');
     this.props.offerStatus(status);
@@ -44,19 +44,18 @@ class PendingTab extends Component {
     });
   }
   onEndReached() {
+    console.log('End Reached');
     const {
-      pagination,
+      pagination_pending,
       token,
-      status
+      status,
     } = this.props;
-    const { page, perPage, pageCount, totalCount } = pagination;
+    const { perPage, pageCount, totalCount } = pagination_pending;
+    let { page } = pagination_pending;
     const lastPage = totalCount <= ((page - 1) * perPage) + pageCount;
     if (!lastPage) {
-      this.props.offerList(
-        token,
-        status,
-        page + 1
-      );
+      page += 1;
+      this.props.offerList({ token, status, page });
     }
   }
   onRefresh() {
@@ -65,6 +64,7 @@ class PendingTab extends Component {
       status
     } = this.props;
     const page = 1;
+    this.props.offerStatus(status);
     this.props.offerList({
       token,
       status,
@@ -72,10 +72,10 @@ class PendingTab extends Component {
     });
   }
   autoBind(...methods) {
-      methods.forEach(method => {
-        this[method] = this[method].bind(this);
-        return this[method];
-      });
+    methods.forEach(method => {
+      this[method] = this[method].bind(this);
+      return this[method];
+    });
   }
   keyExtractor = (item, index) => { return index; };
   renderRow(offerDetails) {
@@ -90,45 +90,44 @@ class PendingTab extends Component {
       offer_description,
       start_date,
       end_date,
-    //   wishlist_count,
-    //   interested_count,
-    //   grabbed_count
     } = item;
     return (
-      <View>
+      <View style={{ flex: 1 }}>
         <OfferCard
           cardTitle={offer_type_name}
           offerID={offer_id}
           startDate={start_date}
           endDate={end_date}
-        //   likeCount={interested_count}
-        //   grabCount={grabbed_count}
-        //   wishlistCount={wishlist_count}
           offerStatus={offer_status_name}
         />
+
       </View>
     );
   }
-  renderOfferList() {
+  renderSpinner() {
     if (this.props.isLoading) {
       return (
         <View style={{ paddingTop: '25%' }}>
           <Spinner color='black' />
         </View>
       )
-    } else {
-      return (
+    }
+  }
+  renderOfferList() {
+    return (
+      <View>
         <FlatList
           automaticallyAdjustContentInsets={false}
           data={this.props.offer_list_pending}
-          refreshing={false}
+          refreshing={this.props.isLoading}
           renderItem={this.renderRow}
           keyExtractor={this.keyExtractor}
-        // onRefresh={() => { return this.onRefresh(); }}
-        // onEndReached={() => { return this.onEndReached(); }}
+          onRefresh={() => { return this.onRefresh(); }}
+          onEndReached={() => { return this.onEndReached(); }}
         />
-      )
-    }
+        {this.renderSpinner()}
+      </View>
+    )
   }
   render() {
     const {
@@ -145,12 +144,12 @@ class PendingTab extends Component {
         >
           {this.renderOfferList()}
         </Content>
-       </Container>
-     );
-   }
- }
+      </Container>
+    );
+  }
+}
 
- const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   containerStyle: {
     backgroundColor: colors.white,
   },
@@ -161,32 +160,32 @@ class PendingTab extends Component {
 });
 
 function mapStateToProps({ offerlist, user }) {
-    const { token } = user;
-    return {
-        ...offerlist,
-        token
-    };
+  const { token } = user;
+  return {
+    ...offerlist,
+    token
+  };
 }
 
 function mapDispatchToProps(dispatch) {
-    return {
-        offerList: ({
-          token,
-          status,
-          page
-          }) => {
-          return dispatch(offerList({
-            token,
-            status,
-            page
-            }));
-        },
-        offerStatus: (text) => {
-          return dispatch(offerStatus(text));
-        },
-    };
+  return {
+    offerList: ({
+      token,
+      status,
+      page
+    }) => {
+      return dispatch(offerList({
+        token,
+        status,
+        page
+      }));
+    },
+    offerStatus: (text) => {
+      return dispatch(offerStatus(text));
+    },
+  };
 }
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(PendingTab);

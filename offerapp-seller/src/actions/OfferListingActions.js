@@ -22,11 +22,6 @@ export const offerList = ({
     page
 }) => {
     return (dispatch) => {
-        console.log('Getting Page :');
-        console.log(page);
-        console.log('Status is :');
-        console.log(status);
-        
         dispatch({ type: OFFER_LIST_REQUEST });
         axios({
             url: `${baseUrl}/seller/offer/listing?token=${token}`,
@@ -38,13 +33,13 @@ export const offerList = ({
         }).then(async (response) => {
             var success = response.status;
             if (success === 200) {
-                dispatch(getOfferListSuccess(response.data.data, response.data.data.pagination));
+                dispatch(getOfferListSuccess(response.data.data));
             }
         }).catch((error) => {
             console.log(error);
             Alert.alert("ERROR");
             dispatch(getOfferfail());
-            
+
         })
     }
 };
@@ -57,16 +52,13 @@ function isEmpty(obj) {
 }
 
 export const getOfferfail = () => {
-    return{
+    return {
         type: OFFER_NOT_LISTED
     };
 }
-export const getOfferListSuccess = (response, pagination) => {
-    
-    console.log('offerList Success :');
-    console.log(pagination);
+export const getOfferListSuccess = (response) => {
     if (response.status_slug === 'all') {
-        const { offer_list } = response;
+        const { offer_list, pagination } = response;
         if (isEmpty(offer_list)) {
             Alert.alert("No Offers");
             return {
@@ -76,6 +68,21 @@ export const getOfferListSuccess = (response, pagination) => {
         } else {
             return {
                 type: OFFER_LISTED_ALL,
+                offer_list,
+                pagination
+            };
+        }
+    } else if (response.status_slug === 'pending') {
+        const { offer_list, pagination } = response;
+        if (isEmpty(offer_list)) {
+            Alert.alert("No Offers");
+            return {
+                type: NO_OFFERS
+            };
+
+        } else {
+            return {
+                type: OFFER_LISTED_PENDING,
                 offer_list,
                 pagination
             };
@@ -119,20 +126,6 @@ export const getOfferListSuccess = (response, pagination) => {
         } else {
             return {
                 type: OFFER_LISTED_EXPIRE,
-                offer_list
-            };
-        }
-    } else if (response.status_slug === 'pending') {
-        const { offer_list } = response;
-        if (isEmpty(offer_list)) {
-            Alert.alert("No Offers");
-            return {
-                type: NO_OFFERS
-            };
-
-        } else {
-            return {
-                type: OFFER_LISTED_PENDING,
                 offer_list
             };
         }

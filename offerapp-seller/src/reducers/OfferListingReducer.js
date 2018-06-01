@@ -20,9 +20,14 @@ const INITIAL_STATE = {
     status: '',
     isLoading: false,
     pagination_all: { page: 1 },
+    pagination_pending: { page: 1 },
+    pagination_approved: { page: 1 },
+    pagination_disapproved: { page: 1 },
+    pagination_expired: { page: 1 },
 };
 
 export default (state = INITIAL_STATE, action) => {
+    const { offer_list = [] } = action;
     switch (action.type) {
         case NO_OFFERS:
             return {
@@ -41,9 +46,7 @@ export default (state = INITIAL_STATE, action) => {
             };
 
         case OFFER_LISTED_ALL:
-            const { offer_list = [] } = action;
-            // console.log('Calling Offer List Reducers !!!!');
-            // console.log(state.offer_list_all);
+            // const { offer_list = [] } = action;
             return {
                 ...state,
                 offer_list_all: [
@@ -58,11 +61,24 @@ export default (state = INITIAL_STATE, action) => {
             };
 
         case OFFER_LISTED_PENDING:
-            return {
-                ...state,
-                offer_list_pending: action.offer_list,
-                isLoading: false
-            };
+        // const { offer_list = [] } = action;
+        return {
+            ...state,
+            offer_list_pending: [
+                ...state.offer_list_pending,
+                ...offer_list
+              ],
+            pagination_pending: {
+            ...action.pagination,
+            },
+            isLoading: false
+
+        };    
+        // return {
+            //     ...state,
+            //     offer_list_pending: action.offer_list,
+            //     isLoading: false
+            // };
 
         case OFFER_LISTED_APPROVE:
             return {

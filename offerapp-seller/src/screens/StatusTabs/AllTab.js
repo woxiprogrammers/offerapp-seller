@@ -44,7 +44,6 @@ class AllTab extends Component {
     });
   }
   onEndReached() {
-    console.log('End Reached');
     const {
       pagination_all,
       token,
@@ -95,7 +94,7 @@ class AllTab extends Component {
       grabbed_count
     } = item;
     return (
-      <View>
+      <View style={{flex: 1}}>
         <OfferCard
           cardTitle={offer_type_name}
           offerID={offer_id}
@@ -109,32 +108,33 @@ class AllTab extends Component {
       </View>
     );
   }
-  renderSpinner(){
+  renderSpinner() {
     if (this.props.isLoading) {
       return (
         <View style={{ paddingTop: '25%' }}>
           <Spinner color='black' />
         </View>
       )
-  }
-}
-  renderOfferList() {
-      return (
-        <View>
-          <FlatList
-            refreshing={this.props.isLoading}
-            data={this.props.offer_list_all}
-            renderItem={this.renderRow}
-            keyExtractor={this.keyExtractor}
-            onRefresh={() => { return this.onRefresh(); }}
-            onEndReached={() => { return this.onEndReached(); }}
-          />
-          {this.renderSpinner()}
-        </View>
-        
-      )
     }
-  
+  }
+  renderOfferList() {
+    return (
+      <View>
+        <FlatList
+          automaticallyAdjustContentInsets={false}
+          refreshing={false}
+          data={this.props.offer_list_all}
+          renderItem={this.renderRow}
+          keyExtractor={this.keyExtractor}
+          onRefresh={() => { return this.onRefresh(); }}
+          onEndReached={() => { return this.onEndReached(); }}
+        />
+        {this.renderSpinner()}
+      </View>
+
+    )
+  }
+
   render() {
     const {
       containerStyle
