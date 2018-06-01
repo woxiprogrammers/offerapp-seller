@@ -16,7 +16,7 @@ import {
 } from 'react-native-responsive-dimensions';
 import {
   colors,
- } from '../../styles';
+} from '../../styles';
 import { offerStatus, offerList } from '../../actions';
 import OfferCard from '../../components/OfferCard';
 
@@ -33,7 +33,7 @@ class DisapproveTab extends Component {
     const {
       token,
     } = this.props;
-    const status = 'disapproved'; 
+    const status = 'disapproved';
     const page = 1;
     console.log('Mounting Disapprove Tab');
     this.props.offerStatus(status);
@@ -45,17 +45,17 @@ class DisapproveTab extends Component {
   }
   onEndReached() {
     const {
-      pagination,
+      pagination_disapproved,
       token,
       status
     } = this.props;
-    const { page, perPage, pageCount, totalCount } = pagination;
+    const { page, perPage, pageCount, totalCount } = pagination_disapproved;
     const lastPage = totalCount <= ((page - 1) * perPage) + pageCount;
     if (!lastPage) {
       this.props.offerList(
         token,
         status,
-        page + 1
+        page+1
       );
     }
   }
@@ -65,6 +65,7 @@ class DisapproveTab extends Component {
       status
     } = this.props;
     const page = 1;
+    this.props.offerStatus(status);
     this.props.offerList({
       token,
       status,
@@ -72,10 +73,10 @@ class DisapproveTab extends Component {
     });
   }
   autoBind(...methods) {
-      methods.forEach(method => {
-        this[method] = this[method].bind(this);
-        return this[method];
-      });
+    methods.forEach(method => {
+      this[method] = this[method].bind(this);
+      return this[method];
+    });
   }
   keyExtractor = (item, index) => { return index; };
   renderRow(offerDetails) {
@@ -92,7 +93,7 @@ class DisapproveTab extends Component {
       end_date,
     } = item;
     return (
-      <View>
+      <View style={{ flex: 1 }}>
         <OfferCard
           cardTitle={offer_type_name}
           offerID={offer_id}
@@ -103,27 +104,32 @@ class DisapproveTab extends Component {
       </View>
     );
   }
-  renderOfferList() {
+  renderSpinner() {
     if (this.props.isLoading) {
       return (
         <View style={{ paddingTop: '25%' }}>
           <Spinner color='black' />
         </View>
       )
-    } else {
-      return (
+    }
+  }
+  renderOfferList() {
+    return (
+      <View>
         <FlatList
           automaticallyAdjustContentInsets={false}
           data={this.props.offer_list_disapproved}
-          refreshing={false}
+          refreshing={this.props.isLoading}
           renderItem={this.renderRow}
           keyExtractor={this.keyExtractor}
-        // onRefresh={() => { return this.onRefresh(); }}
-        // onEndReached={() => { return this.onEndReached(); }}
+          onRefresh={() => { return this.onRefresh(); }}
+          onEndReached={() => { return this.onEndReached(); }}
         />
-      )
-    }
+        {this.renderSpinner()}
+      </View>
+    )
   }
+
   render() {
     const {
       containerStyle
@@ -139,12 +145,12 @@ class DisapproveTab extends Component {
         >
           {this.renderOfferList()}
         </Content>
-       </Container>
-     );
-   }
- }
+      </Container>
+    );
+  }
+}
 
- const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   containerStyle: {
     backgroundColor: colors.white,
   },
@@ -155,32 +161,32 @@ class DisapproveTab extends Component {
 });
 
 function mapStateToProps({ offerlist, user }) {
-    const { token } = user;
-    return {
-        ...offerlist,
-        token
-    };
+  const { token } = user;
+  return {
+    ...offerlist,
+    token
+  };
 }
 
 function mapDispatchToProps(dispatch) {
-    return {
-        offerList: ({
-          token,
-          status,
-          page
-          }) => {
-          return dispatch(offerList({
-            token,
-            status,
-            page
-            }));
-        },
-        offerStatus: (text) => {
-          return dispatch(offerStatus(text));
-        },
-    };
+  return {
+    offerList: ({
+      token,
+      status,
+      page
+    }) => {
+      return dispatch(offerList({
+        token,
+        status,
+        page
+      }));
+    },
+    offerStatus: (text) => {
+      return dispatch(offerStatus(text));
+    },
+  };
 }
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(DisapproveTab);

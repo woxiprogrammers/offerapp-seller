@@ -122,7 +122,7 @@ class AllTab extends Component {
       <View>
         <FlatList
           automaticallyAdjustContentInsets={false}
-          refreshing={false}
+          refreshing={this.props.isLoading}
           data={this.props.offer_list_all}
           renderItem={this.renderRow}
           keyExtractor={this.keyExtractor}

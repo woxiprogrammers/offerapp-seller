@@ -52,7 +52,7 @@ class LoginScreen extends Component {
         } else if (this.props.error) {
             return (
                 <Button style={loginStyle}>
-                    <Text style={textStyle}>LOG FAILED</Text>
+                    <Text style={textStyle}>LOGIN FAILED</Text>
                 </Button>
             );
         }

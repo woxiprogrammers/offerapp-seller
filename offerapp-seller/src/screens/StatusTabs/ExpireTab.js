@@ -7,7 +7,8 @@ import {
   Container,
   Content,
   Spinner,
-  View
+  View,
+  ImageBackground
 } from 'native-base';
 import { connect } from 'react-redux';
 import {
@@ -45,11 +46,11 @@ class ExpireTab extends Component {
   }
   onEndReached() {
     const {
-      pagination,
+      pagination_expired,
       token,
       status
     } = this.props;
-    const { page, perPage, pageCount, totalCount } = pagination;
+    const { page, perPage, pageCount, totalCount } = pagination_expired;
     const lastPage = totalCount <= ((page - 1) * perPage) + pageCount;
     if (!lastPage) {
       this.props.offerList(
@@ -65,6 +66,7 @@ class ExpireTab extends Component {
       status
     } = this.props;
     const page = 1;
+    this.props.offerStatus(status);
     this.props.offerList({
       token,
       status,
@@ -92,12 +94,12 @@ class ExpireTab extends Component {
       end_date,
     } = item;
     return (
-      <View>
+      <View style={{flex: 1}}>
         <OfferCard
           cardTitle={offer_type_name}
           offerID={offer_id}
           startDate={start_date}
-          endDate={ebd_date}
+          endDate={end_date}
           offerStatus={offer_status_name}
         />
       </View>
@@ -115,11 +117,11 @@ class ExpireTab extends Component {
         <FlatList
           automaticallyAdjustContentInsets={false}
           data={this.props.offer_list_expired}
-          refreshing={false}
+          refreshing={this.props.isLoading}
           renderItem={this.renderRow}
           keyExtractor={this.keyExtractor}
-        // onRefresh={() => { return this.onRefresh(); }}
-        // onEndReached={() => { return this.onEndReached(); }}
+          onRefresh={() => { return this.onRefresh(); }}
+          onEndReached={() => { return this.onEndReached(); }}
         />
       )
     }
@@ -129,17 +131,19 @@ class ExpireTab extends Component {
       containerStyle
     } = styles;
     return (
-      <Container style={containerStyle}>
-        <Content
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{
-            paddingTop: responsiveHeight(1),
-            paddingLeft: responsiveWidth(2.5),
-          }}
-        >
-          {this.renderOfferList()}
-        </Content>
-      </Container>
+      <View>
+        <Container style={containerStyle}>
+          <Content
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{
+              paddingTop: responsiveHeight(1),
+              paddingLeft: responsiveWidth(2.5),
+            }}
+          >
+            {this.renderOfferList()}
+          </Content>
+        </Container>
+      </View>
     );
   }
 }

@@ -16,7 +16,7 @@ import {
 } from 'react-native-responsive-dimensions';
 import {
   colors,
- } from '../../styles';
+} from '../../styles';
 import { offerStatus, offerList } from '../../actions';
 import OfferCard from '../../components/OfferCard';
 
@@ -24,7 +24,7 @@ class ApproveTab extends Component {
   constructor(props) {
     super(props);
     this.autoBind(
-     'onEndReached',
+      'onEndReached',
       'onRefresh',
       'renderRow',
     );
@@ -33,7 +33,7 @@ class ApproveTab extends Component {
     const {
       token,
     } = this.props;
-    const status = 'approved'; 
+    const status = 'approved';
     const page = 1;
     console.log('Mounting ApproveTab');
     this.props.offerStatus(status);
@@ -45,11 +45,11 @@ class ApproveTab extends Component {
   }
   onEndReached() {
     const {
-      pagination,
+      pagination_approved,
       token,
       status
     } = this.props;
-    const { page, perPage, pageCount, totalCount } = pagination;
+    const { page, perPage, pageCount, totalCount } = pagination_approved;
     const lastPage = totalCount <= ((page - 1) * perPage) + pageCount;
     if (!lastPage) {
       this.props.offerList(
@@ -65,6 +65,7 @@ class ApproveTab extends Component {
       status
     } = this.props;
     const page = 1;
+    this.props.offerStatus(status);
     this.props.offerList({
       token,
       status,
@@ -72,19 +73,14 @@ class ApproveTab extends Component {
     });
   }
   autoBind(...methods) {
-      methods.forEach(method => {
-        this[method] = this[method].bind(this);
-        return this[method];
-      });
+    methods.forEach(method => {
+      this[method] = this[method].bind(this);
+      return this[method];
+    });
   }
   keyExtractor = (item, index) => { return index; };
   renderRow(offerDetails) {
-    // console.log('Rendering Row');
-    // console.log(offerDetails);
-    // console.log(offerDetails);
     const { item } = offerDetails;
-    console.log("APPRoved OFFERS")
-    console.log(item)
     const {
       offer_id,
       seller_address_id,
@@ -100,7 +96,7 @@ class ApproveTab extends Component {
       grabbed_count
     } = item;
     return (
-      <View>
+      <View style={{ flex: 1 }}>
         <OfferCard
           cardTitle={offer_type_name}
           offerID={offer_id}
@@ -114,32 +110,36 @@ class ApproveTab extends Component {
       </View>
     );
   }
-  renderOfferList() {
+  renderSpinner() {
     if (this.props.isLoading) {
       return (
         <View style={{ paddingTop: '25%' }}>
           <Spinner color='black' />
         </View>
       )
-    } else {
-      return (
-        <FlatList
-          automaticallyAdjustContentInsets={false}
-          data={this.props.offer_list_approved}
-          refreshing={false}
-          renderItem={this.renderRow}
-          keyExtractor={this.keyExtractor}
-        // onRefresh={() => { return this.onRefresh(); }}
-        // onEndReached={() => { return this.onEndReached(); }}
-        />
-      )
     }
+  }
+  renderOfferList() {
+    return (
+      <View>
+      <FlatList
+        automaticallyAdjustContentInsets={false}
+        data={this.props.offer_list_approved}
+        refreshing={this.props.isLoading}
+        renderItem={this.renderRow}
+        keyExtractor={this.keyExtractor}
+        onRefresh={() => { return this.onRefresh(); }}
+        onEndReached={() => { return this.onEndReached(); }}
+      />
+      {this.renderSpinner()}
+      </View>
+    )
   }
   render() {
     const {
       containerStyle
     } = styles;
-        return (
+    return (
       <Container style={containerStyle}>
         <Content
           showsVerticalScrollIndicator={false}
@@ -148,14 +148,14 @@ class ApproveTab extends Component {
             paddingLeft: responsiveWidth(2.5),
           }}
         >
-         {this.renderOfferList()}
+          {this.renderOfferList()}
         </Content>
-       </Container>
-     );
-   }
- }
+      </Container>
+    );
+  }
+}
 
- const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   containerStyle: {
     backgroundColor: colors.white,
   },
@@ -166,32 +166,32 @@ class ApproveTab extends Component {
 });
 
 function mapStateToProps({ offerlist, user }) {
-    const { token } = user;
-    return {
-        ...offerlist,
-        token
-    };
+  const { token } = user;
+  return {
+    ...offerlist,
+    token
+  };
 }
 
 function mapDispatchToProps(dispatch) {
-    return {
-        offerList: ({
-          token,
-          status,
-          page
-          }) => {
-          return dispatch(offerList({
-            token,
-            status,
-            page
-            }));
-        },
-        offerStatus: (text) => {
-          return dispatch(offerStatus(text));
-        },
-    };
+  return {
+    offerList: ({
+      token,
+      status,
+      page
+    }) => {
+      return dispatch(offerList({
+        token,
+        status,
+        page
+      }));
+    },
+    offerStatus: (text) => {
+      return dispatch(offerStatus(text));
+    },
+  };
 }
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(ApproveTab);

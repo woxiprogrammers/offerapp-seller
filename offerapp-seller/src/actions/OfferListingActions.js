@@ -60,7 +60,7 @@ export const getOfferListSuccess = (response) => {
     if (response.status_slug === 'all') {
         const { offer_list, pagination } = response;
         if (isEmpty(offer_list)) {
-            Alert.alert("No Offers");
+            Alert.alert("No Offers Available");
             return {
                 type: NO_OFFERS
             };
@@ -75,7 +75,7 @@ export const getOfferListSuccess = (response) => {
     } else if (response.status_slug === 'pending') {
         const { offer_list, pagination } = response;
         if (isEmpty(offer_list)) {
-            Alert.alert("No Offers");
+            Alert.alert("No Pending Offers Available");
             return {
                 type: NO_OFFERS
             };
@@ -88,9 +88,11 @@ export const getOfferListSuccess = (response) => {
             };
         }
     } else if (response.status_slug === 'approved') {
-        const { offer_list } = response;
+        const { offer_list, pagination } = response;
+        console.log("APPROVED OFFER LIST")
+        console.log(offer_list)
         if (isEmpty(offer_list)) {
-            Alert.alert("No Offers");
+            Alert.alert("No Approved Offers Available");
             return {
                 type: NO_OFFERS
             };
@@ -98,13 +100,14 @@ export const getOfferListSuccess = (response) => {
         } else {
             return {
                 type: OFFER_LISTED_APPROVE,
-                offer_list
+                offer_list,
+                pagination
             };
         }
     } else if (response.status_slug === 'disapproved') {
         const { offer_list } = response;
         if (isEmpty(offer_list)) {
-            Alert.alert("No Offers");
+            Alert.alert("No Disapproved Offers Available");
             return {
                 type: NO_OFFERS
             };
@@ -116,9 +119,9 @@ export const getOfferListSuccess = (response) => {
             };
         }
     } else if (response.status_slug === 'expired') {
-        const { offer_list } = response;
+        const { offer_list, pagination } = response;
         if (isEmpty(offer_list)) {
-            Alert.alert("No Offers");
+            Alert.alert("No Expired Offers Available");
             return {
                 type: NO_OFFERS
             };
@@ -126,7 +129,8 @@ export const getOfferListSuccess = (response) => {
         } else {
             return {
                 type: OFFER_LISTED_EXPIRE,
-                offer_list
+                offer_list,
+                pagination
             };
         }
     }
@@ -138,12 +142,3 @@ export const offerStatus = (text) => {
         payload: text
     };
 };
-
-const offerListingSuccess = (dispatch, data) => {
-    const { offer_list } = data;
-    dispatch({
-        type: OFFER_LISTED,
-        offer_list,
-    });
-}
-
