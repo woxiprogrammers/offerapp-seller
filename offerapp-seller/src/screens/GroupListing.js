@@ -1,7 +1,13 @@
 import React from 'react';
 import { FlatList } from 'react-native';
 import SellerHeader from '../components/SellerHeader';
-import { Container, Header, View, Content } from 'native-base';
+import {
+    Container,
+    Header,
+    View,
+    Content,
+    Spinner
+} from 'native-base';
 import GroupDetailCard from '../components/GroupDetailCard';
 import FabAddGroup from '../components/fab/FabAddGroup';
 import { Actions } from 'react-native-router-flux';
@@ -12,8 +18,8 @@ export class GroupListing extends React.Component {
     constructor(props) {
         super(props);
         this.autoBind(
-            // 'onEndReached',
-            // 'onRefresh',
+            'onEndReached',
+            'onRefresh',
             'renderRow',
         );
     }
@@ -25,33 +31,35 @@ export class GroupListing extends React.Component {
         console.log('Mounting GROUP LisTT');
         this.props.getListOfGroup({
             token,
-            // page
+            page
         });
     }
-    // onEndReached() {
-    //     const {
-    //         pagination,
-    //         token,
-    //     } = this.props;
-    //     const { page, perPage, pageCount, totalCount } = pagination;
-    //     const lastPage = totalCount <= ((page - 1) * perPage) + pageCount;
-    //     if (!lastPage) {
-    //         this.props.getListOfGroup(
-    //             token,
-    //             page + 1
-    //         );
-    //     }
-    // }
-    // onRefresh() {
-    //     const {
-    //         token,
-    //     } = this.props;
-    //     const page = 1;
-    //     this.props.getListOfGroup({
-    //         token,
-    //         page
-    //     });
-    // }
+    onEndReached() {
+        console.log("END REACHED")
+        const {
+            pagination,
+            token,
+        } = this.props;
+        console.log(token)
+        const { page, perPage, pageCount, totalCount } = pagination;
+        const lastPage = totalCount <= ((page - 1) * perPage) + pageCount;
+        if (!lastPage) {
+            this.props.getListOfGroup({
+                token,
+                page
+            });
+        }
+    }
+    onRefresh() {
+        const {
+            token,
+        } = this.props;
+        const page = 1;
+        this.props.getListOfGroup({
+            token,
+            page
+        });
+    }
     autoBind(...methods) {
         methods.forEach(method => {
             this[method] = this[method].bind(this);
@@ -67,7 +75,7 @@ export class GroupListing extends React.Component {
             total_member,
         } = item;
         return (
-            <View>
+            <View >
                 <GroupDetailCard
                     groupName={group_name}
                     totalMembers={total_member}
@@ -79,8 +87,15 @@ export class GroupListing extends React.Component {
             </View>
         );
     }
+
+    renderSpinner() {
+        if (this.props.isLoading) {
+            return (
+                <Spinner color='black' />
+            )
+        }
+    }
     render() {
-        const { select_groups } = this.props;
         return (
             <Container style={{ marginTop: '5.8%' }}>
                 <Header style={{ backgroundColor: '#C10F41' }}>
@@ -89,15 +104,18 @@ export class GroupListing extends React.Component {
 
                 {/* Group Detail Card */}
                 <Content>
-                    <FlatList
-                        automaticallyAdjustContentInsets={false}
-                        data={select_groups}
-                        refreshing={false}
-                        renderItem={this.renderRow}
-                        keyExtractor={this.keyExtractor}
-                        // onRefresh={() => { return this.onRefresh(); }}
-                        // onEndReached={() => { return this.onEndReached(); }}
-                    />
+                    <View >
+                        <FlatList
+                            automaticallyAdjustContentInsets={false}
+                            data={this.props.select_group}
+                            refreshing={this.props.isLoading}
+                            renderItem={this.renderRow}
+                            keyExtractor={this.keyExtractor}
+                            onRefresh={() => { return this.onRefresh(); }}
+                            onEndReached={() => { return this.onEndReached(); }}
+                        />
+                        {this.renderSpinner()}
+                    </View>
                 </Content>
                 <View>
                     <FabAddGroup />
@@ -119,11 +137,11 @@ function mapDispatchToProps(dispatch) {
     return {
         getListOfGroup: ({
             token,
-            // page
+            page
         }) => {
             return dispatch(getListOfGroup({
                 token,
-                // page
+                page
             }));
         },
     };

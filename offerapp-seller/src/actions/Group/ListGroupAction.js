@@ -7,11 +7,13 @@ import {
 } from '../../constants';
 import { Alert } from 'react-native';
 
-export const getListOfGroup = ({ token }) => {
+export const getListOfGroup = ({ token, page }) => {
+    console.log("token is");
+    console.log(token)
     return (dispatch) => {
         dispatch({ type: GROUP_LIST_REQUEST });
         axios({
-            url: `${baseUrl}/seller/group/list?token=${token}`,
+            url: `${baseUrl}/seller/group/list?token=${token}&page=${page}`,
             method: 'get',
         }).then(async (response) => {
             var status = response.status;
@@ -28,10 +30,11 @@ export const getListOfGroup = ({ token }) => {
     }
 };
 export const groupListedSuccess = (response) => {
-    const { select_groups } = response;
+    const { select_group, pagination } = response;
     return {
         type: GROUP_LIST_SUCCESS,
-        select_groups 
+        select_group,
+        pagination 
     };
 };
 export const groupListFailure = () => {

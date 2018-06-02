@@ -10,13 +10,13 @@ export default class FABExample extends Component {
     };
   }
   render() {
-    return (  
+    return (
       <Container>
-        <View style={{ flex: 1 }}>
+        <View >
           <Fab
             active={this.state.active}
             direction="up"
-            containerStyle={{ }}
+            containerStyle={{}}
             style={{ backgroundColor: '#5067FF' }}
             position="bottomRight"
             onPress={Actions.addToGroupScreen}>

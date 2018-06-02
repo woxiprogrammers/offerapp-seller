@@ -7,7 +7,8 @@ import {
 
 const INITIAL_STATE = {
     group_offers: [],
-    isLoading: false
+    isLoading: false,
+    pagination: { page:1 }
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -19,8 +20,8 @@ export default (state = INITIAL_STATE, action) => {
             }
 
         case GROUP_OFFERS_SUCCESS:
-        console.log("in REDUCER")
-        console.log(action.group_offers)
+            console.log("in REDUCER")
+            console.log(action.group_offers)
             return {
                 ...state,
                 isLoading: false,

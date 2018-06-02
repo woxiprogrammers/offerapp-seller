@@ -64,13 +64,15 @@ export class CreateOffer extends Component {
     this.props.selectOfferType({
       token
     });
-
-    this.props.selectSubCategoryType({
-      token,
-      category_id: category_id
-    })
+    // if(this.props.has_subcategory){
+      this.props.selectSubCategoryType({
+        token,
+        category_id: category_id
+      })
+    // }
+    
   }
-
+  
   onDescriptionChange(text) {
     this.props.offerDescriptionChanged(text);
   }
@@ -129,8 +131,8 @@ export class CreateOffer extends Component {
     }
 
   }
-  renderSpinner() {
-    if (this.props.isLoading) {
+  renderSpinner(loadingStatus) {
+    if (this.props.loadingStatus) {
       return (
         <View>
           <Spinner color='black' />
@@ -168,12 +170,12 @@ export class CreateOffer extends Component {
                 >
                   {select_offer_type.map((item, i) => {
                     return (
-                    <Picker.Item
-                      key={i}
-                      value={item.offer_type_id}
-                      label={item.offer_type_name}
-                    />
-                  );
+                      <Picker.Item
+                        key={i}
+                        value={item.offer_type_id}
+                        label={item.offer_type_name}
+                      />
+                    );
                   })}
                 </Picker>
 
@@ -217,7 +219,7 @@ export class CreateOffer extends Component {
                     this.props.selectedSubCategoryId(itemValue);
 
                   }}
-                  returnKeyType={ 'done' }
+                  returnKeyType={'done'}
                 >
                   {select_sub_category_type.map((item, i) => {
                     return (
@@ -324,9 +326,9 @@ export class CreateOffer extends Component {
                 <Button info
                   onPress={this._pickImage}>
                   <Text> Select </Text>
-                 
+
                 </ Button>
-                 {this.renderSpinner()}
+                {this.renderSpinner()}
                 {image &&
                   <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
               </View>

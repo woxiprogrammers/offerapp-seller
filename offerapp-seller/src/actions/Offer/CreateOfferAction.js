@@ -156,6 +156,8 @@ export const selectSubCategoryType = ({ token, category_id, has_subcategory }) =
 };
 export const offerSubCategorySuccess = (response) => {
     const { select_sub_category_type } = response;
+    console.log("in ACTION SUBCATEGORY ID")
+    console.log(select_sub_category_type[0].sub_category_id)
     return {
         type: OFFER_SUB_CATEGORY_SUCCESS,
         select_sub_category_type

@@ -29,14 +29,17 @@ const INITIAL_STATE = {
     select_category_type: [],
     select_sub_category_type: [],
     offer_type_id: '',
-    category_id: '',
+    category_id: 1,
     sub_category_id: '',
     offer_description: '',
     start_date: '',
     end_date: '',
     isLoading: false,
     has_subcategory: false,
-    images: []
+    images: [],
+    categoryLoading: false,
+    subCategoryLoading: false,
+    offerTypeLoading: false
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -60,57 +63,64 @@ export default (state = INITIAL_STATE, action) => {
         case OFFER_TYPE_REQUEST:
             return {
                 ...state,
-                isLoading: true
+                offerTypeLoading: true
             }
         case OFFER_TYPE_SUCCESS:
             return {
                 ...state,
                 select_offer_type: action.select_offer_type,
-                isLoading: false,
+                offerTypeLoading: false,
                 offer_type_id: action.select_offer_type[0].offer_type_id
             }
         case OFFER_TYPE_FAILURE:
             return {
                 ...state,
-                isLoading: false
+                offerTypeLoading: false
             }
 
         case OFFER_CATEGORY_REQUEST:
             return {
                 ...state,
-                isLoading: true
+                categoryLoading: true
             }
 
         case OFFER_CATEGORY_SUCCESS:
+        console.log("in REDUCER")
+        console.log(action.select_category_type[0].has_subcategory)
             return {
                 ...state,
                 select_category_type: action.select_category_type,
-                isLoading: false,
-                category_id: action.select_category_type[0].category_id
+                categoryLoading: false,
+                category_id: action.select_category_type[0].category_id,
+                has_subcategory: action.select_category_type[0].has_subcategory
             }
 
         case OFFER_CATEGORY_FAILURE:
             return {
-                ...state
+                ...state,
+                categoryLoading: false
             }
 
         case OFFER_SUB_CATEGORY_REQUEST:
             return {
                 ...state,
-                isLoading: true
+                subCategoryLoading: true
             }
 
         case OFFER_SUB_CATEGORY_SUCCESS:
+        console.log("SUB CATEGORY ID")
+        console.log(action.select_sub_category_type[0].sub_category_id)
             return {
                 ...state,
                 select_sub_category_type: action.select_sub_category_type,
-                isLoading: false,
-                // sub_category_id: action.select_sub_category_type[0].sub_category_id
+                subCategoryLoading: false,
+                sub_category_id: action.select_sub_category_type[0].sub_category_id
             }
 
         case OFFER_SUB_CATEGORY_FAILURE:
             return {
-                ...state
+                ...state,
+                subCategoryLoading: false
             }
 
         case OFFER_TYPE_ID_CHANGE:

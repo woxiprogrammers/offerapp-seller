@@ -33,8 +33,8 @@ export class OffersSent extends React.Component {
     constructor(props) {
         super(props);
         this.autoBind(
-            // 'onEndReached',
-            // 'onRefresh',
+            'onEndReached',
+            'onRefresh',
             'renderRow',
         );
     }
@@ -50,28 +50,33 @@ export class OffersSent extends React.Component {
         });
     }
 
-    // onEndReached() {
-    //     const {
-    //         token,
-    //         getGroup_id
-    //     } = this.props;
-    //     console.log(token)
-    //     this.props.requestGroupOffers({
-    //         token,
-    //         getGroup_id
-    //     });
-    // }
-    // onRefresh() {
-    //     const {
-    //         token,
-    //         getGroup_id
-    //     } = this.props;
-    //     console.log(token)
-    //     this.props.requestGroupOffers({
-    //         token,
-    //         getGroup_id
-    //     });
-    // }
+    onEndReached() {
+        const {
+            pagination,
+            token,
+            getGroup_id,
+          } = this.props;
+          const { perPage, pageCount, totalCount } = pagination;
+          let { page } = pagination;
+          const lastPage = totalCount <= ((page - 1) * perPage) + pageCount;
+          if (!lastPage) {
+            page += 1;
+            this.props.offerList({ token, getGroup_id, page });
+          }
+    }
+    onRefresh() {
+     
+        const {
+            token,
+            getGroup_id,
+          } = this.props;
+          const page = 1;
+          this.props.requestGroupOffers({
+            token,
+            getGroup_id,
+            page
+          });
+    }
     autoBind(...methods) {
         methods.forEach(method => {
             this[method] = this[method].bind(this);
@@ -130,7 +135,7 @@ export class OffersSent extends React.Component {
         return (
             <Container>
                 <Header style={{ backgroundColor: colors.headerColor }}>
-                    <SellerHeader title='Group Offer Lisiting' />
+                    <SellerHeader title='Group Offers' />
                 </Header>
                 <Content>
                     <View>
@@ -140,8 +145,8 @@ export class OffersSent extends React.Component {
                             refreshing={false}
                             renderItem={this.renderRow}
                             keyExtractor={this.keyExtractor}
-                            // onRefresh={() => { return this.onRefresh(); }}
-                            // onEndReached={() => { return this.onEndReached(); }}
+                            onRefresh={() => { return this.onRefresh(); }}
+                            onEndReached={() => { return this.onEndReached(); }}
                         />
                     </ View>
                 </Content>

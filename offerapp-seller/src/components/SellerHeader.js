@@ -28,6 +28,7 @@ export default class SellerHeader extends Component {
           <Body >
             <Title style={{color:'white', width: responsiveWidth(80), fontSize: responsiveFontSize(3)}}>{this.props.title}</Title>
           </Body>
+          <Right />
           {/* <Right>
             <Button transparent badge>
               <Icon name='md-notifications' style={{color:'yellow'}}/>

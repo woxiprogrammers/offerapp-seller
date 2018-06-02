@@ -24,34 +24,34 @@ export class GroupMemberListing extends React.Component {
         const page = 1;
         this.props.getDetailOfGroup({
             token,
-            getGroup_id
-            // page
+            getGroup_id,
+            page
         });
     }
-    // onEndReached() {
-    //     const {
-    //         pagination,
-    //         token,
-    //     } = this.props;
-    //     const { page, perPage, pageCount, totalCount } = pagination;
-    //     const lastPage = totalCount <= ((page - 1) * perPage) + pageCount;
-    //     if (!lastPage) {
-    //         this.props.getDetailOfGroup(
-    //             token,
-    //             page + 1
-    //         );
-    //     }
-    // }
-    // onRefresh() {
-    //     const {
-    //         token,
-    //     } = this.props;
-    //     const page = 1;
-    //     this.props.getDetailOfGroup({
-    //         token,
-    //         page
-    //     });
-    // }
+    onEndReached() {
+        const {
+            pagination,
+            token,
+        } = this.props;
+        const { page, perPage, pageCount, totalCount } = pagination;
+        const lastPage = totalCount <= ((page - 1) * perPage) + pageCount;
+        if (!lastPage) {
+            this.props.getDetailOfGroup(
+                token,
+                page + 1
+            );
+        }
+    }
+    onRefresh() {
+        const {
+            token,
+        } = this.props;
+        const page = 1;
+        this.props.getDetailOfGroup({
+            token,
+            page
+        });
+    }
     autoBind(...methods) {
         methods.forEach(method => {
             this[method] = this[method].bind(this);
@@ -68,7 +68,7 @@ export class GroupMemberListing extends React.Component {
             customer_email
         } = item;
         return (
-            <View>
+            <View style={{ flex: 1 }}>
                 <CustomerCard
                     customerName={customer_name}
                     customerMobile={customer_mobile}
@@ -86,19 +86,21 @@ export class GroupMemberListing extends React.Component {
                     <Header style={{ backgroundColor: '#C10F41' }}>
                         <SellerHeader title='Members List' />
                     </Header>
-                    <View style={{paddingLeft: '2%', paddingRight: '2%'}}>
+                    <View style={{ paddingLeft: '2%', paddingRight: '2%' }}>
                         <FlatList
                             automaticallyAdjustContentInsets={false}
                             data={group_details}
                             refreshing={false}
                             renderItem={this.renderRow}
                             keyExtractor={this.keyExtractor}
-                            // onRefresh={() => { return this.onRefresh(); }}
-                            // onEndReached={() => { return this.onEndReached(); }}
+                        // onRefresh={() => { return this.onRefresh(); }}
+                        // onEndReached={() => { return this.onEndReached(); }}
                         />
                     </View>
                 </Content>
-                <FabAddMemberToGroup />
+                <View>
+                    <FabAddMemberToGroup />
+                </View>
             </Container>
         )
     }
