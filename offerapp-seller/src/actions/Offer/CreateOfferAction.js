@@ -169,8 +169,7 @@ export const offerSubCategoryFailure = () => {
 };
 
 export const selectedSubCategoryId = (text) => {
-    console.log("SUB CATEGEORY in ACTION")
-    console.log(text)
+    
     return {
         type: OFFER_SUB_CATEGORY_ID_CHANGE,
         payload: text

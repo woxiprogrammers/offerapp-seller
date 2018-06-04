@@ -108,7 +108,6 @@ export default (state = INITIAL_STATE, action) => {
             }
 
         case OFFER_SUB_CATEGORY_SUCCESS:
-        
             return {
                 ...state,
                 select_sub_category_type: action.select_sub_category_type,
@@ -134,8 +133,6 @@ export default (state = INITIAL_STATE, action) => {
                 selected_category_id: action.payload
             }
         case OFFER_SUB_CATEGORY_ID_CHANGE:
-            console.log("subCategory in REDUCER")
-            console.log(action.payload)
             return {
                 ...state,
                 sub_category_id: action.payload,
