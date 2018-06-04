@@ -12,13 +12,23 @@ import { Alert, Platform } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import {
   getGrabCode,
-  gra
-} from '../actions'
+  verifyGrabCodeRequest
+} from '../actions';
+import { connect } from 'react-redux';
 
-export default class SellerFooter extends Component {
-
-  grabCodeChange(text){
+export class SellerFooter extends Component {
+  grabCodeChange(text) {
+    console.log("grabcode recived");
+    console.log(text);
     this.props.getGrabCode(text);
+    const{
+      token,
+      grab_code
+    } = this.props;
+    this.props.verifyGrabCodeRequest({
+      token,
+      grab_code
+    })
   }
 
   renderGCPrompt() {
@@ -27,7 +37,7 @@ export default class SellerFooter extends Component {
       "Enter customer's Grab Code to complete the transaction",
       [
         { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-        { text: 'OK', onPress: grabCode => console.log('OK Pressed, Grab Code: ' + grabCode) },
+        { text: 'OK', onPress: grabCode => this.grabCodeChange(grabCode) },
       ],
       {
         // type: 'numeric',
@@ -69,8 +79,8 @@ export default class SellerFooter extends Component {
           <FooterTab style={{ backgroundColor: '#C10F41' }}>
             {/* <Button vertical
               onPress={() => { */}
-                { this.renderGrabCodeOption() }
-              {/* }}>
+            {this.renderGrabCodeOption()}
+            {/* }}>
 
               <FontAwesome name="handshake-o" size={22} color='white' />
               <Text style={{ color: 'white' }}>Grab Offer</Text>
@@ -88,3 +98,32 @@ export default class SellerFooter extends Component {
     );
   }
 }
+function mapStateToProps({ grabCode, user }) {
+  const { token } = user;
+  return {
+      ...grabCode,
+      token
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    verifyGrabCodeRequest: ({
+          token,
+          grab_code
+      }) => {
+          return dispatch(verifyGrabCodeRequest({
+              token,
+              grab_code
+          }));
+      },
+      getGrabCode: (text) => {
+          return dispatch(getGrabCode(text));
+      },
+      
+  };
+}
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SellerFooter);
