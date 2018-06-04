@@ -10,8 +10,16 @@ import { FontAwesome } from '@expo/vector-icons';
 import prompt from 'react-native-prompt-android';
 import { Alert, Platform } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import {
+  getGrabCode,
+  gra
+} from '../actions'
 
 export default class SellerFooter extends Component {
+
+  grabCodeChange(text){
+    this.props.getGrabCode(text);
+  }
 
   renderGCPrompt() {
     prompt(
@@ -27,7 +35,6 @@ export default class SellerFooter extends Component {
       }
     );
   }
-
   renderGrabCodeOption() {
     if (Platform.OS === 'ios') {
       return (

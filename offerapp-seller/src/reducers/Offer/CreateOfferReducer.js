@@ -39,7 +39,8 @@ const INITIAL_STATE = {
     images: [],
     categoryLoading: false,
     subCategoryLoading: false,
-    offerTypeLoading: false
+    offerTypeLoading: false,
+    selected_category_id: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -85,8 +86,7 @@ export default (state = INITIAL_STATE, action) => {
             }
 
         case OFFER_CATEGORY_SUCCESS:
-        console.log("in REDUCER")
-        console.log(action.select_category_type[0].has_subcategory)
+        
             return {
                 ...state,
                 select_category_type: action.select_category_type,
@@ -108,8 +108,7 @@ export default (state = INITIAL_STATE, action) => {
             }
 
         case OFFER_SUB_CATEGORY_SUCCESS:
-        console.log("SUB CATEGORY ID")
-        console.log(action.select_sub_category_type[0].sub_category_id)
+        
             return {
                 ...state,
                 select_sub_category_type: action.select_sub_category_type,
@@ -131,12 +130,16 @@ export default (state = INITIAL_STATE, action) => {
         case OFFER_CATEGORY_ID_CHANGE:
             return {
                 ...state,
-                category_id: action.payload
+                category_id: action.payload,
+                selected_category_id: action.payload
             }
         case OFFER_SUB_CATEGORY_ID_CHANGE:
+            console.log("subCategory in REDUCER")
+            console.log(action.payload)
             return {
                 ...state,
-                sub_category_id: action.payload
+                sub_category_id: action.payload,
+                selected_category_id: action.payload
             }
         case OFFER_DESCRIPTION_CHANGE:
             return {

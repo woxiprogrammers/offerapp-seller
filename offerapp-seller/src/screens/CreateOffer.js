@@ -64,15 +64,12 @@ export class CreateOffer extends Component {
     this.props.selectOfferType({
       token
     });
-    // if(this.props.has_subcategory){
-      this.props.selectSubCategoryType({
-        token,
-        category_id: category_id
-      })
-    // }
-    
+    this.props.selectSubCategoryType({
+      token,
+      category_id: category_id
+    })
   }
-  
+
   onDescriptionChange(text) {
     this.props.offerDescriptionChanged(text);
   }
@@ -88,7 +85,7 @@ export class CreateOffer extends Component {
   onButtonPress() {
     const {
       token,
-      category_id,
+      selected_category_id,
       offer_type_id,
       offer_description,
       start_date,
@@ -97,7 +94,7 @@ export class CreateOffer extends Component {
     } = this.props;
     this.props.createOfferRequest({
       token,
-      category_id,
+      selected_category_id,
       offer_type_id,
       offer_description,
       start_date,
@@ -186,7 +183,7 @@ export class CreateOffer extends Component {
                   selectedValue={this.props.category_id}
                   onValueChange={(itemValue, itemIndex) => {
                     this.props.selectedofferCategoryId(itemValue);
-                    has_subcategory: select_category_type[itemIndex].has_subcategory
+                    // has_subcategory: select_category_type[itemIndex].has_subcategory
                     const {
                       token,
                       category_id
@@ -217,7 +214,8 @@ export class CreateOffer extends Component {
                   selectedValue={this.props.sub_category_id}
                   onValueChange={(itemValue, itemIndex) => {
                     this.props.selectedSubCategoryId(itemValue);
-
+                    console.log("SUB CATEGORY IN UI")
+                    console.log(itemValue)
                   }}
                   returnKeyType={'done'}
                 >
@@ -424,7 +422,7 @@ function mapDispatchToProps(dispatch) {
     },
     createOfferRequest: ({
       token,
-      category_id,
+      selected_category_id,
       offer_type_id,
       offer_description,
       start_date,
@@ -433,7 +431,7 @@ function mapDispatchToProps(dispatch) {
     }) => {
       return dispatch(createOfferRequest({
         token,
-        category_id,
+        selected_category_id,
         offer_type_id,
         offer_description,
         start_date,

@@ -156,8 +156,7 @@ export const selectSubCategoryType = ({ token, category_id, has_subcategory }) =
 };
 export const offerSubCategorySuccess = (response) => {
     const { select_sub_category_type } = response;
-    console.log("in ACTION SUBCATEGORY ID")
-    console.log(select_sub_category_type[0].sub_category_id)
+   
     return {
         type: OFFER_SUB_CATEGORY_SUCCESS,
         select_sub_category_type
@@ -170,6 +169,8 @@ export const offerSubCategoryFailure = () => {
 };
 
 export const selectedSubCategoryId = (text) => {
+    console.log("SUB CATEGEORY in ACTION")
+    console.log(text)
     return {
         type: OFFER_SUB_CATEGORY_ID_CHANGE,
         payload: text
@@ -185,13 +186,15 @@ export const offerDescriptionChanged = (text) => {
 
 export const createOfferRequest = ({
     token,
-    category_id,
+    selected_category_id,
     offer_type_id,
     offer_description,
     start_date,
     end_date,
     images
 }) => {
+    console.log("CATEGORY ID ")
+    console.log(selected_category_id)
     return (dispatch) => {
         dispatch({ type: OFFER_CREATE_REQUEST });
         axios({
@@ -199,7 +202,7 @@ export const createOfferRequest = ({
             method: 'post',
             data: {
                 token,
-                category_id: category_id,
+                category_id: selected_category_id,
                 offer_type_id,
                 offer_description: offer_description,
                 start_date: start_date,
@@ -281,8 +284,7 @@ export const uploadIamge = ({
         })
             .then((response) => response.json())
             .then((responseJson) => {
-                console.log("file name in response ")
-                console.log(responseJson.filename)
+               
                 dispatch(imageUploadedSuccessfully(responseJson.filename))
             })
             .catch((error) => {
@@ -296,8 +298,6 @@ export const uploadIamge = ({
 let images = [];
 export const imageUploadedSuccessfully = (response) => {
     images.push(response)
-    console.log("images")
-    console.log(images)
     return {
         type: UPLOAD_IMAGE_SUCCESS,
         images
