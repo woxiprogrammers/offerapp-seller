@@ -37,7 +37,7 @@ export const offerList = ({
             }
         }).catch((error) => {
             console.log(error);
-            Alert.alert("ERROR");
+           // Alert.alert("ERROR");
             dispatch(getOfferfail());
 
         })

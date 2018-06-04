@@ -28,7 +28,7 @@ export const requestOfferDetails = ({ token, getOffer_id }) => {
                 dispatch(offerDetailSuccess(response.data.data))
             }
         }).catch((error) => {
-            Alert.alert("ERROR");
+            // Alert.alert("ERROR");
             dispatch(offerDetailFailure());
         });
     }
@@ -65,7 +65,7 @@ export const iAmIntrestedListRequest = ({ token, getOffer_id }) => {
             }
         }).catch((error) => {
             console.log(error)
-            Alert.alert("ERROR");
+            // Alert.alert("ERROR");
             dispatch(iAmIntrestedListFailure());
         })
     }

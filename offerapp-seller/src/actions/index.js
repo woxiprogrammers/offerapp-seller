@@ -4,6 +4,7 @@ export * from './AddToGroupAction';
 export * from './SignUpActions';
 export * from './AccountInformationAction';
 export * from './ForgotPasswordActions';
+export * from './WelcomeActions';
 
 export * from './Group/CreateGroupAction';
 export * from './Group/ListGroupAction';

@@ -31,7 +31,7 @@ export const requestGroupOffers = ({
         }).catch((error) => {
             console.log(error);
             dispatch(groupOfferNotRecieved());
-            Alert.alert("ERROR");
+            // Alert.alert("ERROR");
         })
     }
 }

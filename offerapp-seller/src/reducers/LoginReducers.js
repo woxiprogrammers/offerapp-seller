@@ -36,6 +36,8 @@ export default (state = INITIAL_STATE, action) => {
         token: action.token
       };
     case LOGOUT_USER:
+    console.log("in LOGIN REDUCER");
+    console.log(state.token)
       return {
         ...state,
         ...INITIAL_STATE,

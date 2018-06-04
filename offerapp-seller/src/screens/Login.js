@@ -31,6 +31,7 @@ import {
     loginUser
 } from '../actions';
 import { responsiveHeight, responsiveFontSize, responsiveWidth } from 'react-native-responsive-dimensions';
+import { Feather, FontAwesome } from '@expo/vector-icons';
 
 class LoginScreen extends Component {
     onUserChange(text) {
@@ -57,12 +58,14 @@ class LoginScreen extends Component {
             return (
                 <Button style={loginStyle}>
                     <Text style={textStyle}>LOGIN FAILED</Text>
+                    <FontAwesome name="ban" size={responsiveFontSize(3.5)} style={{ color: 'white' }} />
                 </Button>
             );
         }
         return (
             <Button style={loginStyle} onPress={this.onButtonPress.bind(this)}>
                 <Text style={textStyle}>LOG IN</Text>
+                <Feather name="log-in" size={responsiveFontSize(3.5)} style={{ color: 'white' }} />
             </Button>
         );
     }
@@ -91,6 +94,7 @@ class LoginScreen extends Component {
                     <Container style={containerStyle}>
                         <View>
                             <Text style={headerStyle}>OFFERAPP</Text>
+                            <Text style={{color: 'white', fontSize: responsiveFontSize(3.3)}}>SELLER</Text>
                         </View>
                         <Content contentContainerStyle={contentStyle}>
                             <View style={formStyle}>
@@ -102,6 +106,7 @@ class LoginScreen extends Component {
                                                 onChangeText={this.onUserChange.bind(this)}
                                                 value={this.props.user}
                                                 keyboardType='numeric'
+                                                style={{color: 'white'}}
                                             />
                                         </Item>
                                     </View>
@@ -112,6 +117,7 @@ class LoginScreen extends Component {
                                                 secureTextEntry
                                                 onChangeText={this.onPasswordChange.bind(this)}
                                                 value={this.props.password}
+                                                style={{color: 'white'}}
                                             />
                                         </Item>
                                     </View>

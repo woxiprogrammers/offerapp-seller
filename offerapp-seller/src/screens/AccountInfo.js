@@ -288,6 +288,7 @@ export class AccountInfo extends React.Component {
                     <Label>Zip code</Label>
                     <Input
                         onChangeText={this.onCityChange.bind(this)}
+                        
                     />
                 </Item>
             )
@@ -363,7 +364,6 @@ export class AccountInfo extends React.Component {
                         <Item floatingLabel>
                             <Label>Mobile Number</Label>
                             <Input
-                                editable={false}
                                 selectTextOnFocus={false}
                                 value={account_detail.landline}
                             />

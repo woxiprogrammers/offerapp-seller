@@ -62,7 +62,7 @@ export const selectOfferType = ({ token }) => {
                 dispatch(offerTypeSuccess(response.data.data));
             }
         }).catch((error) => {
-            Alert.alert("ERROR");
+            // Alert.alert("ERROR");
             dispatch(offerTypeFailure());
         });
     }
@@ -216,7 +216,7 @@ export const createOfferRequest = ({
                 dispatch(offerCreatedFail());
             }
         }).catch((error) => {
-            Alert.alert("ERROR");
+            // Alert.alert("ERROR");
             console.log(error)
             dispatch(offerCreatedFail());
         });

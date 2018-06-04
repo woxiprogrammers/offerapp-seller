@@ -21,6 +21,7 @@ import GrabOfferScreen from './src/screens/GrabOfferScreen';
 import ForgotPasswordMobileVerifyScreen from './src/screens/ForgotPasswordMobileVerifyScreen';
 import ForgotPasswordScreen from './src/screens/ForgotPasswordScreen';
 import ForgotPasswordVerifyOtpScreen from './src/screens/ForgotPasswordVerifyOtpScreen';
+import WelcomeScreen from './src/screens/WelcomeScreen';
 class RouterComponent extends React.Component {
   render() {
     console.log('Router Running !!');
@@ -28,6 +29,18 @@ class RouterComponent extends React.Component {
       <Router>
         <Overlay key="overlay">
           <Scene key="root">
+            <Scene initial key="welcomeMain" >
+              <Scene hideNavBar key="welcome" component={WelcomeScreen} />
+            </Scene>
+            <Scene key="auth">
+              <Scene hideNavBar key="LoginScreen" component={Login} />
+              <Scene hideNavBar key="mobileVerifyScreen" component={MobileVerifyScreen} />
+              <Scene hideNavBar key="otpVerifyScreen" component={OtpVerifyScreen} />
+              <Scene hideNavBar key="grabOfferScreen" component={GrabOfferScreen} />
+              <Scene hideNavBar key="forgotPasswordMobileVerifyScreen" component={ForgotPasswordMobileVerifyScreen} />
+              <Scene hideNavBar key="forgotPasswordVerifyOtpScreen" component={ForgotPasswordVerifyOtpScreen} />
+              <Scene hideNavBar key="forgotPasswordScreen" component={ForgotPasswordScreen} />
+            </Scene>
             <Drawer
               hideNavBar
               key="drawer"
@@ -35,7 +48,6 @@ class RouterComponent extends React.Component {
             >
               <Scene hideNavBar panHandlers={null} key="mainroot">
                 <Stack key="root">
-                  <Scene hideNavBar initial key="LoginScreen" component={Login} />
                   <Scene hideNavBar key="offerListingScreen" component={OfferListing} />
                   <Scene hideNavBar key="createOfferScreen" component={CreateOffer} />
                   <Scene hideNavBar key="addToGroupScreen" component={AddToGroup} />
@@ -49,12 +61,7 @@ class RouterComponent extends React.Component {
                   <Scene hideNavBar key="offersSentScreen" component={OffersSent} />
                   <Scene hideNavBar key="offerDetailScreen" component={OfferDetail} />
                   <Scene hideNavBar key="multiSelectDropDownScreen" component={MultiSelectDropDown} />
-                  <Scene hideNavBar key="mobileVerifyScreen" component={MobileVerifyScreen} />
-                  <Scene hideNavBar key="otpVerifyScreen" component={OtpVerifyScreen} />
-                  <Scene hideNavBar key="grabOfferScreen" component={GrabOfferScreen} />
-                  <Scene hideNavBar key="forgotPasswordMobileVerifyScreen" component={ForgotPasswordMobileVerifyScreen} />
-                  <Scene hideNavBar key="forgotPasswordVerifyOtpScreen" component={ForgotPasswordVerifyOtpScreen} />
-                  <Scene hideNavBar key="forgotPasswordScreen" component={ForgotPasswordScreen} />
+
                 </Stack>
               </Scene>
             </Drawer>

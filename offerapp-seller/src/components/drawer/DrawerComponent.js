@@ -8,8 +8,9 @@ import {
 import { Button, Content, Container, Thumbnail } from 'native-base';
 import { responsiveWidth, responsiveFontSize, responsiveHeight } from 'react-native-responsive-dimensions';
 import { MaterialCommunityIcons, Entypo, FontAwesome, MaterialIcons } from '@expo/vector-icons';
-
-export default class DrawerComponent extends React.Component {
+import { logoutUser } from '../../actions';
+import { connect } from 'react-redux';
+export class DrawerComponent extends React.Component {
   render() {
     return (
       <Container style={styles.containerStyle}>
@@ -29,51 +30,66 @@ export default class DrawerComponent extends React.Component {
                 />
               </View>
             </View>
-           
+
           </TouchableWithoutFeedback>
-          <View style={{ backgroundColor: '#e2e2e2', height: responsiveHeight(0.1), paddingTop: '2%'}} />
+          <View style={{ backgroundColor: '#e2e2e2', height: responsiveHeight(0.1), paddingTop: '2%' }} />
           <View style={{ flex: 1, alignSelf: 'center', paddingTop: '2%' }}>
             {/* Account Information */}
-            <Button full light
+            <TouchableOpacity
               style={{ width: responsiveWidth(80) }}
               onPress={Actions.accountInfoScreen}
             >
-              <MaterialCommunityIcons name="account" size={30} style={{color: colors.headerColor}}/><Text>Account Information</Text>
-            </Button>
+              <View style={styles.drawerStyle}>
+                <MaterialCommunityIcons name="account" size={responsiveFontSize(3.5)} style={{ color: colors.headerColor }} />
+                <Text style={styles.drawerText}> Account Information</Text>
+              </View>
+            </TouchableOpacity>
 
             {/* Manage Offer */}
-            <Button full light
+            <TouchableOpacity
               style={{ width: responsiveWidth(80) }}
               onPress={Actions.offerListingScreen}
             >
-             <MaterialIcons name="local-offer" size={30} style={{color: colors.headerColor}}/><Text>Manage Offer</Text>
-            </Button>
+              <View style={styles.drawerStyle}>
+                <MaterialIcons name="local-offer" size={responsiveFontSize(3.5)} style={{ color: colors.headerColor }} />
+                <Text style={styles.drawerText}> Manage Offer</Text>
+              </View>
+            </TouchableOpacity>
 
             {/* Promote Offer */}
-            <Button full light
+            <TouchableOpacity
               style={{ width: responsiveWidth(80) }}
               onPress={Actions.promoteOfferScreen}
             >
-               <Entypo name="notification" size={30} style={{color: colors.headerColor}}/><Text>Promote Offer</Text>
-            </Button>
+              <View style={styles.drawerStyle}>
+                <Entypo name="notification" size={responsiveFontSize(3.5)} style={{ color: colors.headerColor }} />
+                <Text style={styles.drawerText}> Promote Offer</Text>
+              </View>
+            </TouchableOpacity>
 
             {/* Manage Group */}
-            <Button full light
+            <TouchableOpacity
               style={{ width: responsiveWidth(80) }}
               onPress={Actions.groupListingScreen}
             >
-              <FontAwesome name="group" size={30} style={{color: colors.headerColor}}/><Text>Manage Group</Text>
-            </Button>
+              <View style={styles.drawerStyle}>
+                <FontAwesome name="group" size={responsiveFontSize(3.5)} style={{ color: colors.headerColor }} />
+                <Text style={styles.drawerText}> Manage Group</Text>
+              </View>
+            </TouchableOpacity>
 
             {/* Logout */}
-            <Button full light
+            <TouchableOpacity
               style={{
                 width: responsiveWidth(80)
               }}
-              onPress={Actions.LoginScreen}
+              onPress={() => { this.props.logoutUser() }}
             >
-              <Entypo name="log-out" size={30} style={{color: colors.headerColor}}/><Text>Logout</Text>
-            </Button>
+              <View style={styles.drawerStyle}>
+                <Entypo name="log-out" size={responsiveFontSize(3.5)} style={{ color: colors.headerColor }} />
+                <Text style={styles.drawerText}> Logout</Text>
+              </View>
+            </TouchableOpacity>
           </View>
         </Content>
       </Container>
@@ -101,6 +117,33 @@ const styles = StyleSheet.create({
   },
   categoriesListStyle: {
     marginLeft: responsiveWidth(-5)
+  },
+  drawerStyle: {
+    flexDirection: 'row',
+    marginTop: '3.5%'
+  },
+  drawerText:{
+    fontSize: responsiveFontSize(3.5),
+    color: '#666666'
   }
 
 });
+
+function mapStateToProps({ user }) {
+  return {
+    ...user
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    logoutUser: () => {
+      return dispatch(logoutUser());
+    },
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DrawerComponent);

@@ -38,7 +38,7 @@ export const requestFloor = ({ token }) => {
             }
         }).catch((error) => {
             console.log(error)
-            Alert.alert("ERROR")
+           // Alert.alert("ERROR")
             dispatch(floorsNotRecieved());
         })
     }
@@ -78,7 +78,7 @@ export const requestAccInfo = ({ token }) => {
             }
         }).catch((error) => {
             console.log(error)
-            Alert.alert("ERROR")
+            // Alert.alert("ERROR")
             dispatch(requestAccInfoFailure());
         })
     }
@@ -200,7 +200,7 @@ export const requestEditAccInfo = ({
         }).catch((error) => {
             dispatch(editFail());
             console.log(error);
-            Alert.alert("ERROR");
+            // Alert.alert("ERROR");
         })
     }
 }
